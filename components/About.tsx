@@ -1,66 +1,91 @@
-"use client";
+const STATS = [
+  {
+    label: "Story-First",
+    value: "100%",
+    body: "We start with powerful stories and meaningful connections.",
+  },
+  {
+    label: "AI-Native",
+    value: "100%",
+    body: "Built with AI at the core to unlock speed, scale, and imagination.",
+  },
+  {
+    label: "Global-Ready",
+    value: "50+",
+    body: "Projects across markets and languages.",
+  },
+  {
+    label: "Fast Production",
+    value: "10×",
+    body: "Faster from concept to final content delivery.",
+  },
+] as const;
 
-import { motion } from "framer-motion";
-
-/**
- * About — large statement, like pacomepertant's about reveal.
- * Big title + paragraph + stat row.
- */
 export default function About() {
   return (
-    <section
-      id="about"
-      className="relative w-full px-6 sm:px-10 lg:px-20 py-32"
-    >
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
-        <div className="lg:col-span-4">
-          <span
-            className="text-[11px] uppercase tracking-[0.3em] text-white/40"
-            style={{ fontFamily: "var(--font-display), system-ui" }}
-          >
-            (about / 02)
-          </span>
-          <h2 className="title-big mt-3">About Morpio.</h2>
-        </div>
-
-        <div className="lg:col-span-7 lg:col-start-6">
-          <motion.p
-            className="text-[22px] sm:text-[28px] leading-[1.3] tracking-[-0.01em] text-white/85"
-            style={{ fontFamily: "var(--font-display), system-ui" }}
-            initial={false}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-          >
-            Morpio is an AI-native studio turning images into motion and motion
-            into <span className="text-accent">virtual celebrities</span>.
-            We design entire personas — face, voice, story — and deliver them
-            ready for the feed.
-          </motion.p>
-
-          <p className="mt-6 max-w-[640px] text-[15px] text-white/50">
-            상상한 인물을, 실제처럼. 이미지 한 장에서 시작해 영상·페르소나·캠페인까지.
-            우리는 “브랜드의 얼굴”을 AI로 빚습니다.
+    <section id="about" className="relative py-20 md:py-32 container-x">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+        {/* Left: text */}
+        <div className="lg:col-span-5">
+          <p className="section-label mb-5 inline-flex items-center gap-3">
+            <span className="block w-6 h-px bg-violet-500/60" />
+            About morpio
           </p>
 
-          {/* Stats */}
-          <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-10 border-t border-white/10 pt-10">
-            {[
-              { k: "120+", v: "campaigns" },
-              { k: "30+", v: "virtual humans" },
-              { k: "8", v: "countries" },
-              { k: "24/7", v: "studio uptime" },
-            ].map((s) => (
-              <div key={s.k}>
+          <h2
+            className="font-display font-black tracking-tight leading-[1.05] text-ink-primary"
+            style={{ fontSize: "clamp(32px, 9vw, 56px)" }}
+          >
+            morpio is a{" "}
+            <span className="font-serif italic font-normal text-gradient-violet">
+              new-generation
+            </span>{" "}
+            AI media company at the intersection of IP, virtual talent, and
+            advertising.
+          </h2>
+
+          <p
+            className="mt-6 text-ink-secondary max-w-md leading-relaxed"
+            style={{ fontSize: "clamp(14px, 3.6vw, 16px)" }}
+          >
+            We believe great stories deserve new forms — and AI helps us create
+            them faster, better, and bolder.
+          </p>
+
+          <a
+            href="#contact"
+            className="mt-8 inline-flex items-center gap-2 h-12 px-6 rounded-full bg-violet-gradient text-white text-sm font-medium shadow-glow-sm hover:shadow-glow transition-shadow"
+          >
+            Learn More About Us
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        {/* Right: stats grid */}
+        <div className="lg:col-span-7">
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
+            {STATS.map((s, i) => (
+              <div
+                key={s.label}
+                className="relative rounded-2xl bg-bg-card border border-line p-5 md:p-6 hover:border-violet-500/40 transition-colors"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-violet-400">
+                    {s.label}
+                  </span>
+                  <span className="w-2 h-2 rounded-full bg-violet-500 shadow-glow-sm" />
+                </div>
                 <div
-                  className="text-[28px] sm:text-[34px] font-medium tracking-[-0.02em]"
-                  style={{ fontFamily: "var(--font-display), system-ui" }}
+                  className="font-display font-black text-ink-primary leading-none mb-3"
+                  style={{ fontSize: "clamp(36px, 10vw, 56px)" }}
                 >
-                  {s.k}
+                  {s.value}
                 </div>
-                <div className="text-[11px] tracking-[0.18em] uppercase text-white/40 mt-1">
-                  {s.v}
-                </div>
+                <p className="text-ink-secondary text-xs md:text-sm leading-relaxed">
+                  {s.body}
+                </p>
               </div>
             ))}
           </div>

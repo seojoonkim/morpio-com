@@ -2,213 +2,125 @@
 @tailwind components;
 @tailwind utilities;
 
-/* === pacomepertant.com — exact tokens ===
- * Mirrors :root from the source site. Only --color-accent diverges
- * (pacomepertant uses #fdff6c yellow; morpio uses #CCFF00 lime).
- */
 :root {
-  --color-bg-dark: #0A0A0A;
-  --color-black: #000000;
-  --color-grey: #888888;
-  --color-white: #FFFFFF;
-  --color-accent: #CCFF00;     /* morpio lime (pacome: #fdff6c) */
-  --color-green: #28de91;
-  --ease-quad-in-out: cubic-bezier(0.455, 0.03, 0.515, 0.955);
-  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  --gap-20: 20px;
-  --gap-s: 12px;
-  --grid-column: 1fr;
-  --grid-gutter: 20px;
-  --grid-margin: 20px;
+  --bg-base: #05060A;
 }
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
-  background: var(--color-bg-dark);
-  color: var(--color-white);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: var(--font-sans), system-ui, sans-serif;
+html,
+body {
+  background: var(--bg-base);
+  color: #F4F5F7;
   overflow-x: hidden;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans), Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* iOS safe area */
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Selection */
 ::selection {
-  background: var(--color-accent);
-  color: #000;
+  background: rgba(140, 93, 255, 0.35);
+  color: #F4F5F7;
 }
 
-a, button {
-  color: inherit;
-  text-decoration: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: opacity .5s ease-out, transform .5s var(--ease-spring);
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(140, 93, 255, 0.25);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(140, 93, 255, 0.5);
 }
 
-/* === pacomepertant — fixed-layer behavior ===
- * .webgl + svg backgrounds float at z-index:0 with the
- * matching transitions. Using .hide to fade them out.
- */
-.webgl {
-  display: block;
-  height: 100%;
-  left: 0;
-  position: fixed;
-  top: 0;
-  transition: opacity .5s ease-out;
-  width: 100%;
-  z-index: 0;
-}
-.webgl.hide { opacity: 0; pointer-events: none; }
+/* Reusable utilities */
+@layer utilities {
+  .text-gradient-violet {
+    background: linear-gradient(135deg, #A78BFF 0%, #C45CFF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
 
-.bg-svg {
-  height: 100%;
-  left: 0;
-  object-fit: cover;
-  opacity: .4;
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  width: auto;
-  z-index: 0;
-}
+  .border-gradient {
+    position: relative;
+  }
+  .border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(140, 93, 255, 0.5), rgba(196, 92, 255, 0.2));
+    border-radius: inherit;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
 
-.home-overlay-wrapper { transition: opacity .5s ease-out; }
-.home-overlay-wrapper.hide { opacity: 0; }
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>");
+    mix-blend-mode: overlay;
+  }
 
-/* Background grid pattern (SVG-style) */
-.grid-pattern {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 80px 80px;
-  background-position: center center;
-}
+  .container-x {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @media (min-width: 768px) {
+    .container-x {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container-x {
+      padding-left: 80px;
+      padding-right: 80px;
+    }
+  }
 
-/* Center radial vignette to mimic the dark blurred area */
-.center-vignette {
-  background: radial-gradient(
-    ellipse 60% 50% at 50% 50%,
-    rgba(10, 10, 10, 0.95) 0%,
-    rgba(10, 10, 10, 0.7) 40%,
-    rgba(10, 10, 10, 0) 80%
-  );
-}
-
-/* Typography from pacomepertant.com */
-.title-big {
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-size: clamp(40px, 6vw, 60px);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.menu-link-text {
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-size: clamp(48px, 8vw, 80px);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-
-.menu-panel {
-  width: 100%;
-}
-
-.body-text {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-/* Project rows hover behavior (like pacomepertant) */
-.projects-list:hover .project-row {
-  opacity: 0.25;
-  transition: opacity .5s var(--ease-quad-in-out);
-}
-.projects-list .project-row:hover {
-  opacity: 1;
-}
-.project-row {
-  transition: opacity .5s var(--ease-quad-in-out), transform .5s var(--ease-spring);
-}
-.project-row:hover {
-  transform: translateX(8px);
-}
-
-/* Marquee animation */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.marquee-track {
-  display: inline-flex;
-  gap: 1.5rem;
-  animation: marquee 18s linear infinite;
-  white-space: nowrap;
-}
-
-/* Letter-by-letter menu reveal animation */
-@keyframes letter-up {
-  0% { transform: translateY(100%); }
-  100% { transform: translateY(0); }
-}
-
-.menu-letter {
-  display: inline-block;
-  overflow: hidden;
-}
-
-/* Sound wave animation */
-@keyframes wave {
-  0%, 100% { height: 4px; }
-  50% { height: 14px; }
-}
-.wave-bar {
-  width: 2px;
-  background: currentColor;
-  animation: wave 1s ease-in-out infinite;
-}
-
-/* Scroll cue */
-@keyframes scrolldown {
-  0% { transform: translateY(-2px); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateY(8px); opacity: 0; }
-}
-.scrolldown { animation: scrolldown 1.8s ease-in-out infinite; }
-
-/* Subtle breathing for hero word */
-@keyframes breathe {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.92; }
-}
-.breathe { animation: breathe 4s ease-in-out infinite; }
-
-/* === pacomepertant.com mobile parity === */
-@media screen and (min-width: 768px) {
-  .menu-panel {
-    width: min(80vw, 640px);
+  /* Section label (small dotted, centered) */
+  .section-label {
+    font-size: clamp(10px, 2.5vw, 12px);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #B0B4C0;
+    font-weight: 500;
   }
 }
 
-@media screen and (max-width: 900px) {
-  .title-big {
-    font-size: 40px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .menu-link-text {
-    font-size: 40px;
-    line-height: 1.05;
-  }
-
+/* Min tap target for mobile */
+button, a {
+  touch-action: manipulation;
 }

@@ -1,38 +1,62 @@
-import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const display = Space_Grotesk({
+const display = Inter({
   subsets: ["latin"],
   variable: "--font-display",
+  display: "swap",
+  weight: ["700", "800", "900"],
+});
+
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+  weight: ["400"],
+  style: ["italic", "normal"],
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
   display: "swap",
   weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "MORPIO — From Frame to Fame.",
+  title: "MORPIO — AI Media Studio for the Next Era",
   description:
-    "AI-powered image-to-video & virtual celebrity creation. 이미지를 영상으로, 상상을 존재로.",
+    "MORPIO transforms stories, talent, and brands through AI-powered content production. AI animation, virtual celebrities, and AI advertising — built in Seoul.",
   metadataBase: new URL("https://morpio.com"),
   openGraph: {
-    title: "MORPIO — From Frame to Fame.",
+    title: "MORPIO — AI Media Studio for the Next Era",
     description:
-      "AI-powered image-to-video & virtual celebrity creation.",
+      "AI Animation. Virtual Celeb Studio. AI Advertising. We turn IP into intelligent media.",
     url: "https://morpio.com",
     siteName: "MORPIO",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "MORPIO — From Frame to Fame.",
-    description: "AI-powered image-to-video & virtual celebrity creation.",
+    title: "MORPIO — AI Media Studio for the Next Era",
+    description:
+      "AI Animation. Virtual Celeb Studio. AI Advertising.",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#05060A",
 };
 
 export default function RootLayout({
@@ -41,8 +65,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${display.variable}`}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      className={`${inter.variable} ${display.variable} ${serif.variable} ${mono.variable}`}
+    >
+      <body className="bg-bg-base text-ink-primary antialiased overflow-x-hidden">
+        {children}
+      </body>
     </html>
   );
 }
