@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 export default function ShowreelThumb() {
   return (
     <motion.div
-      className="fixed bottom-5 left-5 z-30 select-none"
+      className="hidden md:block fixed bottom-5 left-5 z-30 select-none"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.6, duration: 0.6 }}
