@@ -71,7 +71,7 @@ export default function Services() {
               {/* Base image */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={"/gen/services/" + (s.art === "anim" ? "video_final.webp" : s.art === "celeb" ? "talent_final.webp" : "ads_final.webp")}
+                src={"/gen/services/" + (s.art === "anim" ? "video_v4.webp" : s.art === "celeb" ? "talent_v4.webp" : "ads_v4.webp")}
                 alt={s.title}
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
