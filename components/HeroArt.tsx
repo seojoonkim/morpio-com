@@ -2,7 +2,7 @@
 
 /**
  * HeroArt — ULTRA BLINDING neon orb with intense rainbow trails
- * Maximum visual impact with /gen/hero_v5.webp
+ * Maximum visual impact with /gen/hero_final.webp
  */
 export default function HeroArt() {
   return (
@@ -102,7 +102,7 @@ export default function HeroArt() {
         {/* Hero image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/gen/hero_v5.webp"
+          src="/gen/hero_final.webp"
           alt="morpio AI media studio"
           className="absolute inset-0 w-full h-full object-cover rounded-full"
           style={{
