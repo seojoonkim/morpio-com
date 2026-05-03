@@ -39,7 +39,7 @@ export default function Hero() {
             to build the next generation of entertainment and advertising.
           </p>
 
-          <div className="mt-8 md:mt-10 flex flex-col sm:flex-row flex-wrap gap-3">
+          <div className="mt-10 md:mt-12 flex flex-col sm:flex-row flex-wrap gap-4 md:gap-5">
             <a
               href="#services"
               className="inline-flex items-center justify-center gap-2 h-14 min-h-[56px] px-6 md:px-7 rounded-full bg-violet-gradient text-white text-sm md:text-base font-medium shadow-glow hover:shadow-glow-lg transition-all flex-1 sm:flex-none"
