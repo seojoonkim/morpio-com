@@ -1,48 +1,44 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import Loader from "@/components/Loader";
-import Nav from "@/components/Nav";
+import Background from "@/components/Background";
+import Logo from "@/components/Logo";
+import ModeSwitch from "@/components/ModeSwitch";
+import MenuButton from "@/components/MenuButton";
+import MenuPanel from "@/components/MenuPanel";
+import ShowreelThumb from "@/components/ShowreelThumb";
+import SoundButton from "@/components/SoundButton";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
-import Studio from "@/components/Studio";
+import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import SideThumb from "@/components/SideThumb";
-import type { Lang } from "@/components/i18n";
+
+type Mode = "spiral" | "list";
 
 export default function Page() {
-  const [loading, setLoading] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [mode, setMode] = useState<Mode>("spiral");
   const [sound, setSound] = useState(false);
-  const [lang, setLang] = useState<Lang>("EN");
 
   return (
-    <main className="relative bg-[#0A0A0A] text-white min-h-screen">
-      <AnimatePresence mode="wait">
-        {loading && (
-          <Loader
-            key="loader"
-            lang={lang}
-            onEnter={(s) => {
-              setSound(s);
-              setLoading(false);
-            }}
-          />
-        )}
-      </AnimatePresence>
+    <main className="relative bg-[#0A0A0A] text-white min-h-screen overflow-x-hidden">
+      <Background />
 
-      {!loading && (
-        <>
-          <Nav lang={lang} setLang={setLang} sound={sound} setSound={setSound} />
-          <SideThumb />
-          <Hero lang={lang} />
-          <Services lang={lang} />
-          <Studio lang={lang} />
-          <Contact lang={lang} />
-          <Footer lang={lang} />
-        </>
-      )}
+      {/* Fixed overlay UI (pacomepertant.com .home-overlay-wrapper) */}
+      <Logo />
+      <ModeSwitch mode={mode} setMode={setMode} />
+      <MenuButton open={menuOpen} setOpen={setMenuOpen} />
+      <MenuPanel open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <ShowreelThumb />
+      <SoundButton on={sound} setOn={setSound} />
+
+      {/* Main scrollable content */}
+      <Hero />
+      <Services />
+      <About />
+      <Contact />
+      <Footer />
     </main>
   );
 }

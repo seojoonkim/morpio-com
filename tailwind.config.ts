@@ -11,6 +11,10 @@ const config: Config = {
         bg: "#0A0A0A",
         accent: "#CCFF00",
         neon: "#00D4FF",
+        green: "#28de91",
+      },
+      textColor: {
+        accent: "#CCFF00",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
