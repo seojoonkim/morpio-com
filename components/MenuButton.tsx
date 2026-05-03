@@ -18,7 +18,11 @@ export default function MenuButton({ open, setOpen }: Props) {
   return (
     <button
       onClick={() => setOpen(!open)}
-      className="fixed top-5 right-5 z-50 h-[44px] min-w-[88px] px-5 flex items-center justify-center gap-1.5 rounded-full bg-white/[0.04] backdrop-blur-md border border-white/15 hover:border-white/40 transition-colors duration-500"
+      className={`fixed top-5 right-5 z-50 h-[44px] min-w-[88px] px-5 flex items-center justify-center gap-1.5 rounded-full backdrop-blur-md border transition-colors duration-500 ${
+        open
+          ? "bg-black/[0.04] text-black border-black/15 hover:border-black/40"
+          : "bg-white/[0.04] text-white border-white/15 hover:border-white/40"
+      }`}
       aria-label={open ? "Close menu" : "Open menu"}
     >
       <AnimatePresence mode="wait" initial={false}>

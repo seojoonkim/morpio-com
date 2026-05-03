@@ -50,7 +50,7 @@ export default function LoadingScreen({ onEnter }: Props) {
       {!exit && (
         <motion.div
           key="loading"
-          className="fixed inset-0 z-[100] bg-[#0A0A0A] flex flex-col items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-[100] bg-[#0A0A0A] flex flex-col items-center justify-center overflow-hidden px-5 text-center"
           initial={{ y: 0 }}
           exit={{ y: "-100%" }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
@@ -70,7 +70,7 @@ export default function LoadingScreen({ onEnter }: Props) {
               className="breathe text-white font-medium leading-none tracking-[-0.04em] text-center"
               style={{
                 fontFamily: "var(--font-display), system-ui",
-                fontSize: "clamp(64px, 14vw, 180px)",
+                fontSize: "clamp(60px, 14vw, 180px)",
                 fontWeight: 600,
                 textShadow:
                   "0 0 40px rgba(204,255,0,0.18), 0 0 80px rgba(204,255,0,0.08)",

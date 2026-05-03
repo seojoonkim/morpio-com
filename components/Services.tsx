@@ -38,10 +38,10 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative w-full px-6 sm:px-10 lg:px-20 py-32"
+      className="relative w-full px-5 sm:px-10 lg:px-20 py-24 md:py-32"
     >
       {/* Section heading */}
-      <div className="flex items-end justify-between mb-16 max-w-[1400px] mx-auto">
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-12 md:mb-16 max-w-[1400px] mx-auto">
         <div>
           <span
             className="text-[11px] uppercase tracking-[0.3em] text-white/40"
@@ -67,8 +67,8 @@ export default function Services() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ delay: i * 0.05, duration: 0.6 }}
           >
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex items-baseline gap-6 md:gap-10">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div className="flex flex-col md:flex-row md:items-baseline gap-3 md:gap-10">
                 <span
                   className="text-[12px] tracking-[0.2em] text-white/35 mt-1"
                   style={{ fontFamily: "var(--font-display), system-ui" }}
@@ -79,7 +79,7 @@ export default function Services() {
                   className="font-display font-medium leading-[1] tracking-[-0.02em]"
                   style={{
                     fontFamily: "var(--font-display), system-ui",
-                    fontSize: "clamp(36px, 6vw, 60px)",
+                    fontSize: "clamp(32px, 10vw, 60px)",
                   }}
                 >
                   {s.name}
@@ -97,7 +97,7 @@ export default function Services() {
                 <span className="ml-3 text-accent text-[18px]">→</span>
               </div>
             </div>
-            <p className="mt-3 ml-0 md:ml-[68px] text-[14px] text-white/45 max-w-[520px]">
+            <p className="mt-4 md:mt-3 ml-0 md:ml-[68px] text-[14px] text-white/45 max-w-[520px]">
               {s.desc}
             </p>
           </motion.li>

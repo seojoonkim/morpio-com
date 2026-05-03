@@ -118,6 +118,10 @@ a, button {
   letter-spacing: -0.03em;
 }
 
+.menu-panel {
+  width: 100%;
+}
+
 .body-text {
   font-size: 16px;
   font-weight: 400;
@@ -187,3 +191,27 @@ a, button {
   50% { opacity: 0.92; }
 }
 .breathe { animation: breathe 4s ease-in-out infinite; }
+
+/* === pacomepertant.com mobile parity === */
+@media screen and (min-width: 768px) {
+  .menu-panel {
+    width: min(80vw, 640px);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .title-big {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .menu-link-text {
+    font-size: 40px;
+    line-height: 1.05;
+  }
+
+  .showreel-thumbnail {
+    display: none;
+  }
+}

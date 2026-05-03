@@ -32,21 +32,18 @@ export default function MenuPanel({ open, onClose }: Props) {
       {open && (
         <motion.aside
           key="menu-panel"
-          className="fixed top-5 right-5 bottom-5 z-40 bg-white text-black overflow-hidden rounded-2xl shadow-2xl"
-          initial={{ width: 0, opacity: 0 }}
-          animate={{
-            width: "min(640px, calc(100vw - 40px))",
-            opacity: 1,
-          }}
-          exit={{ width: 0, opacity: 0 }}
+          className="menu-panel fixed inset-0 md:inset-auto md:top-5 md:right-5 md:bottom-5 z-40 bg-white text-black overflow-hidden rounded-none md:rounded-2xl shadow-2xl"
+          initial={{ x: "100%", opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: "100%", opacity: 0 }}
           transition={{
             duration: 0.6,
             ease: [0.175, 0.885, 0.32, 1.275],
           }}
         >
-          <div className="h-full w-full flex flex-col justify-between px-10 lg:px-14 py-20">
+          <div className="h-full w-full flex flex-col justify-between px-5 sm:px-10 lg:px-14 py-20 md:py-20">
             {/* Links */}
-            <nav className="flex flex-col gap-3 mt-10">
+            <nav className="flex flex-col gap-3 mt-10 md:mt-10">
               {LINKS.map((link, i) => (
                 <motion.a
                   key={link.label}

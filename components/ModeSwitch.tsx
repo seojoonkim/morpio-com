@@ -16,7 +16,7 @@ interface Props {
  */
 export default function ModeSwitch({ mode, setMode }: Props) {
   return (
-    <div className="fixed top-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] backdrop-blur-md border border-white/10">
+    <div className="hidden md:flex fixed top-5 left-1/2 -translate-x-1/2 z-30 items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] backdrop-blur-md border border-white/10">
       <button
         onClick={() => setMode("spiral")}
         className={`relative px-3 py-1 text-[13px] tracking-[0.04em] transition-colors duration-500 ${

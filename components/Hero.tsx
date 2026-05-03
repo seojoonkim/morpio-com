@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full flex flex-col items-center justify-center px-6 pt-24"
+      className="relative min-h-screen w-full flex flex-col items-center justify-center px-5 sm:px-6 pt-24"
     >
       {/* Tag above */}
       <motion.div
@@ -37,7 +37,7 @@ export default function Hero() {
         className="breathe text-center font-display font-medium leading-[0.85] tracking-[-0.04em]"
         style={{
           fontFamily: "var(--font-display), system-ui",
-          fontSize: "clamp(72px, 16vw, 220px)",
+          fontSize: "clamp(60px, 14vw, 120px)",
           fontWeight: 600,
         }}
         initial={{ opacity: 0, y: 30 }}
@@ -64,7 +64,7 @@ export default function Hero() {
 
       {/* Sub-copy */}
       <motion.p
-        className="mt-6 max-w-[640px] text-center text-[15px] sm:text-[16px] leading-relaxed text-white/55"
+        className="mt-6 max-w-[640px] text-center text-[14px] sm:text-[16px] leading-relaxed text-white/55"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.7, duration: 0.6 }}
@@ -98,7 +98,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Scroll cue */}
-      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
+      <div className="absolute bottom-24 md:bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
         <span
           className="text-[10px] uppercase tracking-[0.3em]"
           style={{ fontFamily: "var(--font-display), system-ui" }}
