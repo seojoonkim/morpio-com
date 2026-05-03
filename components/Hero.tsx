@@ -50,10 +50,10 @@ export default function Hero() {
               </svg>
             </a>
             <a
-              href="#work"
+              href="#contact"
               className="inline-flex items-center gap-2 h-12 md:h-13 px-6 md:px-7 rounded-full border border-line-strong text-ink-primary text-sm md:text-base font-medium hover:border-violet-500 hover:bg-white/5 transition-colors"
             >
-              View Work
+              Get in Touch
             </a>
           </div>
 
