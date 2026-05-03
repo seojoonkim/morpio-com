@@ -21,8 +21,8 @@ export default function Hero() {
           </p>
 
           <h1
-            className="font-display font-black tracking-tight leading-[0.92] text-ink-primary"
-            style={{ fontSize: "clamp(40px, 11vw, 96px)" }}
+            className="font-display font-black tracking-tight leading-[0.95] text-ink-primary"
+            style={{ fontSize: "clamp(40px, 11vw, 96px)", lineHeight: 1.02 }}
           >
             <span className="block">We Turn IP Into</span>
             <span className="block font-serif italic font-normal text-gradient-violet">
@@ -31,7 +31,7 @@ export default function Hero() {
           </h1>
 
           <p
-            className="mt-7 md:mt-9 max-w-xl text-ink-secondary leading-relaxed"
+            className="mt-7 md:mt-9 max-w-xl text-ink-secondary leading-[1.7]"
             style={{ fontSize: "clamp(14px, 3.6vw, 17px)" }}
           >
             morpio transforms stories, talent, and brands through AI-powered
