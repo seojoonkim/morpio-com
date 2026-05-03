@@ -7,9 +7,18 @@ const SERVICES = [
     title2: "Novels, Comics & Webtoons",
     body:
       "We adapt compelling IP into high-quality animation and moving content. From storyboarding to final output, AI accelerates creativity without compromising emotion.",
-    art: "anim",
-    tags: ["Animation", "IP Adaptation", "Storyboard"],
-    accent: "#ff00ff", // neon-pink
+    art: "video",
+    tags: ["Animation", "IP Adaptation", "Storyboard"], 
+    accent: "#ff00ff",
+  },
+  {
+    n: "04",
+    title: "Fast",
+    title2: "Production",
+    body: "Faster from concept to final content delivery.",
+    art: "fast-production",
+    tags: ["50x", "Production", "Speed"],
+    accent: "#7c5cbf",
   },
   {
     n: "02",
