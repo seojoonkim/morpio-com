@@ -11,14 +11,14 @@ import { motion } from "framer-motion";
 export default function ShowreelThumb() {
   return (
     <motion.div
-      className="showreel-thumbnail hidden md:block fixed bottom-5 left-5 z-30 select-none"
+      className="showreel-thumbnail fixed bottom-4 left-4 md:bottom-5 md:left-5 z-30 select-none"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.6, duration: 0.6 }}
     >
       <div className="group cursor-pointer">
         <div
-          className="relative w-[200px] aspect-[16/9] overflow-hidden rounded-xl border border-white/10 transition-transform duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-105"
+          className="relative w-[150px] md:w-[200px] aspect-[16/9] overflow-hidden rounded-xl border border-white/10 transition-transform duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-105"
           style={{
             transform: "rotate(-6deg)",
             transformOrigin: "center",
