@@ -39,11 +39,10 @@ export default function Hero() {
             to build the next generation of entertainment and advertising.
           </p>
 
-          <div className="mt-8 md:mt-10 flex flex-wrap gap-3">
+          <div className="mt-8 md:mt-10 flex flex-col sm:flex-row flex-wrap gap-3">
             <a
               href="#services"
-              className="inline-flex items-center gap-2 h-12 md:h-13 px-6 md:px-7 rounded-full bg-violet-gradient text-white text-sm md:text-base font-medium shadow-glow hover:shadow-glow-lg transition-shadow"
-            >
+              className="inline-flex items-center justify-center gap-2 h-14 min-h-[56px] px-6 md:px-7 rounded-full bg-violet-gradient text-white text-sm md:text-base font-medium shadow-glow hover:shadow-glow-lg transition-all flex-1 sm:flex-none"
               Explore Services
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M13 5l7 7-7 7" />
@@ -54,6 +53,12 @@ export default function Hero() {
               className="inline-flex items-center gap-2 h-12 md:h-13 px-6 md:px-7 rounded-full border border-line-strong text-ink-primary text-sm md:text-base font-medium hover:border-violet-500 hover:bg-white/5 transition-colors"
             >
               Get in Touch
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center gap-2 h-14 min-h-[56px] px-6 md:px-7 rounded-full border border-line-strong text-ink-primary text-sm md:text-base font-medium hover:border-violet-500 hover:bg-white/5 transition-all flex-1 sm:flex-none"
+            >
+              Contact Us
             </a>
           </div>
 
