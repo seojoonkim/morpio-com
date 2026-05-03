@@ -10,6 +10,12 @@ import { PROJECTS } from "@/constants/projects";
  * - Each tile floats (sin-wave y/rotate) with its own phase.
  * - Hover: scale up, rotate to 0deg, remove blur.
  * - Mobile: tighter radius + smaller tiles so everything stays in frame.
+ *
+ * IMPORTANT: This gallery is the home page hero. It is ALWAYS mounted and ALWAYS
+ * visible at first paint (opacity 1). The `visible` prop merely controls a soft
+ * dim/pointer state when the user toggles to list mode — it must never set
+ * opacity to 0 or unmount, otherwise webviews (Telegram in-app etc.) that fail
+ * to hydrate JS show a blank screen.
  */
 
 type Placement = {
@@ -58,10 +64,10 @@ export default function SpiralGallery({ visible = true }: { visible?: boolean })
 
   return (
     <div
-      className={`fixed inset-0 z-[10] overflow-hidden transition-opacity duration-700 ${
-        visible ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+      className={`spiral-gallery fixed inset-0 z-[10] overflow-hidden transition-opacity duration-500 ${
+        visible ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-30"
       }`}
-      aria-hidden={!visible}
+      style={{ opacity: visible ? 1 : 0.3 }}
     >
       {PROJECTS.map((p, i) => {
         const d = desktop[i];
@@ -84,28 +90,25 @@ export default function SpiralGallery({ visible = true }: { visible?: boolean })
               ["--y-m" as any]: `${m.yPct}%`,
               ["--rot" as any]: `${d.rotate}deg`,
               zIndex: d.z,
+              opacity: 1,
             }}
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={
-              visible
-                ? {
-                    opacity: isHover ? 1 : 0.92,
-                    scale: isHover ? 1.12 : 1,
-                    y: isHover ? 0 : [0, -d.yAmp, 0, d.yAmp * 0.8, 0],
-                    rotate: isHover ? 0 : [
-                      d.rotate - d.rotAmp,
-                      d.rotate + d.rotAmp,
-                      d.rotate - d.rotAmp * 0.6,
-                      d.rotate,
-                    ],
-                  }
-                : { opacity: 0, scale: 0.6 }
-            }
+            initial={false}
+            animate={{
+              opacity: isHover ? 1 : 0.92,
+              scale: isHover ? 1.12 : 1,
+              y: isHover ? 0 : [0, -d.yAmp, 0, d.yAmp * 0.8, 0],
+              rotate: isHover
+                ? 0
+                : [
+                    d.rotate - d.rotAmp,
+                    d.rotate + d.rotAmp,
+                    d.rotate - d.rotAmp * 0.6,
+                    d.rotate,
+                  ],
+            }}
             transition={{
-              opacity: { duration: 0.5, delay: 0.2 + i * 0.05 },
-              scale: isHover
-                ? { duration: 0.45, ease: [0.22, 1, 0.36, 1] }
-                : { duration: 0.6, delay: 0.2 + i * 0.05 },
+              opacity: { duration: 0.4 },
+              scale: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
               y: {
                 duration: d.duration,
                 delay: d.delay,
