@@ -2,12 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* === pacomepertant.com — exact tokens ===
+ * Mirrors :root from the source site. Only --color-accent diverges
+ * (pacomepertant uses #fdff6c yellow; morpio uses #CCFF00 lime).
+ */
 :root {
   --color-bg-dark: #0A0A0A;
   --color-black: #000000;
   --color-grey: #888888;
   --color-white: #FFFFFF;
-  --color-accent: #CCFF00;
+  --color-accent: #CCFF00;     /* morpio lime (pacome: #fdff6c) */
   --color-green: #28de91;
   --ease-quad-in-out: cubic-bezier(0.455, 0.03, 0.515, 0.955);
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -46,6 +50,37 @@ a, button {
   cursor: pointer;
   transition: opacity .5s ease-out, transform .5s var(--ease-spring);
 }
+
+/* === pacomepertant — fixed-layer behavior ===
+ * .webgl + svg backgrounds float at z-index:0 with the
+ * matching transitions. Using .hide to fade them out.
+ */
+.webgl {
+  display: block;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: opacity .5s ease-out;
+  width: 100%;
+  z-index: 0;
+}
+.webgl.hide { opacity: 0; pointer-events: none; }
+
+.bg-svg {
+  height: 100%;
+  left: 0;
+  object-fit: cover;
+  opacity: .4;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  width: auto;
+  z-index: 0;
+}
+
+.home-overlay-wrapper { transition: opacity .5s ease-out; }
+.home-overlay-wrapper.hide { opacity: 0; }
 
 /* Background grid pattern (SVG-style) */
 .grid-pattern {

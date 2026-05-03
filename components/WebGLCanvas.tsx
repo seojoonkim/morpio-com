@@ -119,7 +119,8 @@ export default function WebGLCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 -z-[5] pointer-events-none"
+      className="webgl pointer-events-none"
+      style={{ zIndex: 0 }}
       aria-hidden="true"
     />
   );
