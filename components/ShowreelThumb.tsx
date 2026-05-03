@@ -106,35 +106,7 @@ function ThumbArtwork({ label }: { label?: string }) {
 export default function ShowreelThumb() {
   return (
     <>
-      <motion.div
-        className="fixed inset-0 z-[1] overflow-hidden md:hidden pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.35, duration: 0.9 }}
-        aria-hidden="true"
-      >
-        {floatingThumbs.map((thumb, index) => (
-          <motion.div
-            key={thumb.id}
-            className="absolute aspect-[16/9] overflow-hidden rounded-2xl border border-white/15 shadow-[0_18px_60px_rgba(0,0,0,0.55)] blur-[0.35px]"
-            style={{ ...thumb.style, background: thumb.gradient }}
-            initial={{ opacity: 0, y: 18, scale: 0.92 }}
-            animate={{ opacity: 0.88, y: [0, -8, 0], scale: 1 }}
-            transition={{
-              opacity: { delay: 0.42 + index * 0.05, duration: 0.55 },
-              scale: { delay: 0.42 + index * 0.05, duration: 0.65 },
-              y: {
-                delay: index * 0.12,
-                duration: 5.2 + index * 0.35,
-                repeat: Infinity,
-                ease: "easeInOut",
-              },
-            }}
-          >
-            <ThumbArtwork label={thumb.label} />
-          </motion.div>
-        ))}
-      </motion.div>
+      {/* Mobile floating gradient gallery removed — replaced by SpiralGallery (real thumbnails) */}
 
       <motion.div
         className="showreel-thumbnail fixed bottom-4 left-4 z-30 hidden select-none md:bottom-5 md:left-5 md:block"

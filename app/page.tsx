@@ -9,6 +9,8 @@ import ModeSwitch from "@/components/ModeSwitch";
 import MenuButton from "@/components/MenuButton";
 import MenuPanel from "@/components/MenuPanel";
 import ShowreelThumb from "@/components/ShowreelThumb";
+import SpiralGallery from "@/components/SpiralGallery";
+import SpiralList from "@/components/SpiralList";
 import SoundButton from "@/components/SoundButton";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
@@ -53,8 +55,12 @@ export default function Page() {
       <ShowreelThumb />
       <SoundButton on={sound} setOn={setSound} />
 
+      {/* Pacomepertant-style spiral gallery (real thumbnails, floating) */}
+      <SpiralGallery visible={mode === "spiral"} />
+      <SpiralList visible={mode === "list"} />
+
       {/* Main scrollable content */}
-      <Hero />
+      <Hero mode={mode} />
       <Services />
       <About />
       <Contact />
