@@ -110,7 +110,7 @@ export default function ShowreelThumb() {
 
       <motion.div
         className="showreel-thumbnail fixed bottom-4 left-4 z-30 hidden select-none md:bottom-5 md:left-5 md:block"
-        initial={{ opacity: 0, y: 20 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 0.6 }}
       >

@@ -27,7 +27,7 @@ export default function About() {
           <motion.p
             className="text-[22px] sm:text-[28px] leading-[1.3] tracking-[-0.01em] text-white/85"
             style={{ fontFamily: "var(--font-display), system-ui" }}
-            initial={{ opacity: 0, y: 24 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7 }}

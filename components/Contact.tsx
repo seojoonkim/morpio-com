@@ -25,7 +25,7 @@ export default function Contact() {
             fontFamily: "var(--font-display), system-ui",
             fontSize: "clamp(56px, 11vw, 160px)",
           }}
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7 }}

@@ -24,8 +24,8 @@ export default function SpiralList({ visible = true }: { visible?: boolean }) {
           return (
             <motion.li
               key={p.slug}
-              initial={{ opacity: 0, y: 14 }}
-              animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+              initial={false}
+              animate={visible ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.05 * i }}
               onMouseEnter={() => setHovered(p.slug)}
               onMouseLeave={() => setHovered(null)}

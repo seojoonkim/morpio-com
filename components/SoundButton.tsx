@@ -16,7 +16,7 @@ export default function SoundButton({ on, setOn }: Props) {
       onClick={() => setOn(!on)}
       className="fixed bottom-5 right-5 z-30 w-[52px] h-[52px] rounded-full border border-white/15 bg-white/[0.04] backdrop-blur-md flex items-center justify-center hover:border-accent transition-colors duration-500"
       aria-label={on ? "Mute" : "Unmute"}
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={false}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 0.7, duration: 0.5 }}
     >

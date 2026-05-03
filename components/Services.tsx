@@ -62,7 +62,7 @@ export default function Services() {
           <motion.li
             key={s.no}
             className="project-row group border-t border-white/10 last:border-b py-6 md:py-8 cursor-pointer"
-            initial={{ opacity: 0, y: 30 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ delay: i * 0.05, duration: 0.6 }}

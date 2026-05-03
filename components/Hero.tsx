@@ -25,7 +25,7 @@ export default function Hero({ mode = "spiral" }: Props) {
       {/* Tag above */}
       <motion.div
         className="flex items-center gap-3 mb-8"
-        initial={{ opacity: 0, y: 16 }}
+        initial={false}
         animate={{ opacity: galleryActive ? 0.55 : 1, y: 0 }}
         transition={{ delay: 0.15, duration: 0.6 }}
       >
@@ -47,7 +47,7 @@ export default function Hero({ mode = "spiral" }: Props) {
           fontSize: "clamp(60px, 14vw, 120px)",
           fontWeight: 600,
         }}
-        initial={{ opacity: 0, y: 30 }}
+        initial={false}
         animate={{
           opacity: galleryActive ? 0.06 : 1,
           y: 0,
@@ -58,37 +58,41 @@ export default function Hero({ mode = "spiral" }: Props) {
         MORPIO
       </motion.h1>
 
-      {/* Tagline accent */}
-      <motion.div
-        className="mt-6 text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: galleryActive ? 0 : 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.6 }}
-      >
-        <p
-          className="text-accent text-[20px] sm:text-[24px] tracking-[0.16em] uppercase font-medium"
-          style={{ fontFamily: "var(--font-display), system-ui" }}
+      {/* Tagline accent — only when not in gallery mode */}
+      {!galleryActive && (
+        <motion.div
+          className="mt-6 text-center"
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
         >
-          From Frame to Fame.
-        </p>
-      </motion.div>
+          <p
+            className="text-accent text-[20px] sm:text-[24px] tracking-[0.16em] uppercase font-medium"
+            style={{ fontFamily: "var(--font-display), system-ui" }}
+          >
+            From Frame to Fame.
+          </p>
+        </motion.div>
+      )}
 
-      {/* Sub-copy */}
-      <motion.p
-        className="mt-6 max-w-[640px] text-center text-[14px] sm:text-[16px] leading-relaxed text-white/55"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: galleryActive ? 0 : 1 }}
-        transition={{ delay: 0.7, duration: 0.6 }}
-      >
-        AI-powered image-to-video & virtual celebrity creation.
-        <br className="hidden sm:block" />
-        이미지를 영상으로, 상상을 존재로.
-      </motion.p>
+      {/* Sub-copy — only when not in gallery mode */}
+      {!galleryActive && (
+        <motion.p
+          className="mt-6 max-w-[640px] text-center text-[14px] sm:text-[16px] leading-relaxed text-white/55"
+          initial={false}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7, duration: 0.6 }}
+        >
+          AI-powered image-to-video & virtual celebrity creation.
+          <br className="hidden sm:block" />
+          이미지를 영상으로, 상상을 존재로.
+        </motion.p>
+      )}
 
       {/* CTA pills — always visible, sit ABOVE gallery (z-20) */}
       <motion.div
         className="relative z-20 mt-10 flex flex-wrap items-center justify-center gap-3"
-        initial={{ opacity: 0, y: 16 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.85, duration: 0.5 }}
       >
