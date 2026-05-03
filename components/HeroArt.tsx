@@ -11,6 +11,16 @@ export default function HeroArt() {
       {/* Background radial glow */}
       <div className="absolute inset-0 bg-radial-violet" />
 
+      {/* AI-generated hero composition */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/gen/hero.webp"
+        alt="morpio AI media studio"
+        className="absolute inset-[10%] w-[80%] h-[80%] object-cover rounded-full opacity-90 mix-blend-screen"
+      />
+      {/* Inner blend layer to keep cosmic feel */}
+      <div className="absolute inset-[10%] rounded-full bg-gradient-to-br from-violet-700/30 via-transparent to-accent-pink/20 mix-blend-overlay pointer-events-none" />
+
       {/* Outer rotating ring with tick marks */}
       <div className="absolute inset-[6%] rounded-full border border-violet-500/30 animate-spin-slow">
         <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-accent-pink shadow-glow" />

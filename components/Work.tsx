@@ -8,6 +8,7 @@ const WORK = [
     year: "2025",
     grad: "from-violet-700 via-violet-500 to-accent-pink",
     art: "anime",
+    img: "/gen/work-anime.webp",
   },
   {
     title: "Virtual Idol Campaign",
@@ -16,6 +17,7 @@ const WORK = [
     year: "2025",
     grad: "from-accent-pink via-violet-500 to-accent-blue",
     art: "idol",
+    img: "/gen/work-idol.webp",
   },
   {
     title: "AI Brand Film",
@@ -24,6 +26,7 @@ const WORK = [
     year: "2024",
     grad: "from-accent-blue via-violet-500 to-violet-700",
     art: "film",
+    img: "/gen/work-film.webp",
   },
   {
     title: "Character IP Launch",
@@ -32,6 +35,7 @@ const WORK = [
     year: "2024",
     grad: "from-violet-500 via-accent-pink to-accent-blue",
     art: "ip",
+    img: "/gen/work-ip.webp",
   },
   {
     title: "AI Product Ad",
@@ -40,6 +44,7 @@ const WORK = [
     year: "2024",
     grad: "from-violet-700 via-accent-blue to-violet-500",
     art: "product",
+    img: "/gen/work-product.webp",
   },
   {
     title: "Virtual Talent",
@@ -48,6 +53,7 @@ const WORK = [
     year: "2025",
     grad: "from-accent-pink via-accent-blue to-violet-700",
     art: "shorts",
+    img: "/gen/work-shorts.webp",
   },
 ] as const;
 
@@ -63,11 +69,19 @@ export default function Work() {
             className="group relative rounded-2xl overflow-hidden bg-bg-card border border-line hover:border-violet-500/50 transition-all hover:-translate-y-1 duration-300"
           >
             {/* Visual */}
-            <div className={`relative aspect-[4/3] bg-gradient-to-br ${w.grad}`}>
-              <WorkVisual kind={w.art} />
+            <div className={`relative aspect-[4/3] bg-gradient-to-br ${w.grad} overflow-hidden`}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={w.img}
+                alt={w.title}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+              />
 
-              {/* Overlay gradient for text */}
-              <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-bg-card/30 to-transparent" />
+              {/* Subtle overlay gradient for text legibility */}
+              <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-bg-card/40 to-transparent" />
+              {/* Soft violet tint to keep brand cohesion */}
+              <div className="absolute inset-0 bg-gradient-to-br from-violet-900/10 via-transparent to-accent-pink/10 mix-blend-overlay pointer-events-none" />
 
               {/* Year badge */}
               <span className="absolute top-3 left-3 inline-flex items-center px-2 py-1 rounded-full bg-black/50 backdrop-blur border border-white/15 font-mono text-[10px] tracking-widest text-white/80">
