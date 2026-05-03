@@ -4,6 +4,26 @@
 
 :root {
   --bg-base: #05060A;
+  
+  /* Neon Rainbow System */
+  --neon-pink: #ff00ff;
+  --neon-cyan: #00ffff;
+  --neon-violet: #bf00ff;
+  --neon-orange: #ff6600;
+  --neon-green: #00ff88;
+  --neon-blue: #0066ff;
+  
+  /* Blinding glow intensities */
+  --glow-intense: 0 0 60px rgba(255,0,255,0.6), 0 0 120px rgba(191,0,255,0.4), 0 0 180px rgba(0,255,255,0.3);
+  --glow-rainbow: 
+    0 0 20px var(--neon-pink),
+    0 0 40px var(--neon-violet),
+    0 0 60px var(--neon-cyan),
+    0 0 80px var(--neon-orange);
+  --glow-card: 
+    0 8px 32px rgba(191,0,255,0.25),
+    0 0 60px rgba(255,0,255,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
 * {
@@ -26,13 +46,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  /* iOS safe area */
   padding-top: env(safe-area-inset-top);
 }
 
 /* Selection */
 ::selection {
-  background: rgba(140, 93, 255, 0.35);
+  background: rgba(191, 0, 255, 0.45);
   color: #F4F5F7;
 }
 
@@ -45,11 +64,11 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(140, 93, 255, 0.25);
+  background: rgba(191, 0, 255, 0.35);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(140, 93, 255, 0.5);
+  background: rgba(255, 0, 255, 0.6);
 }
 
 /* Reusable utilities */
@@ -62,6 +81,19 @@ body {
     color: transparent;
   }
 
+  .text-gradient-rainbow {
+    background: linear-gradient(90deg, #ff00ff, #00ffff, #bf00ff, #ff6600, #ff00ff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow-shift 3s linear infinite;
+  }
+
+  @keyframes rainbow-shift {
+    to { background-position: 200% center; }
+  }
+
   .border-gradient {
     position: relative;
   }
@@ -70,7 +102,7 @@ body {
     position: absolute;
     inset: 0;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(140, 93, 255, 0.5), rgba(196, 92, 255, 0.2));
+    background: linear-gradient(135deg, rgba(255, 0, 255, 0.6), rgba(0, 255, 255, 0.3));
     border-radius: inherit;
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
@@ -78,6 +110,57 @@ body {
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
+  }
+
+  /* Brutalist neon card */
+  .neon-card {
+    position: relative;
+    background: linear-gradient(145deg, rgba(20,15,35,0.95) 0%, rgba(10,8,20,0.98) 100%);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .neon-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, rgba(191,0,255,0.5), rgba(0,255,255,0.3), rgba(255,0,255,0.4));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0.6;
+    transition: opacity 0.4s ease;
+  }
+  .neon-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--glow-rainbow);
+  }
+  .neon-card:hover::before {
+    opacity: 1;
+    animation: border-pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes border-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  /* Blinding orb effect */
+  .blinding-orb {
+    position: relative;
+  }
+  .blinding-orb::after {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle, rgba(255,0,255,0.4) 0%, rgba(191,0,255,0.2) 40%, transparent 70%);
+    filter: blur(40px);
+    animation: orb-breathe 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes orb-breathe {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
   }
 
   .grain {
@@ -110,13 +193,17 @@ body {
     }
   }
 
-  /* Section label (small dotted, centered) */
   .section-label {
     font-size: clamp(10px, 2.5vw, 12px);
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: #B0B4C0;
     font-weight: 500;
+  }
+
+  /* Clip path brutalist */
+  .clip-brutalist {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
   }
 }
 
