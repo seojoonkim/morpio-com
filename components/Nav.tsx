@@ -36,7 +36,7 @@ export default function Nav() {
           className="flex items-center gap-2 group"
           aria-label="morpio home"
         >
-          <span className="font-display font-black tracking-tight text-lg md:text-xl text-ink-primary group-hover:text-violet-400 transition-colors">
+          <span className="font-display font-black tracking-tight text-xl md:text-2xl lg:text-3xl text-ink-primary group-hover:text-violet-400 transition-all">
             morpio
           </span>
           <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-violet-500 shadow-glow-sm" />
