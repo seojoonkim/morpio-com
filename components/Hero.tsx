@@ -42,7 +42,7 @@ export default function Hero() {
           <div className="mt-10 md:mt-12 flex flex-col sm:flex-row flex-wrap gap-4 md:gap-5">
             <a
               href="#services"
-              className="inline-flex items-center justify-center gap-2 h-14 min-h-[56px] px-6 md:px-7 rounded-full bg-violet-gradient text-white text-sm md:text-base font-medium shadow-glow hover:shadow-glow-lg transition-all flex-1 sm:flex-none"
+              className="flex items-center justify-center gap-2 h-16 min-h-[64px] py-4 px-6 md:px-8 rounded-full bg-violet-gradient text-white text-sm md:text-base font-medium shadow-glow-lg hover:shadow-glow-xl transition-all flex-1 sm:flex-none"
               Explore Services
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M13 5l7 7-7 7" />
@@ -56,7 +56,7 @@ export default function Hero() {
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center justify-center gap-2 h-14 min-h-[56px] px-6 md:px-7 rounded-full border border-line-strong text-ink-primary text-sm md:text-base font-medium hover:border-violet-500 hover:bg-white/5 transition-all flex-1 sm:flex-none"
+              className="flex items-center justify-center gap-2 h-16 min-h-[64px] py-4 px-6 md:px-8 rounded-full border-2 border-line-strong text-ink-primary text-sm md:text-base font-medium hover:border-violet-500 hover:bg-white/10 transition-all flex-1 sm:flex-none"
             >
               Contact Us
             </a>
