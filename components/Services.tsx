@@ -43,6 +43,13 @@ export default function Services() {
           >
             {/* Visual top */}
             <div className="relative aspect-[16/10] overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={"/gen/services/" + (s.art === "anim" ? "video.webp" : s.art === "celeb" ? "talent.webp" : "ads.webp")}
+                alt={s.title}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover opacity-95"
+              />
               <ServiceVisual kind={s.art} />
               {/* Big number watermark */}
               <span
