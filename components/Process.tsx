@@ -8,26 +8,26 @@ const STEPS = [
   {
     n: "I",
     label: "Discover",
-    italic: "the brief",
-    body: "We dive deep into your IP, brand, and audience to uncover the core story and the right opportunity.",
+    italic: "the brief.",
+    body: "We read your IP like editors, not vendors. The right opening matters more than the loudest one.",
   },
   {
     n: "II",
     label: "Design",
-    italic: "the world",
-    body: "We build characters, worlds, and concepts, then prototype, iterate, and bring direction to life.",
+    italic: "the world.",
+    body: "Characters, plots, and visual rules — drafted, prototyped, iterated. Worlds that stay coherent at scale.",
   },
   {
     n: "III",
     label: "Generate",
-    italic: "the work",
-    body: "We leverage frontier AI tools and in-house pipelines to produce stunning visuals, video, and audio.",
+    italic: "the work.",
+    body: "Animation, voice, image, and motion produced with AI tools we tune ourselves. Quality stays human.",
   },
   {
     n: "IV",
-    label: "Launch",
-    italic: "to the world",
-    body: "We deliver optimized assets and scale your content across channels for maximum cultural impact.",
+    label: "Deliver",
+    italic: "the launch.",
+    body: "We ship across feed, screen, and channel — with the metrics that matter and the polish that doesn’t beg.",
   },
 ] as const;
 

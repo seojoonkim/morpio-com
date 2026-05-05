@@ -88,36 +88,34 @@ export default function Hero() {
         {/* Lead */}
         <div className="col-span-12 md:col-span-6 lg:col-span-5">
           <p className="text-ink text-lg md:text-xl leading-[1.45] max-w-md">
-            An AI media house at the intersection of{" "}
-            <span className="serif-em">story</span>,{" "}
-            <span className="serif-em">talent</span>, and{" "}
-            <span className="serif-em">advertising</span>.
+            A studio for IP that wants{" "}
+            <span className="serif-em">a second life</span>. We take stories that already have fans — novels, comics, webtoons — and rebuild them as living media. Animation that breathes. Celebrities that don&apos;t sleep. Advertising that remembers your name.
           </p>
         </div>
 
         {/* CTAs */}
         <div className="col-span-12 md:col-span-3 flex flex-col gap-3 md:items-start md:justify-end">
           <a
-            href="#services"
+            href="mailto:hello@morpio.com?subject=Bring%20my%20IP"
             className="inline-flex items-center gap-3 text-ink text-[13px] font-medium link-underline"
           >
-            <span>Read Practice</span>
+            <span>Bring your IP</span>
             <span aria-hidden>→</span>
           </a>
           <a
-            href="mailto:hello@morpio.com"
+            href="#services"
             className="inline-flex items-center gap-3 text-ink-muted text-[13px] link-underline"
           >
-            <span>Write Studio</span>
+            <span>See the work</span>
             <span aria-hidden>↗</span>
           </a>
         </div>
 
         {/* Byline */}
         <div className="col-span-12 md:col-span-3 lg:col-span-4 md:text-right">
-          <p className="meta">By the editors</p>
+          <p className="meta">Made in Seoul</p>
           <p className="font-serif italic text-ink mt-1 text-base">
-            Studio Morpio · 2026
+            Sent to the world
           </p>
         </div>
       </motion.div>

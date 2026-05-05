@@ -37,7 +37,7 @@ export default function Contact() {
             letterSpacing: "-0.045em",
           }}
         >
-          Build the next
+          Let&apos;s build the next
           <br />
           <span className="serif-em font-normal">media universe.</span>
         </h2>
@@ -53,8 +53,9 @@ export default function Contact() {
       >
         {/* Lead */}
         <p className="col-span-12 md:col-span-7 lg:col-span-6 text-ink text-xl md:text-2xl leading-[1.4]">
-          Let&apos;s create world-class AI media, virtual talent, and campaigns
-          that move <span className="serif-em">culture</span>.
+          If you have IP that wants more lives, write to us. If you have a brand that wants attention worth keeping, write to us. If you just want to argue about what{" "}
+          <span className="serif-em">&ldquo;intelligent media&rdquo;</span>{" "}
+          means — yes, write to us.
         </p>
 
         {/* CTAs + email */}

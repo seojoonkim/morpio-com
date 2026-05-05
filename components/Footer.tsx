@@ -28,10 +28,8 @@ export default function Footer() {
               morpio<span className="text-accent">.</span>
             </a>
             <p className="mt-6 text-ink-muted text-[15px] leading-[1.65] max-w-sm">
-              An AI media studio for the next era of{" "}
-              <span className="serif-em text-ink">story</span>,{" "}
-              <span className="serif-em text-ink">talent</span>, and{" "}
-              <span className="serif-em text-ink">advertising</span>.
+              A media studio inside{" "}
+              <span className="serif-em text-ink">Hashed Vibe Labs</span>. Tomorrow&apos;s franchises, tonight&apos;s prototypes.
             </p>
             <p className="meta mt-8">Seoul · Sent to the world</p>
           </div>
@@ -83,7 +81,7 @@ export default function Footer() {
         {/* Legal row */}
         <div className="pt-8 border-t border-line flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <p className="meta">
-            © {new Date().getFullYear()} morpio · All rights reserved
+            © {new Date().getFullYear()} morpio · Made with intention in Seoul
           </p>
           <p className="meta tabular">
             Vol. 01 · Issue 04 · 2026

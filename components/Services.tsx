@@ -7,24 +7,24 @@ const ease = [0.19, 1, 0.22, 1] as const;
 const SERVICES = [
   {
     n: "01",
-    label: "Animation",
-    title: "AI Animation",
-    italic: "for novels, comics & webtoons",
-    body: "We adapt compelling IP into high-quality animation. From storyboarding to final output, AI accelerates creativity without compromising emotion.",
+    label: "01 / Kinetic IP",
+    title: "Animation",
+    italic: "that doesn’t sit still.",
+    body: "Novels, comics, and webtoons reborn as motion. Your IP, finally rendered at the speed of imagination.",
   },
   {
     n: "02",
-    label: "Talent",
-    title: "Virtual Celeb Studio",
-    italic: "& full-service agency",
-    body: "We create, grow, and manage virtual celebrities. From concept to content, we build IP, produce video, and operate as a full-service talent agency.",
+    label: "02 / Synthetic Talent",
+    title: "Virtual Celebs",
+    italic: "built to be loved.",
+    body: "We design characters who tour, post, perform, and never miss a comeback. Studio, agency, and faithful fanbase included.",
   },
   {
     n: "03",
-    label: "Brand",
-    title: "AI Advertising Agency",
-    italic: "campaigns built to perform",
-    body: "We craft AI-native campaigns, branded content, and commercials that are data-driven, visually precise, and built to perform across surfaces.",
+    label: "03 / Intelligent Reach",
+    title: "Advertising",
+    italic: "that learns who’s watching.",
+    body: "AI-native ad creative that adapts in the wild — by audience, channel, and mood. Made for brands that refuse to send the same ad twice.",
   },
 ] as const;
 
@@ -55,8 +55,8 @@ export default function Services() {
           letterSpacing: "-0.035em",
         }}
       >
-        Three studios.{" "}
-        <span className="serif-em font-normal">One discipline.</span>
+        Three businesses.{" "}
+        <span className="serif-em font-normal">One creative engine.</span>
       </motion.h2>
 
       {/* Cards row */}
@@ -120,8 +120,7 @@ export default function Services() {
 
       {/* Closing accent */}
       <p className="mt-16 md:mt-24 max-w-2xl serif-em text-ink-muted text-xl md:text-2xl leading-[1.4]">
-        — Built with creativity, technology, and precision. Story-first,
-        always.
+        § Three businesses. One creative engine. Built in Seoul, deployed everywhere.
       </p>
     </section>
   );

@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 const ease = [0.19, 1, 0.22, 1] as const;
 
 const STATS = [
-  { value: "100", suffix: "%", label: "Story-first" },
-  { value: "100", suffix: "%", label: "AI-native" },
-  { value: "50", suffix: "+", label: "Global projects" },
-  { value: "10", suffix: "×", label: "Faster production" },
+  { value: "01", suffix: "", label: "One creative engine" },
+  { value: "03", suffix: "", label: "Animation · Talent · Ads" },
+  { value: "∞", suffix: "", label: "We never ship still" },
+  { value: "SEL", suffix: "", label: "Seoul → World" },
 ] as const;
 
 export default function About() {
@@ -41,10 +41,10 @@ export default function About() {
             letterSpacing: "-0.03em",
           }}
         >
-          A new-generation AI media company at the intersection of{" "}
-          <span className="serif-em font-normal">IP</span>, virtual{" "}
-          <span className="serif-em font-normal">talent</span>, and{" "}
-          <span className="serif-em font-normal">advertising</span>.
+          We believe IP is{" "}
+          <span className="serif-em font-normal">infrastructure</span>, talent is{" "}
+          <span className="serif-em font-normal">software</span>, and advertising is{" "}
+          <span className="serif-em font-normal">conversation</span>.
         </p>
       </motion.div>
 
@@ -58,9 +58,7 @@ export default function About() {
       >
         <span className="col-span-12 md:col-span-3 meta">Belief</span>
         <p className="col-span-12 md:col-span-9 lg:col-span-7 text-ink text-xl md:text-2xl leading-[1.45]">
-          We believe great stories deserve{" "}
-          <span className="serif-em">new forms</span> — and AI helps us create
-          them <span className="serif-em">faster, better, and bolder</span>.
+          <span className="serif-em">Stories don’t end on the last page anymore. They begin there.</span>
         </p>
       </motion.div>
 
@@ -87,9 +85,11 @@ export default function About() {
                 }}
               >
                 {stat.value}
-                <span className="serif-em font-normal text-accent">
-                  {stat.suffix}
-                </span>
+                {stat.suffix && (
+                  <span className="serif-em font-normal text-accent">
+                    {stat.suffix}
+                  </span>
+                )}
               </span>
             </motion.div>
           ))}

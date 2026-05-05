@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 
 const NAV_LINKS = [
-  { label: "Index", href: "#index", num: "01" },
-  { label: "Practice", href: "#services", num: "02" },
-  { label: "Method", href: "#process", num: "03" },
-  { label: "Studio", href: "#about", num: "04" },
+  { label: "Practices", href: "#services", num: "01" },
+  { label: "Method", href: "#process", num: "02" },
+  { label: "Studio", href: "#about", num: "03" },
+  { label: "Inquiry", href: "#contact", num: "04" },
 ];
 
 export default function Header() {
@@ -64,11 +64,11 @@ export default function Header() {
 
         {/* CTA */}
         <a
-          href="mailto:hello@morpio.com"
+          href="mailto:hello@morpio.com?subject=Bring%20my%20IP"
           className="hidden md:inline-flex items-baseline gap-2 text-[13px] text-ink"
         >
-          <span className="link-underline">Get in Touch</span>
-          <span className="font-serif italic text-ink-muted">↗</span>
+          <span className="link-underline">Bring your IP</span>
+          <span className="font-serif italic text-ink-muted">→</span>
         </a>
 
         {/* Mobile Toggle */}
@@ -111,11 +111,11 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="mailto:hello@morpio.com"
+            href="mailto:hello@morpio.com?subject=Bring%20my%20IP"
             onClick={() => setOpen(false)}
             className="mt-6 inline-flex items-center justify-center gap-2 h-12 border border-ink text-ink text-sm font-medium"
           >
-            Get in Touch ↗
+            Bring your IP →
           </a>
         </nav>
       </div>
