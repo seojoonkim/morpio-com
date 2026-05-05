@@ -2,72 +2,94 @@
 
 import { motion } from "framer-motion";
 
+const ease = [0.19, 1, 0.22, 1] as const;
+
 const STATS = [
-  { value: "100%", label: "Story-First" },
-  { value: "100%", label: "AI-Native" },
-  { value: "50+", label: "Global Projects" },
-  { value: "10×", label: "Faster Production" },
+  { value: "100", suffix: "%", label: "Story-first" },
+  { value: "100", suffix: "%", label: "AI-native" },
+  { value: "50", suffix: "+", label: "Global projects" },
+  { value: "10", suffix: "×", label: "Faster production" },
 ] as const;
 
 export default function About() {
   return (
-    <section id="about" className="py-32 md:py-56 container-x">
-      {/* Section Header */}
-      <div className="flex items-center gap-4 mb-16 md:mb-24">
-        <span className="section-label">About</span>
-        <span className="block flex-1 h-px bg-line" />
-        <span className="section-label">04 / 04</span>
+    <section id="about" className="relative py-32 md:py-56 container-wide">
+      {/* Section opener */}
+      <div className="grid grid-cols-12 gap-6 mb-16 md:mb-24">
+        <span className="col-span-6 md:col-span-3 meta">[ IV — Studio ]</span>
+        <span className="hidden md:block col-span-6 meta tabular">
+          On story, talent, and machines
+        </span>
+        <span className="hidden md:block col-span-3 meta text-right">
+          04 / 04
+        </span>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
-        {/* Left: Copy */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
+      {/* Manifesto headline */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 1, ease }}
+        className="grid grid-cols-12 gap-6 md:gap-10 mb-24 md:mb-32"
+      >
+        <p
+          className="col-span-12 lg:col-span-10 lg:col-start-2 font-display font-black text-ink"
+          style={{
+            fontSize: "clamp(36px, 6.5vw, 96px)",
+            lineHeight: "0.98",
+            letterSpacing: "-0.03em",
+          }}
         >
-          <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl text-ink leading-[1.05] tracking-tight">
-            A new-generation AI media company at the intersection of IP, virtual talent, and advertising.
-          </h2>
+          A new-generation AI media company at the intersection of{" "}
+          <span className="serif-em font-normal">IP</span>, virtual{" "}
+          <span className="serif-em font-normal">talent</span>, and{" "}
+          <span className="serif-em font-normal">advertising</span>.
+        </p>
+      </motion.div>
 
-          <p className="mt-8 text-ink-muted text-lg md:text-xl leading-relaxed max-w-lg">
-            We believe great stories deserve new forms — and AI helps us create them faster, better, and bolder.
-          </p>
+      {/* Belief block */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, delay: 0.1, ease }}
+        className="grid grid-cols-12 gap-6 md:gap-10 mb-24 md:mb-40 pt-10 border-t border-line"
+      >
+        <span className="col-span-12 md:col-span-3 meta">Belief</span>
+        <p className="col-span-12 md:col-span-9 lg:col-span-7 text-ink text-xl md:text-2xl leading-[1.45]">
+          We believe great stories deserve{" "}
+          <span className="serif-em">new forms</span> — and AI helps us create
+          them <span className="serif-em">faster, better, and bolder</span>.
+        </p>
+      </motion.div>
 
-          <a
-            href="#contact"
-            className="mt-10 inline-flex items-center gap-2 text-ink font-medium link-underline"
-          >
-            Learn more about us
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12h14M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </motion.div>
-
-        {/* Right: Stats */}
-        <div className="grid grid-cols-2 gap-6 md:gap-8">
+      {/* Stats grid — magazine-grade pull numbers */}
+      <div className="border-t border-ink">
+        <div className="grid grid-cols-2 md:grid-cols-4">
           {STATS.map((stat, index) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.19, 1, 0.22, 1] }}
-              className="group"
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.9, delay: index * 0.08, ease }}
+              className={`relative pt-10 md:pt-12 pb-12 md:pb-14 px-2 md:px-6 ${
+                index !== 0 ? "md:border-l" : ""
+              } ${index >= 2 ? "border-t md:border-t-0" : ""} border-ink/15`}
             >
-              {/* Giant Number */}
-              <span 
-                className="font-display font-black text-ink leading-none block"
-                style={{ fontSize: "clamp(80px, 15vw, 160px)" }}
+              <span className="meta-ink mb-8 block">{stat.label}</span>
+              <span
+                className="font-display font-black text-ink leading-none tabular block"
+                style={{
+                  fontSize: "clamp(80px, 13vw, 168px)",
+                  letterSpacing: "-0.05em",
+                }}
               >
                 {stat.value}
-              </span>
-              
-              {/* Label */}
-              <span className="mt-2 block font-mono text-xs uppercase tracking-widest text-ink-muted">
-                {stat.label}
+                <span className="serif-em font-normal text-accent">
+                  {stat.suffix}
+                </span>
               </span>
             </motion.div>
           ))}

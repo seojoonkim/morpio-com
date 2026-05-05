@@ -2,52 +2,78 @@
 
 import { motion } from "framer-motion";
 
+const ease = [0.19, 1, 0.22, 1] as const;
+
 export default function Contact() {
   return (
-    <section id="contact" className="py-32 md:py-56 container-x">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-        className="max-w-3xl"
-      >
-        <p className="section-label mb-6">Get in Touch</p>
+    <section
+      id="contact"
+      className="relative py-32 md:py-56 container-wide border-t border-line"
+    >
+      {/* Opener */}
+      <div className="grid grid-cols-12 gap-6 mb-16 md:mb-24">
+        <span className="col-span-6 md:col-span-3 meta">[ V — Letter ]</span>
+        <span className="hidden md:block col-span-6 meta tabular">
+          To prospective collaborators
+        </span>
+        <span className="hidden md:block col-span-3 meta text-right">
+          Closing
+        </span>
+      </div>
 
-        <h2 
-          className="font-display font-black text-ink leading-[0.95] tracking-tight"
-          style={{ fontSize: "clamp(48px, 10vw, 96px)" }}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 1, ease }}
+        className="grid grid-cols-12 gap-6 md:gap-10"
+      >
+        {/* Headline */}
+        <h2
+          className="col-span-12 lg:col-span-10 lg:col-start-2 font-display font-black text-ink"
+          style={{
+            fontSize: "clamp(56px, 11vw, 168px)",
+            lineHeight: "0.88",
+            letterSpacing: "-0.045em",
+          }}
         >
           Build the next
           <br />
-          <span className="font-serif italic font-normal">media universe.</span>
+          <span className="serif-em font-normal">media universe.</span>
         </h2>
+      </motion.div>
 
-        <p className="mt-8 text-ink-muted text-lg md:text-xl leading-relaxed max-w-lg">
-          Let's create world-class AI media, virtual talent, and campaigns that inspire the world.
+      {/* Body row */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, delay: 0.15, ease }}
+        className="grid grid-cols-12 gap-6 md:gap-10 mt-20 md:mt-28 pt-10 border-t border-line"
+      >
+        {/* Lead */}
+        <p className="col-span-12 md:col-span-7 lg:col-span-6 text-ink text-xl md:text-2xl leading-[1.4]">
+          Let&apos;s create world-class AI media, virtual talent, and campaigns
+          that move <span className="serif-em">culture</span>.
         </p>
 
-        <div className="mt-12 flex flex-wrap gap-4">
+        {/* CTAs + email */}
+        <div className="col-span-12 md:col-span-5 lg:col-span-5 lg:col-start-8 flex flex-col gap-6 md:items-end md:text-right">
           <a
             href="mailto:hello@morpio.com?subject=Start%20a%20Project"
-            className="inline-flex items-center gap-3 px-8 h-14 rounded-full bg-ink text-bg text-sm font-medium hover:bg-accent transition-colors duration-300"
+            className="inline-flex items-baseline gap-3 text-ink text-base md:text-lg font-medium link-underline"
           >
-            Start a Project
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12h14M13 5l7 7-7 7" />
-            </svg>
+            <span>Start a project</span>
+            <span aria-hidden>↗</span>
           </a>
           <a
             href="mailto:hello@morpio.com"
-            className="inline-flex items-center gap-2 px-8 h-14 rounded-full border border-line text-ink text-sm font-medium hover:border-ink transition-colors duration-300"
+            className="font-serif italic text-ink text-3xl md:text-5xl tracking-tight link-underline"
           >
-            Contact Us
+            hello@morpio.com
           </a>
+          <p className="meta">Reply within one business day · Seoul, KST</p>
         </div>
-
-        <p className="mt-16 font-mono text-sm text-ink-muted">
-          hello@morpio.com
-        </p>
       </motion.div>
     </section>
   );

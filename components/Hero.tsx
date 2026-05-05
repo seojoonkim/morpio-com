@@ -3,80 +3,124 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+const ease = [0.19, 1, 0.22, 1] as const;
+
 export default function Hero() {
   return (
-    <section className="relative pt-32 md:pt-40 pb-20 md:pb-32 container-x">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        {/* Left: Typography */}
+    <section
+      id="index"
+      className="relative pt-40 md:pt-52 lg:pt-56 pb-32 md:pb-44 container-wide"
+    >
+      {/* Top meta strip */}
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease }}
+        className="grid grid-cols-12 gap-6 mb-16 md:mb-24"
+      >
+        <span className="col-span-6 md:col-span-3 meta">[ I — Index ]</span>
+        <span className="hidden md:block col-span-6 meta tabular">
+          MORPIO · Vol. 01 / Issue 04
+        </span>
+        <span className="hidden md:block col-span-3 meta text-right">
+          Made in Seoul
+        </span>
+      </motion.div>
+
+      {/* Hero composition: 12-col magazine grid */}
+      <div className="grid grid-cols-12 gap-6 md:gap-10 items-end">
+        {/* Headline — 7 cols on desktop */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
+          transition={{ duration: 1.1, ease }}
+          className="col-span-12 lg:col-span-7"
         >
-          <p className="section-label mb-6 flex items-center gap-3">
-            <span className="font-mono">01 / 04</span>
-            <span className="block w-8 h-px bg-line" />
-            <span>INDEX</span>
-          </p>
-
-          <h1 className="font-display font-black tracking-tight leading-[0.9] text-ink"
-              style={{ fontSize: "clamp(48px, 12vw, 120px)", letterSpacing: "-0.04em" }}>
-            We turn IP into
+          <h1
+            className="font-display font-black text-ink"
+            style={{
+              fontSize: "clamp(60px, 13.5vw, 196px)",
+              lineHeight: "0.86",
+              letterSpacing: "-0.045em",
+            }}
+          >
+            We turn IP
             <br />
-            <span className="font-serif italic font-normal">intelligent</span> media.
+            into <span className="serif-em font-normal">intelligent</span>
+            <br />
+            media<span className="text-accent">.</span>
           </h1>
-
-          <p className="mt-8 md:mt-10 max-w-md text-ink-muted text-lg md:text-xl leading-relaxed">
-            AI animation, virtual celebrities, and next-generation advertising — 
-            built with creativity, technology, and precision.
-          </p>
-
-          <div className="mt-10 md:mt-12 flex flex-wrap gap-4">
-            <a
-              href="#services"
-              className="inline-flex items-center gap-3 px-7 h-14 rounded-full bg-ink text-bg text-sm font-medium hover:bg-accent transition-colors duration-300"
-            >
-              Explore Services
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M13 5l7 7-7 7" />
-              </svg>
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-7 h-14 rounded-full border border-line text-ink text-sm font-medium hover:border-ink transition-colors duration-300"
-            >
-              Contact
-            </a>
-          </div>
-
-          {/* Editorial detail */}
-          <div className="mt-16 md:mt-20 flex items-center gap-4 text-ink-muted">
-            <span className="font-mono text-xs uppercase tracking-widest">MORPIO — 2026</span>
-            <span className="block w-px h-4 bg-line" />
-            <span className="font-mono text-xs uppercase tracking-widest">Seoul</span>
-          </div>
         </motion.div>
 
-        {/* Right: Image */}
+        {/* Right column — image + caption (5 cols) */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.19, 1, 0.22, 1] }}
-          className="relative aspect-[4/5] lg:aspect-square w-full max-w-lg mx-auto lg:mx-0"
+          transition={{ duration: 1.1, delay: 0.15, ease }}
+          className="col-span-12 lg:col-span-5"
         >
-          <div className="relative w-full h-full rounded-lg overflow-hidden">
+          <div className="relative aspect-[4/5] w-full max-w-md ml-auto">
             <Image
               src="/gen/hero_v6.webp"
               alt="morpio AI media studio"
               fill
-              className="object-cover"
+              className="object-cover grayscale"
               priority
+              sizes="(max-width: 1024px) 100vw, 40vw"
             />
+            {/* Hairline frame */}
+            <div className="absolute inset-0 border border-ink/10 pointer-events-none" />
+            {/* Caption block */}
+            <div className="absolute -bottom-8 right-0 text-right">
+              <p className="meta">Plate 01 — Studio</p>
+            </div>
           </div>
-          {/* Minimal border accent */}
-          <div className="absolute -bottom-3 -right-3 w-full h-full border border-line rounded-lg -z-10" />
         </motion.div>
       </div>
+
+      {/* Bottom row: lead, CTA, byline */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.1, delay: 0.3, ease }}
+        className="grid grid-cols-12 gap-6 md:gap-10 mt-20 md:mt-28 pt-10 md:pt-12 border-t border-line"
+      >
+        {/* Lead */}
+        <div className="col-span-12 md:col-span-6 lg:col-span-5">
+          <p className="text-ink text-lg md:text-xl leading-[1.45] max-w-md">
+            An AI media house at the intersection of{" "}
+            <span className="serif-em">story</span>,{" "}
+            <span className="serif-em">talent</span>, and{" "}
+            <span className="serif-em">advertising</span>.
+          </p>
+        </div>
+
+        {/* CTAs */}
+        <div className="col-span-12 md:col-span-3 flex flex-col gap-3 md:items-start md:justify-end">
+          <a
+            href="#services"
+            className="inline-flex items-center gap-3 text-ink text-[13px] font-medium link-underline"
+          >
+            <span>Read Practice</span>
+            <span aria-hidden>→</span>
+          </a>
+          <a
+            href="mailto:hello@morpio.com"
+            className="inline-flex items-center gap-3 text-ink-muted text-[13px] link-underline"
+          >
+            <span>Write Studio</span>
+            <span aria-hidden>↗</span>
+          </a>
+        </div>
+
+        {/* Byline */}
+        <div className="col-span-12 md:col-span-3 lg:col-span-4 md:text-right">
+          <p className="meta">By the editors</p>
+          <p className="font-serif italic text-ink mt-1 text-base">
+            Studio Morpio · 2026
+          </p>
+        </div>
+      </motion.div>
     </section>
   );
 }

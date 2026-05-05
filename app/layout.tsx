@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
+import { Inter, EB_Garamond, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -13,10 +13,10 @@ const display = Inter({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["700", "800", "900"],
+  weight: ["800", "900"],
 });
 
-const serif = Playfair_Display({
+const serif = EB_Garamond({
   subsets: ["latin"],
   variable: "--font-serif",
   display: "swap",

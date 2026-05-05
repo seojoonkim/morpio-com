@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 
 const NAV_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Index", href: "#index", num: "01" },
+  { label: "Practice", href: "#services", num: "02" },
+  { label: "Method", href: "#process", num: "03" },
+  { label: "Studio", href: "#about", num: "04" },
 ];
 
 export default function Header() {
@@ -14,7 +14,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -22,25 +22,42 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ease-out-expo ${
-        scrolled ? "bg-bg/90 backdrop-blur-sm border-b border-line" : "bg-transparent"
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-700 ease-out-expo ${
+        scrolled
+          ? "bg-bg/85 backdrop-blur-md border-b border-line"
+          : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div className="container-x flex items-center justify-between h-16 md:h-20">
+      {/* Editorial topbar */}
+      <div className="hidden md:block border-b border-line/60">
+        <div className="container-wide flex items-center justify-between h-7 text-[10px] tracking-[0.22em] uppercase text-ink-muted font-mono">
+          <span>Vol. 01 — Studio Letter</span>
+          <span className="tabular">2026 / 05</span>
+          <span>Seoul · Sent to the world</span>
+        </div>
+      </div>
+
+      <div className="container-wide flex items-center justify-between h-14 md:h-16">
         {/* Logo */}
-        <a href="#" className="font-display font-black text-xl md:text-2xl tracking-tight text-ink">
-          morpio
+        <a
+          href="#"
+          className="font-display font-black text-lg md:text-xl tracking-[-0.04em] text-ink lowercase"
+        >
+          morpio<span className="text-accent">.</span>
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-ink-muted hover:text-ink transition-colors duration-300 link-underline"
+              className="group flex items-baseline gap-1.5 text-[13px] text-ink hover:text-ink transition-colors duration-300"
             >
-              {link.label}
+              <span className="font-mono text-[10px] text-ink-muted group-hover:text-accent transition-colors duration-300 tabular">
+                {link.num}
+              </span>
+              <span className="link-underline">{link.label}</span>
             </a>
           ))}
         </nav>
@@ -48,12 +65,10 @@ export default function Header() {
         {/* CTA */}
         <a
           href="mailto:hello@morpio.com"
-          className="hidden md:inline-flex items-center gap-2 px-5 h-10 rounded-full border border-ink text-ink text-sm font-medium hover:bg-ink hover:text-bg transition-all duration-300"
+          className="hidden md:inline-flex items-baseline gap-2 text-[13px] text-ink"
         >
-          Get in Touch
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
+          <span className="link-underline">Get in Touch</span>
+          <span className="font-serif italic text-ink-muted">↗</span>
         </a>
 
         {/* Mobile Toggle */}
@@ -63,8 +78,16 @@ export default function Header() {
           aria-label="Toggle menu"
         >
           <span className="relative flex flex-col gap-1.5">
-            <span className={`block w-5 h-px bg-ink transition-transform duration-300 ${open ? "rotate-45 translate-y-[4px]" : ""}`} />
-            <span className={`block w-5 h-px bg-ink transition-transform duration-300 ${open ? "-rotate-45 -translate-y-[2px]" : ""}`} />
+            <span
+              className={`block w-5 h-px bg-ink transition-transform duration-300 ${
+                open ? "rotate-45 translate-y-[4px]" : ""
+              }`}
+            />
+            <span
+              className={`block w-5 h-px bg-ink transition-transform duration-300 ${
+                open ? "-rotate-45 -translate-y-[2px]" : ""
+              }`}
+            />
           </span>
         </button>
       </div>
@@ -72,26 +95,27 @@ export default function Header() {
       {/* Mobile Menu */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-500 ease-out-expo border-t border-line bg-bg ${
-          open ? "max-h-80 opacity-100" : "max-h-0 opacity-0 border-t-0"
+          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0 border-t-0"
         }`}
       >
-        <nav className="container-x flex flex-col py-6 gap-4">
+        <nav className="container-x flex flex-col py-6">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="text-lg text-ink py-2 border-b border-line"
+              className="flex items-baseline justify-between py-4 border-b border-line"
             >
-              {link.label}
+              <span className="text-lg text-ink">{link.label}</span>
+              <span className="font-mono text-xs text-ink-muted tabular">{link.num}</span>
             </a>
           ))}
           <a
             href="mailto:hello@morpio.com"
             onClick={() => setOpen(false)}
-            className="mt-2 inline-flex items-center justify-center gap-2 h-12 rounded-full border border-ink text-ink text-sm font-medium"
+            className="mt-6 inline-flex items-center justify-center gap-2 h-12 border border-ink text-ink text-sm font-medium"
           >
-            Get in Touch
+            Get in Touch ↗
           </a>
         </nav>
       </div>
