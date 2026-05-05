@@ -16,10 +16,10 @@ const config: Config = {
         accent: "#5B3FFF",
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "Inter", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "Inter", "system-ui", "sans-serif"],
+        sans: ["var(--font-sans)", "Inter Tight", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-sans)", "system-ui", "sans-serif"],
         serif: ["var(--font-serif)", "EB Garamond", "Georgia", "serif"],
-        mono: ["var(--font-mono)", "JetBrains Mono", "monospace"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       transitionTimingFunction: {
         "out-expo": "cubic-bezier(0.19, 1, 0.22, 1)",

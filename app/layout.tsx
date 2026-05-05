@@ -1,19 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, EB_Garamond, JetBrains_Mono } from "next/font/google";
+import { Inter_Tight, EB_Garamond } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
-const inter = Inter({
+const sans = Inter_Tight({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-
-const display = Inter({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-  weight: ["800", "900"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const serif = EB_Garamond({
@@ -22,13 +17,6 @@ const serif = EB_Garamond({
   display: "swap",
   weight: ["400", "500", "600"],
   style: ["italic", "normal"],
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -66,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${display.variable} ${serif.variable} ${mono.variable}`}
+      className={`${sans.variable} ${GeistSans.variable} ${serif.variable} ${GeistMono.variable}`}
     >
       <body className="bg-bg text-ink antialiased">
         {children}
