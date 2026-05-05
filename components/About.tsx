@@ -1,94 +1,76 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 const STATS = [
-  {
-    label: "Story-First",
-    value: "100%",
-    body: "We start with powerful stories and meaningful connections.",
-  },
-  {
-    label: "AI-Native",
-    value: "100%",
-    body: "Built with AI at the core to unlock speed, scale, and imagination.",
-  },
-  {
-    label: "Global-Ready",
-    value: "50+",
-    body: "Projects across markets and languages.",
-  },
-  {
-    label: "Fast Production",
-    value: "10×",
-    body: "Faster from concept to final content delivery.",
-  },
+  { value: "100%", label: "Story-First" },
+  { value: "100%", label: "AI-Native" },
+  { value: "50+", label: "Global Projects" },
+  { value: "10×", label: "Faster Production" },
 ] as const;
 
 export default function About() {
   return (
-    <section id="about" className="relative py-20 md:py-32 container-x">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
-        {/* Left: text */}
-        <div className="lg:col-span-5">
-          <p className="section-label mb-5 inline-flex items-center gap-3">
-            <span className="block w-6 h-px bg-violet-500/60" />
-            About morpio
-          </p>
+    <section id="about" className="py-32 md:py-56 container-x">
+      {/* Section Header */}
+      <div className="flex items-center gap-4 mb-16 md:mb-24">
+        <span className="section-label">About</span>
+        <span className="block flex-1 h-px bg-line" />
+        <span className="section-label">04 / 04</span>
+      </div>
 
-          <h2
-            className="font-display font-black tracking-tight leading-[1.05] text-ink-primary"
-            style={{ fontSize: "clamp(32px, 9vw, 56px)" }}
-          >
-            morpio is a{" "}
-            <span className="font-serif italic font-normal text-gradient-violet">
-              new-generation
-            </span>{" "}
-            AI media company at the intersection of IP, virtual talent, and
-            advertising.
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
+        {/* Left: Copy */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
+        >
+          <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl text-ink leading-[1.05] tracking-tight">
+            A new-generation AI media company at the intersection of IP, virtual talent, and advertising.
           </h2>
 
-          <p
-            className="mt-6 text-ink-secondary max-w-md leading-relaxed"
-            style={{ fontSize: "clamp(14px, 3.6vw, 16px)" }}
-          >
-            We believe great stories deserve new forms — and AI helps us create
-            them faster, better, and bolder.
+          <p className="mt-8 text-ink-muted text-lg md:text-xl leading-relaxed max-w-lg">
+            We believe great stories deserve new forms — and AI helps us create them faster, better, and bolder.
           </p>
 
           <a
             href="#contact"
-            className="mt-8 inline-flex items-center gap-2 h-12 px-6 rounded-full bg-violet-gradient text-white text-sm font-medium shadow-glow-sm hover:shadow-glow transition-shadow"
+            className="mt-10 inline-flex items-center gap-2 text-ink font-medium link-underline"
           >
-            Learn More About Us
+            Learn more about us
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M13 5l7 7-7 7" />
             </svg>
           </a>
-        </div>
+        </motion.div>
 
-        {/* Right: stats grid */}
-        <div className="lg:col-span-7">
-          <div className="grid grid-cols-2 gap-3 md:gap-4">
-            {STATS.map((s, i) => (
-              <div
-                key={s.label}
-                className="relative rounded-2xl bg-bg-card border border-line p-5 md:p-6 hover:border-violet-500/40 transition-colors"
+        {/* Right: Stats */}
+        <div className="grid grid-cols-2 gap-6 md:gap-8">
+          {STATS.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.19, 1, 0.22, 1] }}
+              className="group"
+            >
+              {/* Giant Number */}
+              <span 
+                className="font-display font-black text-ink leading-none block"
+                style={{ fontSize: "clamp(80px, 15vw, 160px)" }}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-violet-400">
-                    {s.label}
-                  </span>
-                  <span className="w-2 h-2 rounded-full bg-violet-500 shadow-glow-sm" />
-                </div>
-                <div
-                  className="font-display font-black text-ink-primary leading-none mb-3"
-                  style={{ fontSize: "clamp(36px, 10vw, 56px)" }}
-                >
-                  {s.value}
-                </div>
-                <p className="text-ink-secondary text-xs md:text-sm leading-relaxed">
-                  {s.body}
-                </p>
-              </div>
-            ))}
-          </div>
+                {stat.value}
+              </span>
+              
+              {/* Label */}
+              <span className="mt-2 block font-mono text-xs uppercase tracking-widest text-ink-muted">
+                {stat.label}
+              </span>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

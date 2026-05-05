@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -16,11 +16,11 @@ const display = Inter({
   weight: ["700", "800", "900"],
 });
 
-const serif = Instrument_Serif({
+const serif = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-serif",
   display: "swap",
-  weight: ["400"],
+  weight: ["400", "500", "600"],
   style: ["italic", "normal"],
 });
 
@@ -28,16 +28,16 @@ const mono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",
-  weight: ["400", "500", "700"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "MORPIO — AI Media Studio for the Next Era",
+  title: "MORPIO — AI Media Studio",
   description:
-    "MORPIO transforms stories, talent, and brands through AI-powered content production. AI animation, virtual celebrities, and AI advertising — built in Seoul.",
+    "We turn IP into intelligent media. AI animation, virtual celebrities, and AI advertising — built in Seoul.",
   metadataBase: new URL("https://morpio.com"),
   openGraph: {
-    title: "MORPIO — AI Media Studio for the Next Era",
+    title: "MORPIO — AI Media Studio",
     description:
       "AI Animation. Virtual Celeb Studio. AI Advertising. We turn IP into intelligent media.",
     url: "https://morpio.com",
@@ -46,9 +46,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MORPIO — AI Media Studio for the Next Era",
-    description:
-      "AI Animation. Virtual Celeb Studio. AI Advertising.",
+    title: "MORPIO — AI Media Studio",
+    description: "AI Animation. Virtual Celeb Studio. AI Advertising.",
   },
 };
 
@@ -56,7 +55,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#05060A",
+  themeColor: "#FAFAFA",
 };
 
 export default function RootLayout({
@@ -69,7 +68,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${display.variable} ${serif.variable} ${mono.variable}`}
     >
-      <body className="bg-bg-base text-ink-primary antialiased overflow-x-hidden">
+      <body className="bg-bg text-ink antialiased">
         {children}
       </body>
     </html>

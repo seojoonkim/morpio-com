@@ -1,21 +1,21 @@
-import Nav from "@/components/Nav";
+import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Process from "@/components/Process";
 import About from "@/components/About";
-import CtaBanner from "@/components/CtaBanner";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Page() {
   return (
     <>
-      <Nav />
-      <main className="relative min-h-screen bg-bg-base text-ink-primary overflow-x-hidden">
+      <Header />
+      <main className="bg-bg text-ink">
         <Hero />
         <Services />
         <Process />
         <About />
-        <CtaBanner />
+        <Contact />
       </main>
       <Footer />
     </>
