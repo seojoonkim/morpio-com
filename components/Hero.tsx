@@ -47,10 +47,10 @@ export default function Hero() {
                   lineHeight: 1.65,
                 }}
               >
-                morpio transforms stories, talent, and brands through AI-powered
-                content production — we combine creativity, technology, and
-                strategy to build the next generation of entertainment and
-                advertising.
+                A studio for IP that wants a second life. We take stories
+                that already have fans — novels, comics, webtoons — and rebuild
+                them as living media. Animation that breathes. Celebrities that
+                don&apos;t sleep. Advertising that remembers your name.
               </p>
             </Reveal>
 

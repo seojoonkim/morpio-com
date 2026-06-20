@@ -4,21 +4,21 @@ import Reveal from "./Reveal";
 
 const SERVICES = [
   {
-    idx: "01 / ANIMATION",
-    title: "AI Animation for Novels, Comics & Webtoons",
-    body: "We adapt compelling IP into high-quality animation and moving content. From storyboarding to final output, AI accelerates creativity without compromising emotion.",
+    idx: "01 / KINETIC IP",
+    title: "Animation",
+    body: "Novels, comics, and webtoons reborn as motion. Your IP, finally rendered at the speed of imagination.",
     tags: ["Animation", "IP Adaptation", "Storyboard"],
   },
   {
-    idx: "02 / VIRTUAL CELEB",
-    title: "Virtual Celeb Studio & Agency",
-    body: "We create, grow, and manage virtual celebrities. From concept to content, we build IP, produce videos, and operate as a full-service talent agency.",
+    idx: "02 / SYNTHETIC TALENT",
+    title: "Virtual Celebs",
+    body: "We design characters who tour, post, perform, and never miss a comeback. Studio, agency, and faithful fanbase included.",
     tags: ["Virtual Talent", "IP Building", "Agency"],
   },
   {
-    idx: "03 / ADVERTISING",
-    title: "AI Advertising Agency",
-    body: "We craft AI-native campaigns, branded content, and commercials that are data-driven, visually stunning, and built to perform.",
+    idx: "03 / INTELLIGENT REACH",
+    title: "Advertising",
+    body: "AI-native ad creative that adapts in the wild — by audience, channel, and mood. Made for brands that refuse to send the same ad twice.",
     tags: ["Campaigns", "Brand Films", "Performance"],
   },
 ] as const;
@@ -36,8 +36,8 @@ export default function Services() {
             <SectionLabel index="02" label="PRACTICE" trailing="Our Core Businesses" />
             <Headline
               as="h2"
-              text="Three Core Businesses."
-              limeIndices={[2]}
+              text="Three Businesses. One Creative Engine."
+              limeIndices={[3]}
               className="display mt-[18px]"
               style={{
                 fontSize: "clamp(36px, 8vw, 96px)",

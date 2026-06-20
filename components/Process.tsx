@@ -6,25 +6,25 @@ const STEPS = [
   {
     n: "01",
     title: "Discover the Brief",
-    body: "We dive deep into your IP, brand, and audience to uncover the core story and opportunities.",
+    body: "We read your IP like editors, not vendors. The right opening matters more than the loudest one.",
     tags: ["Research", "Strategy"],
   },
   {
     n: "02",
     title: "Design the World",
-    body: "We build characters, worlds, and concepts, then prototype, iterate, and bring direction to life.",
+    body: "Characters, plots, and visual rules — drafted, prototyped, iterated. Worlds that stay coherent at scale.",
     tags: ["Story", "Design"],
   },
   {
     n: "03",
     title: "Generate the Work",
-    body: "We leverage cutting-edge AI tools and in-house pipelines to produce stunning visuals and videos.",
+    body: "Animation, voice, image, and motion produced with AI tools we tune ourselves. Quality stays human.",
     tags: ["AI Production", "Content"],
   },
   {
     n: "04",
     title: "Deliver the Launch",
-    body: "We deliver optimized assets and scale your content across channels for maximum impact.",
+    body: "We ship across feed, screen, and channel — with the metrics that matter and the polish that doesn\u2019t beg.",
     tags: ["Distribution", "Growth"],
   },
 ] as const;

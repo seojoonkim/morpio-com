@@ -43,8 +43,8 @@ export default function CtaBanner() {
                 <SectionLabel index="05" label="CONTACT" trailing="Bring Your IP" />
                 <Headline
                   as="h2"
-                  text="Build the Next Media Universe"
-                  limeIndices={[3]}
+                  text={"Let\u2019s Build the Next Media Universe"}
+                  limeIndices={[4]}
                   className="display mt-[18px]"
                   style={{
                     fontSize: "clamp(36px, 11vw, 80px)",
@@ -59,9 +59,11 @@ export default function CtaBanner() {
                     lineHeight: 1.6,
                   }}
                 >
-                  Let&apos;s create world-class AI media, virtual talent, and
-                  campaigns that inspire the world. Brand. Artist. Label. Bring
-                  us a frame, we&apos;ll bring you fame.
+                  If you have IP that wants more lives, write to us. If you
+                  have a brand that wants attention worth keeping, write to us.
+                  If you just want to argue about what{" "}
+                  <span className="serif-em">&ldquo;intelligent media&rdquo;</span>{" "}
+                  means — yes, write to us.
                 </p>
               </div>
               <div className="lg:col-span-5 flex flex-col gap-3 lg:items-start">

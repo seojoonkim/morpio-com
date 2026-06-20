@@ -1,20 +1,9 @@
-const COLS = [
-  {
-    head: "Studio",
-    links: ["Our Approach", "Technology", "Careers"],
-  },
-  {
-    head: "Services",
-    links: ["AI Animation", "Virtual Celeb Studio", "AI Advertising"],
-  },
-  {
-    head: "Company",
-    links: ["About", "News", "Contact"],
-  },
-  {
-    head: "Legal",
-    links: ["Privacy Policy", "Terms of Service"],
-  },
+// Real anchors only — mirrors header nav. Ghost menus (Approach/Technology/Careers/News) dropped.
+const INDEX_LINKS = [
+  { num: "01", label: "Services", href: "#services" },
+  { num: "02", label: "Process", href: "#process" },
+  { num: "03", label: "About", href: "#about" },
+  { num: "04", label: "Contact", href: "#contact" },
 ] as const;
 
 const SOCIALS = [
@@ -59,7 +48,8 @@ export default function Footer() {
                 lineHeight: 1.6,
               }}
             >
-              AI media studio for the next era of story, tech, and talent.
+              A media studio inside Hashed Vibe Labs. Tomorrow&apos;s
+              franchises, tonight&apos;s prototypes.
             </p>
             <div className="mt-6 flex gap-3">
               {SOCIALS.map((s) => (
@@ -82,31 +72,45 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Link columns */}
-          {COLS.map((c) => (
-            <div key={c.head} className="md:col-span-2">
-              <h5 className="mono text-[0.68rem] uppercase tracking-[0.25em] lime mb-4">
-                {c.head}
-              </h5>
-              <ul className="flex flex-col gap-[10px]">
-                {c.links.map((l) => (
-                  <li key={l}>
-                    <a
-                      href="#"
-                      className="text-[0.875rem] text-ink-secondary hover:text-ink-primary transition-colors duration-300"
-                    >
-                      {l}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Index column — mirrors header nav */}
+          <div className="md:col-span-3">
+            <h5 className="mono text-[0.68rem] uppercase tracking-[0.25em] lime mb-4">
+              Index
+            </h5>
+            <ul className="flex flex-col gap-[10px]">
+              {INDEX_LINKS.map((l) => (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    className="group flex items-baseline gap-2 text-[0.875rem] text-ink-secondary hover:text-ink-primary transition-colors duration-300"
+                  >
+                    <span className="mono text-[0.62rem] text-ink-muted group-hover:text-accent-lime transition-colors duration-300 tabular">
+                      {l.num}
+                    </span>
+                    <span>{l.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Write column */}
+          <div className="md:col-span-2">
+            <h5 className="mono text-[0.68rem] uppercase tracking-[0.25em] lime mb-4">
+              Write
+            </h5>
+            <a
+              href="mailto:hello@morpio.com"
+              className="text-[0.875rem] text-ink-secondary hover:text-ink-primary transition-colors duration-300"
+            >
+              hello@morpio.com
+            </a>
+          </div>
         </div>
 
         <div className="mt-12 pt-6 border-t border-line flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <p className="text-xs text-ink-muted">
-            © 2025 morpio. All rights reserved.
+            © {new Date().getFullYear()} morpio · Made with intention in Seoul
           </p>
           <p className="mono text-[0.62rem] uppercase tracking-[0.25em] text-ink-muted">
             Made in Seoul · Sent to the world

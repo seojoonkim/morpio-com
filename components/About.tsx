@@ -3,26 +3,10 @@ import Headline from "./Headline";
 import Reveal from "./Reveal";
 
 const STATS = [
-  {
-    label: "Story-First",
-    value: "100%",
-    body: "We start with powerful stories and meaningful connections.",
-  },
-  {
-    label: "AI-Native",
-    value: "100%",
-    body: "Built with AI at the core to unlock speed, scale, and imagination.",
-  },
-  {
-    label: "Global-Ready",
-    value: "50+",
-    body: "Projects across markets and languages.",
-  },
-  {
-    label: "Fast Production",
-    value: "10×",
-    body: "Faster from concept to final content delivery.",
-  },
+  { label: "One creative engine", value: "01" },
+  { label: "Animation · Talent · Ads", value: "03" },
+  { label: "We never ship still", value: "∞" },
+  { label: "Seoul → World", value: "SEL" },
 ] as const;
 
 export default function About() {
@@ -41,8 +25,8 @@ export default function About() {
             </Reveal>
             <Headline
               as="h2"
-              text="morpio is a new-generation AI media company at the intersection of IP, virtual talent, and advertising."
-              limeIndices={[3]}
+              text="We believe IP is infrastructure, talent is software, and advertising is conversation."
+              limeIndices={[4]}
               className="display mt-[18px]"
               style={{
                 fontSize: "clamp(32px, 9vw, 56px)",
@@ -58,8 +42,8 @@ export default function About() {
                   lineHeight: 1.65,
                 }}
               >
-                We believe great stories deserve new forms — and AI helps us
-                create them faster, better, and bolder.
+                Stories don&apos;t end on the last page anymore. They begin
+                there.
               </p>
               <a
                 href="#contact"
@@ -83,7 +67,7 @@ export default function About() {
                       {s.label}
                     </span>
                     <div
-                      className="display mb-3"
+                      className="display"
                       style={{
                         fontSize: "clamp(36px, 10vw, 56px)",
                         lineHeight: 1,
@@ -91,15 +75,6 @@ export default function About() {
                     >
                       {s.value}
                     </div>
-                    <p
-                      className="text-ink-secondary"
-                      style={{
-                        fontSize: "0.82rem",
-                        lineHeight: 1.5,
-                      }}
-                    >
-                      {s.body}
-                    </p>
                   </div>
                 ))}
               </div>
