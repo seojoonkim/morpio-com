@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <>
       <Nav />
-      <main className="relative min-h-screen bg-bg-base text-ink-primary overflow-x-hidden">
+      <main className="relative z-[1] min-h-screen bg-bg-base text-ink-primary overflow-x-hidden">
         <Hero />
         <Services />
         <Process />

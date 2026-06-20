@@ -1,71 +1,96 @@
+import SectionLabel from "./SectionLabel";
+import Headline from "./Headline";
+import Reveal from "./Reveal";
+import Magnetic from "./Magnetic";
+
 export default function CtaBanner() {
   return (
-    <section id="contact" className="relative py-16 md:py-24 container-x">
-      <div className="relative overflow-hidden rounded-3xl border border-violet-500/30 bg-gradient-to-br from-bg-panel via-bg-base to-bg-panel p-8 md:p-14">
-        {/* Cosmic glow */}
-        <div className="pointer-events-none absolute -inset-x-20 -top-20 h-80 bg-violet-gradient opacity-20 blur-3xl" />
-        <div className="pointer-events-none absolute right-0 top-0 w-1/2 h-full bg-radial-violet" />
+    <section
+      id="contact"
+      className="relative"
+      style={{ paddingBlock: "clamp(64px, 10vh, 128px)" }}
+    >
+      <div className="container-x">
+        <Reveal>
+          <div
+            className="relative bg-bg-surface border border-line-strong rounded-[28px] overflow-hidden"
+            style={{ padding: "clamp(32px, 6vw, 64px)" }}
+          >
+            {/* Lime glow halo */}
+            <div
+              className="absolute inset-[-20%] pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(circle at 30% 0%, var(--accent-lime-dim), transparent 50%)",
+              }}
+            />
+            {/* Static lime pinpoints */}
+            <span
+              className="absolute w-[3px] h-[3px] rounded-full bg-accent-lime"
+              style={{ top: "12%", left: "18%", boxShadow: "0 0 10px #C5FF3D" }}
+            />
+            <span
+              className="absolute w-[3px] h-[3px] rounded-full bg-accent-lime"
+              style={{ top: "72%", left: "8%", boxShadow: "0 0 10px #C5FF3D" }}
+            />
+            <span
+              className="absolute w-[3px] h-[3px] rounded-full bg-accent-lime"
+              style={{ top: "30%", left: "88%", boxShadow: "0 0 10px #C5FF3D" }}
+            />
 
-        {/* Sparkle dots */}
-        {[
-          { top: "12%", left: "20%" },
-          { top: "70%", left: "8%" },
-          { top: "30%", left: "85%" },
-          { top: "80%", left: "70%" },
-          { top: "45%", left: "55%" },
-        ].map((p, i) => (
-          <span
-            key={i}
-            className="absolute w-1 h-1 rounded-full bg-white animate-glow"
-            style={{
-              top: p.top,
-              left: p.left,
-              boxShadow: "0 0 6px #C45CFF",
-              animationDelay: `${i * 0.5}s`,
-            }}
-          />
-        ))}
-
-        <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <div className="lg:col-span-7">
-            <h2
-              className="font-display font-black tracking-tight leading-[1.02] text-ink-primary"
-              style={{ fontSize: "clamp(36px, 11vw, 80px)" }}
-            >
-              Build the Next
-              <br />
-              <span className="font-serif italic font-normal text-gradient-violet">
-                Media Universe
-              </span>
-            </h2>
-
-            <p
-              className="mt-6 max-w-lg text-ink-secondary leading-relaxed"
-              style={{ fontSize: "clamp(14px, 3.6vw, 16px)" }}
-            >
-              Let's create world-class AI media, virtual talent, and campaigns
-              that inspire the world.
-            </p>
+            <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-7">
+                <SectionLabel index="05" label="CONTACT" trailing="Bring Your IP" />
+                <Headline
+                  as="h2"
+                  text="Build the Next Media Universe"
+                  limeIndices={[3]}
+                  className="display mt-[18px]"
+                  style={{
+                    fontSize: "clamp(36px, 11vw, 80px)",
+                    lineHeight: 1.02,
+                    letterSpacing: "-0.025em",
+                  }}
+                />
+                <p
+                  className="mt-6 max-w-[48ch] text-ink-secondary"
+                  style={{
+                    fontSize: "clamp(14px, 3.6vw, 16px)",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  Let&apos;s create world-class AI media, virtual talent, and
+                  campaigns that inspire the world. Brand. Artist. Label. Bring
+                  us a frame, we&apos;ll bring you fame.
+                </p>
+              </div>
+              <div className="lg:col-span-5 flex flex-col gap-3 lg:items-start">
+                <Magnetic
+                  href="mailto:hello@morpio.com?subject=Start%20a%20Project"
+                  className="inline-flex items-center gap-[10px] h-14 px-7 rounded-full bg-accent-lime text-bg-base font-bold text-[0.95rem] transition-shadow duration-300 hover:shadow-[0_0_48px_rgba(197,255,61,0.5)]"
+                >
+                  Start a Project
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </Magnetic>
+                <a
+                  href="mailto:hello@morpio.com"
+                  className="inline-flex items-center h-14 px-7 rounded-full border border-line-strong text-ink-primary font-medium text-[0.95rem] transition-colors duration-300 hover:border-accent-lime hover:bg-[rgba(197,255,61,0.05)]"
+                >
+                  hello@morpio.com
+                </a>
+              </div>
+            </div>
           </div>
-
-          <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3 lg:items-end">
-            <a
-              href="mailto:hello@morpio.com?subject=Start%20a%20Project"
-              className="inline-flex items-center justify-center gap-2 h-13 px-7 rounded-full bg-violet-gradient text-white text-sm md:text-base font-medium shadow-glow hover:shadow-glow-lg transition-shadow w-full sm:w-auto"
-            >
-              Start a Project
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M13 5l7 7-7 7" />
-              </svg>
-            </a>
-            <a
-              href="mailto:hello@morpio.com"
-              className="inline-flex items-center justify-center gap-2 h-13 px-7 rounded-full border border-line-strong text-ink-primary text-sm md:text-base font-medium hover:border-violet-500 hover:bg-white/5 transition-colors w-full sm:w-auto"
-            >
-              Contact Us
-            </a>
-          </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

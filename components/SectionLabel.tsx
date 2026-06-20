@@ -1,9 +1,23 @@
-export default function SectionLabel({ children }: { children: React.ReactNode }) {
+/**
+ * Section eyebrow marker — `[ 01 — STAGE ]` mono index format.
+ * Used as the section intro label across the Kinetic Stage system.
+ */
+export default function SectionLabel({
+  index,
+  label,
+  trailing,
+}: {
+  index: string;
+  label: string;
+  trailing?: string;
+}) {
   return (
-    <div className="flex items-center justify-center gap-3 md:gap-4 mb-10 md:mb-14">
-      <span className="block h-px w-10 md:w-16 bg-line-strong" />
-      <span className="section-label">{children}</span>
-      <span className="block h-px w-10 md:w-16 bg-line-strong" />
-    </div>
+    <p className="eyebrow">
+      <span className="dash" />
+      <span className="num">
+        [ {index} — {label} ]
+      </span>
+      {trailing ? ` ${trailing}` : null}
+    </p>
   );
 }

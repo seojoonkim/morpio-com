@@ -1,35 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-
-const display = Inter({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-  weight: ["700", "800", "900"],
-});
-
-const serif = Instrument_Serif({
-  subsets: ["latin"],
-  variable: "--font-serif",
-  display: "swap",
-  weight: ["400"],
-  style: ["italic", "normal"],
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-  weight: ["400", "500", "700"],
-});
 
 export const metadata: Metadata = {
   title: "MORPIO — AI Media Studio for the Next Era",
@@ -56,7 +26,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#05060A",
+  themeColor: "#0A0A0A",
 };
 
 export default function RootLayout({
@@ -65,11 +35,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${display.variable} ${serif.variable} ${mono.variable}`}
-    >
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="bg-bg-base text-ink-primary antialiased overflow-x-hidden">
+        <div className="stage-spot" aria-hidden />
         {children}
       </body>
     </html>
