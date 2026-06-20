@@ -11,8 +11,8 @@ export default function Hero() {
       id="top"
       className="relative"
       style={{
-        paddingTop: "clamp(120px, 18vh, 220px)",
-        paddingBottom: "clamp(48px, 8vh, 96px)",
+        paddingTop: "clamp(64px, 9vh, 100px)",
+        paddingBottom: "clamp(24px, 4vh, 40px)",
       }}
     >
       <div className="container-x">
@@ -31,20 +31,20 @@ export default function Hero() {
               as="h1"
               text="We Turn IP Into Intelligent Media."
               limeIndices={[4]}
-              className="display mt-5"
+              className="display mt-4"
               style={{
-                fontSize: "clamp(48px, 13vw, 168px)",
-                lineHeight: 0.92,
+                fontSize: "clamp(40px, 7.5vw, 100px)",
+                lineHeight: 0.95,
                 letterSpacing: "-0.03em",
               }}
             />
 
             <Reveal>
               <p
-                className="mt-8 max-w-[34ch] text-ink-secondary"
+                className="mt-5 max-w-[52ch] text-ink-secondary"
                 style={{
                   fontSize: "clamp(15px, 3.8vw, 18px)",
-                  lineHeight: 1.65,
+                  lineHeight: 1.6,
                 }}
               >
                 A studio for IP that wants a second life. We take stories
@@ -55,7 +55,7 @@ export default function Hero() {
             </Reveal>
 
             <Reveal>
-              <div className="mt-10 flex flex-wrap gap-[14px]">
+              <div className="mt-6 flex flex-wrap gap-[14px]">
                 <Magnetic
                   href="#services"
                   className="inline-flex items-center gap-[10px] h-14 px-7 rounded-full bg-accent-lime text-bg-base font-bold text-[0.95rem] transition-shadow duration-300 hover:shadow-[0_0_48px_rgba(197,255,61,0.5)]"
@@ -82,7 +82,7 @@ export default function Hero() {
             </Reveal>
 
             <Reveal>
-              <div className="mt-16 flex items-center gap-3 text-ink-muted">
+              <div className="mt-6 flex items-center gap-3 text-ink-muted">
                 <span className="block w-px h-8 animate-scroll-cue bg-gradient-to-b from-accent-lime to-transparent" />
                 <span className="mono text-[0.65rem] uppercase tracking-[0.3em]">
                   Scroll to Explore

@@ -6,7 +6,7 @@
  */
 export default function HeroArt() {
   return (
-    <div className="relative w-full aspect-square max-w-[520px] mx-auto">
+    <div className="relative w-full aspect-square max-w-[400px] mx-auto">
       {/* Lime stage glow */}
       <div
         className="absolute rounded-full animate-orb-breathe"
