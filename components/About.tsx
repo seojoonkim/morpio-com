@@ -3,10 +3,10 @@ import Headline from "./Headline";
 import Reveal from "./Reveal";
 
 const STATS = [
-  { label: "One creative engine", value: "01" },
-  { label: "Animation · Talent · Ads", value: "03" },
-  { label: "We never ship still", value: "∞" },
-  { label: "Seoul → World", value: "SEL" },
+  { label: "Story-First", value: "100%" },
+  { label: "AI-Native", value: "100%" },
+  { label: "Global-Ready", value: "50+" },
+  { label: "Fast Production", value: "10×" },
 ] as const;
 
 export default function About() {

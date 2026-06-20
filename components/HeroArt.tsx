@@ -47,6 +47,22 @@ export default function HeroArt() {
             "linear-gradient(135deg, var(--bg-surface), var(--bg-surface-2))",
         }}
       >
+        {/* Generated media visual */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/gen/hero-art.png"
+          alt="morpio media studio visual"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: 0.85 }}
+        />
+        {/* Darkening overlay for text legibility */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.65) 100%)",
+          }}
+        />
         {/* Grid lines */}
         <div
           className="absolute inset-0"
