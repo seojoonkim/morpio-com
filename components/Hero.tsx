@@ -1,102 +1,130 @@
 "use client";
 
-import HeroArt from "./HeroArt";
 import Headline from "./Headline";
 import Reveal from "./Reveal";
 import Magnetic from "./Magnetic";
 
+/**
+ * Hero — full-bleed cinematic stage.
+ * 100svh background image with slow zoom-in, triple dark overlay,
+ * lime spot + rotating ring, oversized H1 overlay, bottom-left poster layout.
+ * Nav (fixed, z-100) overlays this section naturally — no Nav changes needed.
+ */
 export default function Hero() {
   return (
     <section
       id="top"
-      className="relative"
-      style={{
-        paddingTop: "clamp(64px, 9vh, 100px)",
-        paddingBottom: "clamp(24px, 4vh, 40px)",
-      }}
+      className="hero-fullbleed relative w-full overflow-hidden bg-bg-base"
+      style={{ minHeight: "100svh" }}
     >
-      <div className="container-x">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-          {/* Copy */}
-          <div className="lg:col-span-7 relative z-10">
-            <Reveal>
-              <p className="eyebrow">
-                <span className="dash" />
-                <span className="num">[ 01 — STAGE ]</span>
-                Three Core Businesses · Endless Possibilities
-              </p>
-            </Reveal>
+      {/* Full-bleed background image with kinetic zoom-in */}
+      <div className="hero-bg" aria-hidden />
 
-            <Headline
-              as="h1"
-              text="We Turn IP Into Intelligent Media."
-              limeIndices={[4]}
-              className="display mt-4"
-              style={{
-                fontSize: "clamp(40px, 7.5vw, 100px)",
-                lineHeight: 0.95,
-                letterSpacing: "-0.03em",
-              }}
-            />
+      {/* Triple dark cinematic overlay (left + bottom weighted for legibility) */}
+      <div className="hero-overlay" aria-hidden />
 
-            <Reveal>
-              <p
-                className="mt-5 max-w-[52ch] text-ink-secondary"
-                style={{
-                  fontSize: "clamp(15px, 3.8vw, 18px)",
-                  lineHeight: 1.6,
-                }}
+      {/* Soft lime stage spot behind H1 */}
+      <div className="hero-spot" aria-hidden />
+
+      {/* Lime thin rotating ring — kinetic accent */}
+      <div className="hero-ring" aria-hidden />
+
+      {/* Content — bottom-left cinematic poster layout */}
+      <div
+        className="relative z-[5] flex flex-col justify-end mx-auto w-full"
+        style={{
+          minHeight: "100svh",
+          maxWidth: 1640,
+          paddingInline: "clamp(20px, 5vw, 80px)",
+          paddingTop: "clamp(120px, 18vh, 220px)",
+          paddingBottom: "clamp(40px, 9vh, 120px)",
+        }}
+      >
+        <Reveal>
+          <p className="eyebrow">
+            <span className="dash" />
+            <span className="num">[ 01 — STAGE ]</span>
+            <span className="opacity-60">·</span>
+            <span>Three Core Businesses · Endless Possibilities</span>
+          </p>
+        </Reveal>
+
+        <Headline
+          as="h1"
+          text="We Turn IP Into Intelligent Media."
+          limeIndices={[4]}
+          className="display"
+          style={{
+            fontSize: "clamp(56px, 11vw, 180px)",
+            lineHeight: 0.9,
+            letterSpacing: "-0.035em",
+            marginTop: "clamp(28px, 4vh, 56px)",
+            marginBottom: "clamp(28px, 4vh, 48px)",
+            maxWidth: "18ch",
+            textShadow: "0 1px 0 rgba(0,0,0,0.25)",
+          }}
+        />
+
+        <Reveal>
+          <p
+            className="text-ink-secondary"
+            style={{
+              fontSize: "clamp(15px, 1.9vw, 19px)",
+              lineHeight: 1.6,
+              maxWidth: "54ch",
+              marginBottom: "clamp(28px, 4vh, 44px)",
+            }}
+          >
+            A studio for IP that wants a{" "}
+            <strong className="font-semibold text-ink-primary">
+              second life
+            </strong>
+            . We take stories that already have fans — novels, comics, webtoons —
+            and rebuild them as living media. Animation that breathes.
+            Celebrities that don&apos;t sleep. Advertising that remembers your
+            name.
+          </p>
+        </Reveal>
+
+        <Reveal>
+          <div className="flex flex-wrap items-center gap-4">
+            <Magnetic
+              href="#services"
+              className="inline-flex items-center gap-[10px] h-14 px-7 rounded-full bg-accent-lime text-bg-base font-semibold text-[0.95rem] tracking-[0.04em] uppercase transition-shadow duration-300 hover:shadow-[0_0_48px_rgba(197,255,61,0.5)]"
+            >
+              Explore Services
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
               >
-                A studio for IP that wants a second life. We take stories
-                that already have fans — novels, comics, webtoons — and rebuild
-                them as living media. Animation that breathes. Celebrities that
-                don&apos;t sleep. Advertising that remembers your name.
-              </p>
-            </Reveal>
-
-            <Reveal>
-              <div className="mt-6 flex flex-wrap gap-[14px]">
-                <Magnetic
-                  href="#services"
-                  className="inline-flex items-center gap-[10px] h-14 px-7 rounded-full bg-accent-lime text-bg-base font-bold text-[0.95rem] transition-shadow duration-300 hover:shadow-[0_0_48px_rgba(197,255,61,0.5)]"
-                >
-                  Explore Services
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M5 12h14M13 5l7 7-7 7" />
-                  </svg>
-                </Magnetic>
-                <a
-                  href="#contact"
-                  className="inline-flex items-center h-14 px-7 rounded-full border border-line-strong text-ink-primary font-medium text-[0.95rem] transition-colors duration-300 hover:border-accent-lime hover:bg-[rgba(197,255,61,0.05)]"
-                >
-                  Get in Touch
-                </a>
-              </div>
-            </Reveal>
-
-            <Reveal>
-              <div className="mt-6 flex items-center gap-3 text-ink-muted">
-                <span className="block w-px h-8 animate-scroll-cue bg-gradient-to-b from-accent-lime to-transparent" />
-                <span className="mono text-[0.65rem] uppercase tracking-[0.3em]">
-                  Scroll to Explore
-                </span>
-              </div>
-            </Reveal>
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </Magnetic>
+            <a
+              href="#contact"
+              className="inline-flex items-center h-14 px-7 rounded-full border border-line-strong text-ink-primary font-medium text-[0.95rem] tracking-[0.04em] uppercase transition-colors duration-300 hover:border-accent-lime hover:text-accent-lime"
+            >
+              Get in Touch
+            </a>
           </div>
+        </Reveal>
+      </div>
 
-          {/* Hero artwork */}
-          <div className="lg:col-span-5 relative">
-            <Reveal>
-              <HeroArt />
-            </Reveal>
-          </div>
+      {/* Scroll indicator — bottom left */}
+      <div className="hero-scroll" aria-hidden>
+        <span className="hero-scroll-line" />
+        <span>Scroll to Explore</span>
+      </div>
+
+      {/* Bottom-right studio signature */}
+      <div className="hero-meta" aria-hidden>
+        <div>Morpio — AI Media Studio</div>
+        <div>
+          Seoul <span className="lime">·</span> Est. 2025
         </div>
       </div>
     </section>
