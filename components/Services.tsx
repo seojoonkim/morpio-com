@@ -56,7 +56,7 @@ export default function Services() {
             {SERVICES.map((s, i) => (
               <article
                 key={s.idx}
-                className="group relative bg-bg-surface border border-line rounded-[20px] overflow-hidden transition-transform duration-300 ease-snap hover:-translate-y-2 hover:border-line-strong"
+                className="group svc-card relative bg-bg-surface border border-line rounded-none overflow-hidden transition-transform duration-300 ease-snap hover:-translate-y-2 hover:border-line-strong"
               >
                 {/* Card visual — wrapper holds hover scale, img holds idle Ken Burns */}
                 <div className="relative aspect-[16/10] overflow-hidden border-b border-line">
@@ -115,7 +115,7 @@ export default function Services() {
                   {s.tags.map((t) => (
                     <span
                       key={t}
-                      className="mono text-[0.62rem] py-[5px] px-[10px] border border-line rounded-full text-ink-secondary tracking-[0.08em]"
+                      className="mono text-[0.62rem] py-[5px] px-[10px] border border-line rounded-none text-ink-secondary tracking-[0.08em]"
                     >
                       {t}
                     </span>
@@ -125,7 +125,7 @@ export default function Services() {
                   <span className="mono text-[0.68rem] tracking-[0.2em] uppercase lime">
                     Learn More
                   </span>
-                  <span className="w-10 h-10 border border-line rounded-full grid place-items-center transition-colors duration-300 group-hover:border-accent-lime group-hover:bg-[rgba(197,255,61,0.08)]">
+                  <span className="w-10 h-10 border border-line rounded-none grid place-items-center transition-colors duration-300 group-hover:border-accent-lime group-hover:bg-[rgba(197,255,61,0.08)]">
                     <svg
                       width="14"
                       height="14"

@@ -495,27 +495,102 @@ a {
 /* ============ Hero title idle motion ============ */
 /* Gentle vertical float after reveal settles — composes with inner word transforms */
 .hero-headline.is-revealed {
-  animation: hero-title-float 9s ease-in-out 1.4s infinite alternate;
+  animation: hero-title-float 12s ease-in-out 1.4s infinite alternate;
 }
 @keyframes hero-title-float {
   0% {
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-6px);
+    transform: translateY(-3px);
   }
 }
 /* Soft glow pulse on the lime accent word — drop-shadow composes with inline text-shadow */
 .hero-headline .word > span.lime {
-  animation: hero-lime-glow 5s ease-in-out 1.4s infinite alternate;
+  animation: hero-lime-glow 7s ease-in-out 1.4s infinite alternate;
 }
 @keyframes hero-lime-glow {
   0% {
     filter: drop-shadow(0 0 0 rgba(197, 255, 61, 0));
   }
   100% {
-    filter: drop-shadow(0 0 18px rgba(197, 255, 61, 0.55));
+    filter: drop-shadow(0 0 10px rgba(197, 255, 61, 0.32));
   }
+}
+
+/* ============ Futuristic overlays ============ */
+/* Subtle dot-grid background — tech blueprint feel, barely visible */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(
+    rgba(197, 255, 61, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+  background-position: 0 0;
+  opacity: 0.6;
+}
+
+/* Corner brackets on service cards — kinetic tech framing */
+.svc-card {
+  position: relative;
+}
+.svc-card::before,
+.svc-card::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--accent-lime);
+  border-style: solid;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+.svc-card::before {
+  top: 8px;
+  left: 8px;
+  border-width: 1px 0 0 1px;
+}
+.svc-card::after {
+  bottom: 8px;
+  right: 8px;
+  border-width: 0 1px 1px 0;
+}
+.svc-card:hover::before,
+.svc-card:hover::after {
+  opacity: 0.9;
+}
+
+/* Lime scan-line on primary buttons hover — tech sweep */
+.btn-tech {
+  position: relative;
+  overflow: hidden;
+}
+.btn-tech::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+.btn-tech:hover::after {
+  left: 130%;
 }
 
 @media (prefers-reduced-motion: reduce) {

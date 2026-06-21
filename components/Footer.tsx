@@ -57,7 +57,7 @@ export default function Footer() {
                   key={s.label}
                   href="#"
                   aria-label={s.label}
-                  className="w-10 h-10 grid place-items-center rounded-full border border-line text-ink-secondary transition-colors duration-300 hover:border-accent-lime hover:text-accent-lime"
+                  className="w-10 h-10 grid place-items-center rounded-none border border-line text-ink-secondary transition-colors duration-300 hover:border-accent-lime hover:text-accent-lime"
                 >
                   <svg
                     width="14"

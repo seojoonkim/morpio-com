@@ -56,7 +56,7 @@ export default function Process() {
 
         <Reveal stagger>
           <div
-            className="bg-bg-surface border border-line rounded-3xl"
+            className="bg-bg-surface border border-line rounded-none"
             style={{ padding: "clamp(24px, 5vw, 48px)" }}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -104,7 +104,7 @@ export default function Process() {
                     {s.tags.map((t) => (
                       <span
                         key={t}
-                        className="mono text-[0.6rem] py-1 px-[9px] border border-line rounded-full text-ink-secondary tracking-[0.08em]"
+                        className="mono text-[0.6rem] py-1 px-[9px] border border-line rounded-none text-ink-secondary tracking-[0.08em]"
                       >
                         {t}
                       </span>

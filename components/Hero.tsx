@@ -94,13 +94,13 @@ export default function Hero() {
           <div className="flex flex-nowrap items-center gap-2 sm:gap-4">
             <Magnetic
               href="#services"
-              className="inline-flex items-center h-12 px-5 sm:h-14 sm:px-7 rounded-full bg-accent-lime text-bg-base font-semibold text-[0.8rem] sm:text-[0.95rem] tracking-[0.04em] uppercase whitespace-nowrap transition-shadow duration-300 hover:shadow-[0_0_48px_rgba(197,255,61,0.5)]"
+              className="btn-tech inline-flex items-center h-12 px-5 sm:h-14 sm:px-7 rounded-none bg-accent-lime text-bg-base font-semibold text-[0.8rem] sm:text-[0.95rem] tracking-[0.04em] uppercase whitespace-nowrap transition-shadow duration-300 hover:shadow-[0_0_48px_rgba(197,255,61,0.5)]"
             >
               Explore Services
             </Magnetic>
             <a
               href="#contact"
-              className="inline-flex items-center h-12 px-5 sm:h-14 sm:px-7 rounded-full border border-line-strong text-ink-primary font-medium text-[0.8rem] sm:text-[0.95rem] tracking-[0.04em] uppercase whitespace-nowrap transition-colors duration-300 hover:border-accent-lime hover:text-accent-lime"
+              className="inline-flex items-center h-12 px-5 sm:h-14 sm:px-7 rounded-none border border-line-strong text-ink-primary font-medium text-[0.8rem] sm:text-[0.95rem] tracking-[0.04em] uppercase whitespace-nowrap transition-colors duration-300 hover:border-accent-lime hover:text-accent-lime"
             >
               Get in Touch
             </a>

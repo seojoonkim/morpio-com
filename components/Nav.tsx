@@ -61,7 +61,7 @@ export default function Nav() {
         <div className="flex items-center gap-3">
           <Magnetic
             href="#contact"
-            className="hidden sm:inline-flex items-center gap-2 h-10 px-[18px] rounded-full border border-accent-lime text-ink-primary text-[0.82rem] font-semibold transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(197,255,61,0.35)]"
+            className="hidden sm:inline-flex items-center gap-2 h-10 px-[18px] rounded-none border border-accent-lime text-ink-primary text-[0.82rem] font-semibold transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(197,255,61,0.35)]"
           >
             Start a Project
             <svg
@@ -81,7 +81,7 @@ export default function Nav() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((o) => !o)}
-            className="lg:hidden w-10 h-10 grid place-items-center rounded-full border border-line text-ink-primary"
+            className="lg:hidden w-10 h-10 grid place-items-center rounded-none border border-line text-ink-primary"
           >
             <svg width="16" height="4" viewBox="0 0 16 4">
               <circle cx="2" cy="2" r="1.5" fill="currentColor" />
@@ -112,7 +112,7 @@ export default function Nav() {
           <a
             href="#contact"
             onClick={() => setOpen(false)}
-            className="mt-2 inline-flex items-center justify-center gap-2 h-12 rounded-full border border-accent-lime text-ink-primary text-sm font-semibold"
+            className="mt-2 inline-flex items-center justify-center gap-2 h-12 rounded-none border border-accent-lime text-ink-primary text-sm font-semibold"
           >
             Start a Project
           </a>

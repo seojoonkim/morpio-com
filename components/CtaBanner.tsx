@@ -13,7 +13,7 @@ export default function CtaBanner() {
       <div className="container-x">
         <Reveal>
           <div
-            className="relative bg-bg-surface border border-line-strong rounded-[28px] overflow-hidden"
+            className="relative bg-bg-surface border border-line-strong rounded-none overflow-hidden"
             style={{ padding: "clamp(32px, 6vw, 64px)" }}
           >
             {/* Lime glow halo */}
@@ -26,15 +26,15 @@ export default function CtaBanner() {
             />
             {/* Static lime pinpoints */}
             <span
-              className="absolute w-[3px] h-[3px] rounded-full bg-accent-lime"
+              className="absolute w-[3px] h-[3px] rounded-none bg-accent-lime"
               style={{ top: "12%", left: "18%", boxShadow: "0 0 10px #C5FF3D" }}
             />
             <span
-              className="absolute w-[3px] h-[3px] rounded-full bg-accent-lime"
+              className="absolute w-[3px] h-[3px] rounded-none bg-accent-lime"
               style={{ top: "72%", left: "8%", boxShadow: "0 0 10px #C5FF3D" }}
             />
             <span
-              className="absolute w-[3px] h-[3px] rounded-full bg-accent-lime"
+              className="absolute w-[3px] h-[3px] rounded-none bg-accent-lime"
               style={{ top: "30%", left: "88%", boxShadow: "0 0 10px #C5FF3D" }}
             />
 
@@ -69,7 +69,7 @@ export default function CtaBanner() {
               <div className="lg:col-span-5 flex flex-col gap-3 lg:items-start">
                 <Magnetic
                   href="mailto:hello@morpio.com?subject=Start%20a%20Project"
-                  className="inline-flex items-center gap-[10px] h-14 px-7 rounded-full bg-accent-lime text-bg-base font-bold text-[0.95rem] transition-shadow duration-300 hover:shadow-[0_0_48px_rgba(197,255,61,0.5)]"
+                  className="btn-tech inline-flex items-center gap-[10px] h-14 px-7 rounded-none bg-accent-lime text-bg-base font-bold text-[0.95rem] transition-shadow duration-300 hover:shadow-[0_0_48px_rgba(197,255,61,0.5)]"
                 >
                   Start a Project
                   <svg
@@ -85,7 +85,7 @@ export default function CtaBanner() {
                 </Magnetic>
                 <a
                   href="mailto:hello@morpio.com"
-                  className="inline-flex items-center h-14 px-7 rounded-full border border-line-strong text-ink-primary font-medium text-[0.95rem] transition-colors duration-300 hover:border-accent-lime hover:bg-[rgba(197,255,61,0.05)]"
+                  className="inline-flex items-center h-14 px-7 rounded-none border border-line-strong text-ink-primary font-medium text-[0.95rem] transition-colors duration-300 hover:border-accent-lime hover:bg-[rgba(197,255,61,0.05)]"
                 >
                   hello@morpio.com
                 </a>

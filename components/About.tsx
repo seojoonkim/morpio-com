@@ -47,7 +47,7 @@ export default function About() {
               </p>
               <a
                 href="#contact"
-                className="mt-8 inline-flex items-center h-14 px-7 rounded-full border border-line-strong text-ink-primary font-medium text-[0.95rem] transition-colors duration-300 hover:border-accent-lime hover:bg-[rgba(197,255,61,0.05)]"
+                className="mt-8 inline-flex items-center h-14 px-7 rounded-none border border-line-strong text-ink-primary font-medium text-[0.95rem] transition-colors duration-300 hover:border-accent-lime hover:bg-[rgba(197,255,61,0.05)]"
               >
                 Learn More About Us
               </a>
@@ -61,7 +61,7 @@ export default function About() {
                 {STATS.map((s) => (
                   <div
                     key={s.label}
-                    className="bg-bg-surface border border-line rounded-[20px] p-6 transition-colors duration-300 hover:border-line-strong"
+                    className="bg-bg-surface border border-line rounded-none p-6 transition-colors duration-300 hover:border-line-strong"
                   >
                     <span className="mono text-[0.62rem] tracking-[0.25em] uppercase lime block mb-4">
                       {s.label}
