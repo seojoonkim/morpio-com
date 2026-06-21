@@ -47,6 +47,7 @@ export default function Hero() {
           <p className="eyebrow" style={{ textShadow: "0 1px 10px rgba(0,0,0,0.95), 0 0 20px rgba(0,0,0,0.6)" }}>
             <span className="dash" />
             <span>Three Core Businesses · Endless Possibilities</span>
+            <span className="cursor-blink" aria-hidden>_</span>
           </p>
         </Reveal>
 

@@ -73,7 +73,7 @@ export default function Process() {
                     />
                   )}
                   <span
-                    className="display block lime mb-4"
+                    className="display block lime proc-num mb-4"
                     style={{
                       fontSize: "clamp(48px, 10vw, 80px)",
                       lineHeight: 1,
