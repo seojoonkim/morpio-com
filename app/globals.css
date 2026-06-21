@@ -239,7 +239,8 @@ a {
   background-position: center 40%;
   background-repeat: no-repeat;
   transform: scale(1.14);
-  animation: hero-zoom 9s var(--ease-stage) forwards;
+  animation: hero-zoom 9s var(--ease-stage) forwards,
+    hero-breathe 22s ease-in-out 9s infinite alternate;
   will-change: transform;
   filter: saturate(1.05) contrast(1.03);
 }
@@ -249,6 +250,55 @@ a {
   }
   100% {
     transform: scale(1.04);
+  }
+}
+/* Continuous subtle drift after zoom-in settles — keeps the stage alive */
+@keyframes hero-breathe {
+  0% {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.07) translate3d(1.5%, -1.2%, 0);
+  }
+}
+
+/* Tech scan beam — thin lime light sweeps vertically, slow */
+.hero-scan {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-scan::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(197, 255, 61, 0.35) 50%,
+    transparent
+  );
+  filter: blur(1px);
+  animation: hero-scan-sweep 7s ease-in-out infinite;
+}
+@keyframes hero-scan-sweep {
+  0% {
+    top: -2%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.85;
+  }
+  88% {
+    opacity: 0.85;
+  }
+  100% {
+    top: 102%;
+    opacity: 0;
   }
 }
 
@@ -421,6 +471,10 @@ a {
   /* Hero full-bleed: park the bg at its settled scale, kill kinetic accents */
   .hero-bg {
     transform: scale(1.04) !important;
+    animation: hero-zoom 9s var(--ease-stage) forwards !important;
+  }
+  .hero-scan {
+    display: none !important;
   }
   .hero-scroll-line {
     transform: scaleY(0.6) !important;

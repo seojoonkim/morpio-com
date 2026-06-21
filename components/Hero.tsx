@@ -17,8 +17,11 @@ export default function Hero() {
       className="hero-fullbleed relative w-full overflow-hidden bg-bg-base"
       style={{ minHeight: "100svh" }}
     >
-      {/* Full-bleed background image with kinetic zoom-in */}
+      {/* Full-bleed background image with kinetic zoom-in + continuous breathe */}
       <div className="hero-bg" aria-hidden />
+
+      {/* Tech scan beam — thin lime light sweeps vertically */}
+      <div className="hero-scan" aria-hidden />
 
       {/* Triple dark cinematic overlay (left + bottom weighted for legibility) */}
       <div className="hero-overlay" aria-hidden />
