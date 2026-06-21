@@ -40,20 +40,18 @@ export default function Hero() {
           paddingBottom: "clamp(40px, 9vh, 120px)",
         }}
       >
-        {/* Localized dark scrim behind text block — guarantees color separation from bg image */}
+        {/* Localized dark scrim behind text block — soft fade, no hard edge */}
         <div
           aria-hidden
           className="absolute inset-0 -z-10 pointer-events-none"
           style={{
             background:
-              "radial-gradient(130% 90% at 25% 85%, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.72) 25%, rgba(10,10,10,0.3) 55%, transparent 75%)",
+              "radial-gradient(160% 120% at 20% 90%, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.55) 30%, rgba(10,10,10,0.2) 60%, transparent 85%)",
           }}
         />
         <Reveal>
           <p className="eyebrow" style={{ textShadow: "0 1px 10px rgba(0,0,0,0.95), 0 0 20px rgba(0,0,0,0.6)" }}>
             <span className="dash" />
-            <span className="num">[ 01 — STAGE ]</span>
-            <span className="opacity-60">·</span>
             <span>Three Core Businesses · Endless Possibilities</span>
           </p>
         </Reveal>
@@ -114,12 +112,6 @@ export default function Hero() {
             </a>
           </div>
         </Reveal>
-      </div>
-
-      {/* Scroll indicator — bottom left */}
-      <div className="hero-scroll" aria-hidden>
-        <span className="hero-scroll-line" />
-        <span>Scroll to Explore</span>
       </div>
 
       {/* Bottom-right studio signature */}

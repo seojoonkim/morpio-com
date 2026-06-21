@@ -39,7 +39,7 @@ export default function Process() {
       <div className="container-x">
         <Reveal>
           <div className="mb-10 md:mb-[72px] max-w-[720px]">
-            <SectionLabel index="03" label="METHOD" trailing="Our Process" />
+            <SectionLabel index="02" label="METHOD" trailing="Our Process" />
             <Headline
               as="h2"
               text="From Brief to Launch."

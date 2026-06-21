@@ -36,7 +36,7 @@ export default function Services() {
       <div className="container-x">
         <Reveal>
           <div className="mb-10 md:mb-[72px] max-w-[720px]">
-            <SectionLabel index="02" label="PRACTICE" trailing="Our Core Businesses" />
+            <SectionLabel index="01" label="PRACTICE" trailing="Our Core Businesses" />
             <Headline
               as="h2"
               text="Three Businesses. One Creative Engine."

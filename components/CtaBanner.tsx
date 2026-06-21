@@ -40,7 +40,7 @@ export default function CtaBanner() {
 
             <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7">
-                <SectionLabel index="05" label="CONTACT" trailing="Bring Your IP" />
+                <SectionLabel index="04" label="CONTACT" trailing="Bring Your IP" />
                 <Headline
                   as="h2"
                   text={"Let\u2019s Build the Next Media Universe"}

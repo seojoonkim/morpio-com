@@ -21,7 +21,7 @@ export default function About() {
           {/* Left: text */}
           <div className="lg:col-span-5">
             <Reveal>
-              <SectionLabel index="04" label="STUDIO" trailing="About morpio" />
+              <SectionLabel index="03" label="STUDIO" trailing="About morpio" />
             </Reveal>
             <Headline
               as="h2"
