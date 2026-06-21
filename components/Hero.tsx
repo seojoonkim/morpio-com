@@ -69,18 +69,24 @@ export default function Hero() {
 
         <Reveal>
           <p
-            className="text-ink-secondary"
+            className="text-ink-primary"
             style={{
               fontSize: "clamp(15px, 1.9vw, 19px)",
               lineHeight: 1.6,
               maxWidth: "54ch",
               marginBottom: "clamp(28px, 4vh, 44px)",
               textShadow:
-                "0 1px 20px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,1)",
+                "0 2px 30px rgba(0,0,0,0.95), 0 0 60px rgba(0,0,0,0.7), 0 1px 4px rgba(0,0,0,1), 0 0 8px rgba(0,0,0,0.9)",
             }}
           >
             A studio for IP that wants a{" "}
-            <strong className="font-semibold text-ink-primary">
+            <strong
+              className="font-semibold text-ink-primary"
+              style={{
+                textShadow:
+                  "0 2px 8px rgba(0,0,0,1), 0 0 24px rgba(0,0,0,0.95), 0 1px 3px rgba(0,0,0,1), 0 0 6px rgba(0,0,0,1)",
+              }}
+            >
               second life
             </strong>
             . We take stories that already have fans — novels, comics, webtoons —
@@ -100,7 +106,8 @@ export default function Hero() {
             </Magnetic>
             <a
               href="#contact"
-              className="inline-flex items-center h-12 px-5 sm:h-14 sm:px-7 rounded-none border border-line-strong text-ink-primary font-medium text-[0.8rem] sm:text-[0.95rem] tracking-[0.04em] uppercase whitespace-nowrap transition-colors duration-300 hover:border-accent-lime hover:text-accent-lime"
+              className="inline-flex items-center h-12 px-5 sm:h-14 sm:px-7 rounded-none border-2 border-[rgba(244,244,242,0.55)] bg-[rgba(10,10,10,0.4)] backdrop-blur-[2px] text-ink-primary font-medium text-[0.8rem] sm:text-[0.95rem] tracking-[0.04em] uppercase whitespace-nowrap transition-colors duration-300 hover:border-accent-lime hover:text-accent-lime"
+              style={{ textShadow: "0 1px 4px rgba(0,0,0,0.95)" }}
             >
               Get in Touch
             </a>
