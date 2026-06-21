@@ -31,12 +31,12 @@ export default function Hero() {
 
       {/* Content — bottom-left cinematic poster layout */}
       <div
-        className="relative z-[5] flex flex-col justify-end mx-auto w-full"
+        className="relative z-[5] flex flex-col justify-center mx-auto w-full"
         style={{
           minHeight: "100svh",
           maxWidth: 1640,
           paddingInline: "clamp(20px, 5vw, 80px)",
-          paddingTop: "clamp(64px, 10vh, 140px)",
+          paddingTop: "clamp(48px, 7vh, 96px)",
           paddingBottom: "clamp(40px, 9vh, 120px)",
         }}
       >
