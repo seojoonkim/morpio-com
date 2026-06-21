@@ -53,20 +53,22 @@ export default function Services() {
 
         <Reveal stagger>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SERVICES.map((s) => (
+            {SERVICES.map((s, i) => (
               <article
                 key={s.idx}
                 className="group relative bg-bg-surface border border-line rounded-[20px] overflow-hidden transition-transform duration-300 ease-snap hover:-translate-y-2 hover:border-line-strong"
               >
-                {/* Card visual */}
+                {/* Card visual — wrapper holds hover scale, img holds idle Ken Burns */}
                 <div className="relative aspect-[16/10] overflow-hidden border-b border-line">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={s.image}
-                    alt={s.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-snap group-hover:scale-105"
-                    loading="lazy"
-                  />
+                  <div className="absolute inset-0 transition-transform duration-700 ease-snap group-hover:scale-105">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={s.image}
+                      alt={s.title}
+                      className={`absolute inset-0 w-full h-full object-cover svc-pan svc-pan-${i + 1}`}
+                      loading="lazy"
+                    />
+                  </div>
                   <div
                     className="absolute inset-0"
                     style={{

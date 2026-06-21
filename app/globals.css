@@ -453,6 +453,45 @@ a {
   }
 }
 
+/* ============ Services card idle Ken Burns ============ */
+/* Each card pans/zooms on a slightly different cycle so they never sync. */
+.svc-pan {
+  will-change: transform;
+}
+.svc-pan-1 {
+  animation: svc-ken-1 20s ease-in-out infinite alternate;
+}
+.svc-pan-2 {
+  animation: svc-ken-2 26s ease-in-out infinite alternate;
+}
+.svc-pan-3 {
+  animation: svc-ken-3 23s ease-in-out infinite alternate;
+}
+@keyframes svc-ken-1 {
+  0% {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.14) translate3d(3%, -2%, 0);
+  }
+}
+@keyframes svc-ken-2 {
+  0% {
+    transform: scale(1.1) translate3d(2%, 1%, 0);
+  }
+  100% {
+    transform: scale(1.05) translate3d(-3%, 2%, 0);
+  }
+}
+@keyframes svc-ken-3 {
+  0% {
+    transform: scale(1.04) translate3d(-2%, 2%, 0);
+  }
+  100% {
+    transform: scale(1.12) translate3d(2%, -3%, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -475,6 +514,9 @@ a {
   }
   .hero-scan {
     display: none !important;
+  }
+  .svc-pan {
+    transform: scale(1.05) !important;
   }
   .hero-scroll-line {
     transform: scaleY(0.6) !important;
