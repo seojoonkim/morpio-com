@@ -36,7 +36,7 @@ export default function Hero() {
           minHeight: "100svh",
           maxWidth: 1640,
           paddingInline: "clamp(20px, 5vw, 80px)",
-          paddingTop: "clamp(120px, 18vh, 220px)",
+          paddingTop: "clamp(96px, 14vh, 180px)",
           paddingBottom: "clamp(40px, 9vh, 120px)",
         }}
       >
@@ -99,26 +99,16 @@ export default function Hero() {
         </Reveal>
 
         <Reveal>
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-nowrap items-center gap-2 sm:gap-4">
             <Magnetic
               href="#services"
-              className="inline-flex items-center gap-[10px] h-14 px-7 rounded-full bg-accent-lime text-bg-base font-semibold text-[0.95rem] tracking-[0.04em] uppercase transition-shadow duration-300 hover:shadow-[0_0_48px_rgba(197,255,61,0.5)]"
+              className="inline-flex items-center h-12 px-5 sm:h-14 sm:px-7 rounded-full bg-accent-lime text-bg-base font-semibold text-[0.8rem] sm:text-[0.95rem] tracking-[0.04em] uppercase whitespace-nowrap transition-shadow duration-300 hover:shadow-[0_0_48px_rgba(197,255,61,0.5)]"
             >
               Explore Services
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M5 12h14M13 5l7 7-7 7" />
-              </svg>
             </Magnetic>
             <a
               href="#contact"
-              className="inline-flex items-center h-14 px-7 rounded-full border border-line-strong text-ink-primary font-medium text-[0.95rem] tracking-[0.04em] uppercase transition-colors duration-300 hover:border-accent-lime hover:text-accent-lime"
+              className="inline-flex items-center h-12 px-5 sm:h-14 sm:px-7 rounded-full border border-line-strong text-ink-primary font-medium text-[0.8rem] sm:text-[0.95rem] tracking-[0.04em] uppercase whitespace-nowrap transition-colors duration-300 hover:border-accent-lime hover:text-accent-lime"
             >
               Get in Touch
             </a>
