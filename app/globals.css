@@ -492,6 +492,32 @@ a {
   }
 }
 
+/* ============ Hero title idle motion ============ */
+/* Gentle vertical float after reveal settles — composes with inner word transforms */
+.hero-headline.is-revealed {
+  animation: hero-title-float 9s ease-in-out 1.4s infinite alternate;
+}
+@keyframes hero-title-float {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-6px);
+  }
+}
+/* Soft glow pulse on the lime accent word — drop-shadow composes with inline text-shadow */
+.hero-headline .word > span.lime {
+  animation: hero-lime-glow 5s ease-in-out 1.4s infinite alternate;
+}
+@keyframes hero-lime-glow {
+  0% {
+    filter: drop-shadow(0 0 0 rgba(197, 255, 61, 0));
+  }
+  100% {
+    filter: drop-shadow(0 0 18px rgba(197, 255, 61, 0.55));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

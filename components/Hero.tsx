@@ -54,7 +54,7 @@ export default function Hero() {
           as="h1"
           text="We Turn IP Into Intelligent Media."
           limeIndices={[4]}
-          className="display"
+          className="display hero-headline"
           style={{
             fontSize: "clamp(48px, 9vw, 152px)",
             lineHeight: 0.9,
