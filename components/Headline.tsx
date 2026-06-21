@@ -59,7 +59,15 @@ export default function Headline({
         <Fragment key={i}>
           <span className="word">
             <span
-              style={{ transitionDelay: `${i * 0.08}s` }}
+              style={{
+                transitionDelay: `${i * 0.08}s`,
+                ...(limeIndices.includes(i)
+                  ? {
+                      textShadow:
+                        "0 0 6px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,1), 0 0 28px rgba(0,0,0,0.85)",
+                    }
+                  : {}),
+              }}
               className={limeIndices.includes(i) ? "lime" : undefined}
             >
               {w}
