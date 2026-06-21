@@ -36,7 +36,7 @@ export default function Hero() {
           minHeight: "100svh",
           maxWidth: 1640,
           paddingInline: "clamp(20px, 5vw, 80px)",
-          paddingTop: "clamp(96px, 14vh, 180px)",
+          paddingTop: "clamp(64px, 10vh, 140px)",
           paddingBottom: "clamp(40px, 9vh, 120px)",
         }}
       >
