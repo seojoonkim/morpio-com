@@ -53,7 +53,7 @@ export default function Hero() {
           limeIndices={[4]}
           className="display"
           style={{
-            fontSize: "clamp(56px, 11vw, 180px)",
+            fontSize: "clamp(48px, 9vw, 152px)",
             lineHeight: 0.9,
             letterSpacing: "-0.035em",
             marginTop: "clamp(28px, 4vh, 56px)",
