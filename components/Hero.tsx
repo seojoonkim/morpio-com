@@ -41,7 +41,7 @@ export default function Hero() {
         }}
       >
         <Reveal>
-          <p className="eyebrow">
+          <p className="eyebrow" style={{ textShadow: "0 1px 10px rgba(0,0,0,0.95), 0 0 20px rgba(0,0,0,0.6)" }}>
             <span className="dash" />
             <span className="num">[ 01 — STAGE ]</span>
             <span className="opacity-60">·</span>
@@ -61,7 +61,8 @@ export default function Hero() {
             marginTop: "clamp(28px, 4vh, 56px)",
             marginBottom: "clamp(28px, 4vh, 48px)",
             maxWidth: "18ch",
-            textShadow: "0 1px 0 rgba(0,0,0,0.25)",
+            textShadow:
+              "0 2px 40px rgba(0,0,0,0.9), 0 0 80px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,1)",
           }}
         />
 
@@ -73,6 +74,8 @@ export default function Hero() {
               lineHeight: 1.6,
               maxWidth: "54ch",
               marginBottom: "clamp(28px, 4vh, 44px)",
+              textShadow:
+                "0 1px 20px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,1)",
             }}
           >
             A studio for IP that wants a{" "}
