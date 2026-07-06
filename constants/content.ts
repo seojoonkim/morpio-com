@@ -2,7 +2,7 @@ export type Lang = "en" | "kr";
 
 export const projects = [
   { slug: "jupiter", title: "Jupiter", year: "2025", category: "Music Video" },
-  { slug: "mercedes-amg", title: "Mercedes-AMG", year: "2025", category: "Brand Film" },
+  { slug: "brand-system-study", title: "Brand System Study", year: "2025", category: "Brand Film" },
   { slug: "thought", title: "Thought", year: "2025", category: "Short Film" },
   { slug: "babylon-is-burning", title: "Babylon", year: "2024", category: "Music Video" },
   { slug: "the-purity-revealed", title: "Purity", year: "2024", category: "Editorial" },

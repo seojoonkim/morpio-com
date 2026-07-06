@@ -2,23 +2,23 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MORPIO — AI Media Studio for the Next Era",
+  title: "MORPIO — AI Media Lab Incubated by Hashed",
   description:
-    "MORPIO transforms stories, talent, and brands through AI-powered content production. AI animation, virtual celebrities, and AI advertising — built in Seoul.",
+    "MORPIO turns IP into intelligent media: animation, virtual talent, and adaptive creative from an AI media lab incubated by Hashed.",
   metadataBase: new URL("https://morpio.com"),
   openGraph: {
-    title: "MORPIO — AI Media Studio for the Next Era",
+    title: "MORPIO — AI Media Lab Incubated by Hashed",
     description:
-      "AI Animation. Virtual Celeb Studio. AI Advertising. We turn IP into intelligent media.",
+      "AI animation, virtual talent, and adaptive creative. We turn IP into intelligent media.",
     url: "https://morpio.com",
     siteName: "MORPIO",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "MORPIO — AI Media Studio for the Next Era",
+    title: "MORPIO — AI Media Lab Incubated by Hashed",
     description:
-      "AI Animation. Virtual Celeb Studio. AI Advertising.",
+      "AI animation, virtual talent, and adaptive creative.",
   },
 };
 

@@ -7,7 +7,7 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   { slug: "jupiter", title: "Jupiter", year: 2026, thumb: "/thumbs/jupiter.webp" },
-  { slug: "mercedes-amg", title: "Mercedes AMG", year: 2025, thumb: "/thumbs/mercedes-amg.webp" },
+  { slug: "brand-system-study", title: "Brand System Study", year: 2025, thumb: "/thumbs/mercedes-amg.webp" },
   { slug: "thought", title: "Thought", year: 2025, thumb: "/thumbs/thought.webp" },
   { slug: "babylon-is-burning", title: "Babylon is burning", year: 2025, thumb: "/thumbs/babylon-is-burning.webp" },
   { slug: "the-disease-spread-on-tiktok", title: "The disease spread on Tiktok", year: 2024, thumb: "/thumbs/the-disease-spread-on-tiktok.webp" },

@@ -40,10 +40,10 @@ export default function CtaBanner() {
 
             <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7">
-                <SectionLabel index="04" label="CONTACT" trailing="Bring Your IP" />
+                <SectionLabel index="05" label="CONTACT" trailing="Build the Prototype" />
                 <Headline
                   as="h2"
-                  text={"Let\u2019s Build the Next Media Universe"}
+                  text={"Bring Us the IP. We’ll Build the Prototype."}
                   limeIndices={[4]}
                   className="display mt-[18px]"
                   style={{
@@ -59,11 +59,11 @@ export default function CtaBanner() {
                     lineHeight: 1.6,
                   }}
                 >
-                  If you have IP that wants more lives, write to us. If you
-                  have a brand that wants attention worth keeping, write to us.
-                  If you just want to argue about what{" "}
-                  <span className="serif-em">&ldquo;intelligent media&rdquo;</span>{" "}
-                  means — yes, write to us.
+                  For publishers, studios, webtoon teams, artists, and brands:
+                  bring the story, character, or campaign problem. We will turn
+                  it into a first piece of intelligent media — animation,
+                  virtual talent, or adaptive creative — that people can actually
+                  watch, share, and react to.
                 </p>
               </div>
               <div className="lg:col-span-5 flex flex-col gap-3 lg:items-start">

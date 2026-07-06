@@ -5,27 +5,27 @@ import Reveal from "./Reveal";
 const STEPS = [
   {
     n: "01",
-    title: "Discover the Brief",
-    body: "We read your IP like editors, not vendors. The right opening matters more than the loudest one.",
-    tags: ["Research", "Strategy"],
+    title: "Map the IP",
+    body: "We read the canon, fandom, characters, and expansion surface before choosing the first format to prototype.",
+    tags: ["Canon", "Audience", "Brief"],
   },
   {
     n: "02",
-    title: "Design the World",
-    body: "Characters, plots, and visual rules — drafted, prototyped, iterated. Worlds that stay coherent at scale.",
-    tags: ["Story", "Design"],
+    title: "Design the System",
+    body: "Visual language, character logic, voice, and tone are locked into a reusable world bible before production scales.",
+    tags: ["World Bible", "Character Logic"],
   },
   {
     n: "03",
-    title: "Generate the Work",
-    body: "Animation, voice, image, and motion produced with AI tools we tune ourselves. Quality stays human.",
-    tags: ["AI Production", "Content"],
+    title: "Generate & Edit",
+    body: "AI pipelines create rapid variations; human direction keeps story, taste, and continuity in control.",
+    tags: ["AI Pipeline", "Human Edit"],
   },
   {
     n: "04",
-    title: "Deliver the Launch",
-    body: "We ship across feed, screen, and channel — with the metrics that matter and the polish that doesn\u2019t beg.",
-    tags: ["Distribution", "Growth"],
+    title: "Launch the Prototype",
+    body: "We ship a real piece first — teaser, character drop, or campaign module — then scale what proves alive.",
+    tags: ["Prototype", "Launch"],
   },
 ] as const;
 
@@ -113,6 +113,16 @@ export default function Process() {
                 </div>
               ))}
             </div>
+          </div>
+        </Reveal>
+        <Reveal>
+          <div className="mt-8 border border-line bg-[rgba(197,255,61,0.03)] p-5 md:p-6">
+            <p className="mono text-[0.68rem] tracking-[0.22em] uppercase lime mb-2">
+              Prototype-first production
+            </p>
+            <p className="display text-ink-primary" style={{ fontSize: "clamp(22px, 5vw, 36px)", lineHeight: 1.05 }}>
+              Tomorrow&apos;s franchises, tonight&apos;s prototypes.
+            </p>
           </div>
         </Reveal>
       </div>

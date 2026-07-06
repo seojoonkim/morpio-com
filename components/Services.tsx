@@ -6,21 +6,24 @@ const SERVICES = [
   {
     idx: "01 / KINETIC IP",
     title: "Animation",
-    body: "Novels, comics, and webtoons reborn as motion. Your IP, finally rendered at the speed of imagination.",
+    body: "Story-first animation built from novels, comics, and webtoons that already have a world and a fandom.",
+    outputs: ["Pilot & teaser episodes", "Key visuals", "World bible"],
     tags: ["Animation", "IP Adaptation", "Storyboard"],
     image: "/gen/svc-animation.png",
   },
   {
     idx: "02 / SYNTHETIC TALENT",
     title: "Virtual Celebs",
-    body: "We design characters who tour, post, perform, and never miss a comeback. Studio, agency, and faithful fanbase included.",
+    body: "Characters that can perform, post, and respond — designed as media properties from day one.",
+    outputs: ["Persona bible", "Content pipeline", "Social presence kit"],
     tags: ["Virtual Talent", "IP Building", "Agency"],
     image: "/gen/svc-virtualcelebs.png",
   },
   {
     idx: "03 / INTELLIGENT REACH",
     title: "Advertising",
-    body: "AI-native ad creative that adapts in the wild — by audience, channel, and mood. Made for brands that refuse to send the same ad twice.",
+    body: "Campaign systems where characters and worlds carry the message across audiences, channels, and moods.",
+    outputs: ["Brand shorts", "Format prototypes", "Creative variants"],
     tags: ["Campaigns", "Brand Films", "Performance"],
     image: "/gen/svc-advertising.png",
   },
@@ -111,11 +114,26 @@ export default function Services() {
                 >
                   {s.body}
                 </p>
+                <div className="relative mb-6">
+                  <p className="mono text-[0.62rem] tracking-[0.2em] uppercase lime mb-3">
+                    Outputs
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {s.outputs.map((t) => (
+                      <span
+                        key={t}
+                        className="mono text-[0.62rem] py-[5px] px-[10px] border border-line rounded-none text-ink-secondary tracking-[0.08em]"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
                 <div className="relative flex flex-wrap gap-2 mb-6">
                   {s.tags.map((t) => (
                     <span
                       key={t}
-                      className="mono text-[0.62rem] py-[5px] px-[10px] border border-line rounded-none text-ink-secondary tracking-[0.08em]"
+                      className="mono text-[0.58rem] py-[4px] px-[9px] border border-line rounded-none text-ink-muted tracking-[0.08em]"
                     >
                       {t}
                     </span>

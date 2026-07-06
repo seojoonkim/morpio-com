@@ -46,7 +46,7 @@ export default function Hero() {
         <Reveal>
           <p className="eyebrow" style={{ textShadow: "0 1px 10px rgba(0,0,0,0.95), 0 0 20px rgba(0,0,0,0.6)" }}>
             <span className="dash" />
-            <span>Three Core Businesses · Endless Possibilities</span>
+            <span>AI MEDIA LAB · INCUBATED BY HASHED</span>
             <span className="cursor-blink" aria-hidden>_</span>
           </p>
         </Reveal>
@@ -80,7 +80,8 @@ export default function Hero() {
                 "0 2px 30px rgba(0,0,0,0.95), 0 0 60px rgba(0,0,0,0.7), 0 1px 4px rgba(0,0,0,1), 0 0 8px rgba(0,0,0,0.9)",
             }}
           >
-            A studio for IP that wants a{" "}
+            We take stories that already have fans — novels, comics, webtoons —
+            and rebuild them as{" "}
             <strong
               className="font-semibold text-ink-primary"
               style={{
@@ -88,12 +89,11 @@ export default function Hero() {
                   "0 2px 8px rgba(0,0,0,1), 0 0 24px rgba(0,0,0,0.95), 0 1px 3px rgba(0,0,0,1), 0 0 6px rgba(0,0,0,1)",
               }}
             >
-              second life
+              living media
             </strong>
-            . We take stories that already have fans — novels, comics, webtoons —
-            and rebuild them as living media. Animation that breathes.
-            Celebrities that don&apos;t sleep. Advertising that remembers your
-            name.
+            : content that keeps moving after release. Animated worlds that
+            grow episode by episode, virtual characters that keep performing,
+            and ad creative that adapts to whoever is watching.
           </p>
         </Reveal>
 
@@ -118,7 +118,7 @@ export default function Hero() {
 
       {/* Bottom-right studio signature */}
       <div className="hero-meta" aria-hidden>
-        <div>Morpio — AI Media Studio</div>
+        <div>Morpio — AI Media Lab · Incubated by Hashed</div>
         <div>
           Seoul <span className="lime">·</span> Est. 2025
         </div>
