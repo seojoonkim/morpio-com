@@ -48,7 +48,7 @@ export default function Footer() {
                 lineHeight: 1.6,
               }}
             >
-              A media studio inside Hashed Vibe Labs. Tomorrow&apos;s
+              An AI media lab incubated by Hashed. Tomorrow&apos;s
               franchises, tonight&apos;s prototypes.
             </p>
             <div className="mt-6 flex gap-3">
