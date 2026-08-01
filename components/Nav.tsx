@@ -1,4 +1,15 @@
-"use client";
-import { useEffect, useState } from "react";
-const LINKS=[{label:"Morph",href:"#morph"},{label:"Work",href:"#work"},{label:"Studio",href:"#about"}];
-export default function Nav(){const[open,setOpen]=useState(false);useEffect(()=>{document.body.style.overflow=open?"hidden":"";return()=>{document.body.style.overflow=""}},[open]);return <header className="site-nav"><a className="nav-logo" href="#top">morpio<span>.</span></a><nav>{LINKS.map(l=><a key={l.href} href={l.href}>{l.label}</a>)}<a href="#contact">Get in touch</a></nav><button className="menu-button" aria-expanded={open} aria-label={open?"Close menu":"Open menu"} onClick={()=>setOpen(!open)}>{open?"CLOSE":"MENU"}</button>{open&&<div className="mobile-menu">{LINKS.map((l,i)=><a key={l.href} href={l.href} onClick={()=>setOpen(false)}><span>0{i+1}</span>{l.label}</a>)}<a href="#contact" onClick={()=>setOpen(false)}><span>04</span>Get in touch</a></div>}</header>}
+const LINKS = [
+  { label: "Morph", href: "#morph" },
+  { label: "Work", href: "#work" },
+  { label: "Studio", href: "#about" },
+];
+
+export default function Nav() {
+  return <header className="site-nav">
+    <a className="nav-logo" href="#top">morpio<span>.</span></a>
+    <nav aria-label="Primary navigation">
+      {LINKS.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
+      <a href="#contact">Get in touch</a>
+    </nav>
+  </header>;
+}

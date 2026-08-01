@@ -56,18 +56,20 @@ try {
     }));
     console.error(`QA ${viewport.name}: interaction`);
 
-    let menu = null;
-    if (viewport.name === "mobile") {
-      await page.evaluate(() => document.querySelector(".menu-button")?.click());
-      menu = await page.evaluate(() => ({
-        expanded: document.querySelector(".menu-button")?.getAttribute("aria-expanded"),
-        visible: Boolean(document.querySelector(".mobile-menu")),
-        bodyOverflow: getComputedStyle(document.body).overflow,
-      }));
-      await page.evaluate(() => document.querySelector('.mobile-menu a[href="#work"]')?.click());
-      menu.closedAfterLink = await page.evaluate(() => !document.querySelector(".mobile-menu"));
-      console.error(`QA ${viewport.name}: menu`);
-    }
+    const navigation = await page.evaluate(() => {
+      const nav = document.querySelector(".site-nav nav");
+      const links = [...document.querySelectorAll(".site-nav nav a")];
+      return {
+        visible: Boolean(nav) && getComputedStyle(nav).display !== "none",
+        labels: links.map((link) => link.textContent?.trim()),
+        menuButton: Boolean(document.querySelector(".menu-button")),
+        bounds: links.map((link) => {
+          const box = link.getBoundingClientRect();
+          return { left: box.left, right: box.right, top: box.top, bottom: box.bottom };
+        }),
+      };
+    });
+    console.error(`QA ${viewport.name}: navigation`);
 
     await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
     console.error(`QA ${viewport.name}: media emulated`);
@@ -87,13 +89,14 @@ try {
     check(initial.videos.length === 6 && initial.videos.every((video) => video.src.endsWith(".mp4") && !video.error), `${viewport.name}: a video source failed`);
     check(viewport.name !== "mobile" || initial.cardColumns === 1, "mobile: reel cards are not a single column");
     check(interaction.pressed === "true" && interaction.readout === "AI CAMPAIGN" && interaction.src?.includes("advertising"), `${viewport.name}: morph interaction failed`);
-    check(!menu || (menu.expanded === "true" && menu.visible && menu.bodyOverflow === "hidden" && menu.closedAfterLink), "mobile: menu behavior failed");
+    check(navigation.visible && navigation.labels.length === 4 && !navigation.menuButton, `${viewport.name}: expanded navigation is incomplete`);
+    check(navigation.bounds.every((box) => box.left >= 0 && box.right <= viewport.width + 1), `${viewport.name}: navigation link is clipped`);
     check(reduced.matches && reduced.visibleVideos === 0 && reduced.htmlScrollBehavior === "auto", `${viewport.name}: reduced-motion contract failed`);
 
     const screenshot = `/tmp/morpio-${viewport.name}.png`;
     await page.screenshot({ path: screenshot, fullPage: true, captureBeyondViewport: false });
     console.error(`QA ${viewport.name}: screenshot`);
-    results.push({ viewport: viewport.name, initial, interaction, menu, reduced, screenshot });
+    results.push({ viewport: viewport.name, initial, interaction, navigation, reduced, screenshot });
     await page.close();
   }
 } finally {
@@ -107,3 +110,4 @@ if (failures.length) {
   process.exit(1);
 }
 console.log("PASS: browser QA at 390px and 1280px");
+process.exit(0);
