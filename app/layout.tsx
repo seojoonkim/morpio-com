@@ -26,7 +26,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#0A0A0A",
+  themeColor: "#F2ECE1",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -48,10 +49,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-bg-base text-ink-primary antialiased overflow-x-hidden">
-        <div className="stage-spot" aria-hidden />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

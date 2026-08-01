@@ -1,25 +1,25 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import MorphMachine from "@/components/MorphMachine";
 import Services from "@/components/Services";
+import CastingReel from "@/components/CastingReel";
 import Process from "@/components/Process";
 import About from "@/components/About";
-import Work from "@/components/Work";
 import CtaBanner from "@/components/CtaBanner";
 import Footer from "@/components/Footer";
 
 export default function Page() {
-  return (
-    <>
-      <Nav />
-      <main className="relative z-[1] min-h-screen bg-bg-base text-ink-primary overflow-x-hidden">
-        <Hero />
-        <Services />
-        <Process />
-        <Work />
-        <About />
-        <CtaBanner />
-      </main>
-      <Footer />
-    </>
-  );
+  return <>
+    <Nav />
+    <main>
+      <Hero />
+      <MorphMachine />
+      <Services />
+      <CastingReel />
+      <Process />
+      <About />
+      <CtaBanner />
+    </main>
+    <Footer />
+  </>;
 }
