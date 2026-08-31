@@ -88,7 +88,7 @@ export function TechnicalDemoIndex() {
             <article className={`demo-row${expanded ? " is-expanded" : ""}`} data-demo-row={demo.id} key={demo.id}>
               <button className="demo-toggle" type="button" aria-expanded={expanded} aria-controls={`${demo.id}-media`} onClick={() => { setExpandedDemo(expanded ? null : demo.id); stop(); }}>
                 <span className="demo-number">{demo.index}</span>
-                <span className="demo-name"><strong>{demo.title}</strong><small>{demo.subtitle}</small></span>
+                <span className="demo-name"><strong>{demo.title}</strong><small>{demo.subtitle}</small><em>{demo.experiment}</em></span>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={thumbUrl(demo.videoId, demo.portrait)} alt="" />
                 <span className="demo-action">{expanded ? "CLOSE" : "OPEN"} <i aria-hidden="true">↘</i></span>

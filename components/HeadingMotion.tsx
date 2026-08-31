@@ -29,7 +29,7 @@ function splitHeading(heading: HTMLElement) {
         const characterSpan = document.createElement("span");
         characterSpan.className = "heading-char";
         characterSpan.textContent = character;
-        characterSpan.style.setProperty("--char-delay", `${index++ * 26}ms`);
+        characterSpan.style.setProperty("--char-delay", `${index++ * 42}ms`);
         word.append(characterSpan);
       });
 

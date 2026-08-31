@@ -15,6 +15,7 @@ export type DemoFilm = {
   index: string;
   title: string;
   subtitle: string;
+  experiment: string;
   videoId: string;
   portrait?: boolean;
 };
@@ -36,6 +37,7 @@ export const DEMO_FILMS: DemoFilm[] = [
     index: "01",
     title: "創造のリンゴ",
     subtitle: "창조의 사과",
+    experiment: "Tests character and style consistency from source art to moving shots.",
     videoId: "Ff3HrDGiFsw",
     portrait: true,
   },
@@ -44,6 +46,7 @@ export const DEMO_FILMS: DemoFilm[] = [
     index: "02",
     title: "GTO: PARADISE LOST",
     subtitle: "GTO: 파라다이스 로스트",
+    experiment: "Tests key-shot design and motion direction for a finished animated sequence.",
     videoId: "zUvo4r_AyoU",
     portrait: true,
   },
@@ -52,6 +55,7 @@ export const DEMO_FILMS: DemoFilm[] = [
     index: "03",
     title: "AGENT KIM REACTIVATED",
     subtitle: "김부장",
+    experiment: "Tests integrated video, voice, music, and sound in one production path.",
     videoId: "tOaoUyxOLT0",
   },
 ];

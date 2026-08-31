@@ -26,9 +26,11 @@ function ProductionEngine() {
             <div className="stage-title"><strong>{line1}</strong><strong>{line2}</strong></div>
             <p>{detail}</p>
             <i aria-hidden="true" />
-            {index < STAGES.length - 1 && <em aria-hidden="true">→</em>}
           </article>
         ))}
+        <div className="engine-connectors" aria-hidden="true">
+          {STAGES.slice(0, -1).map(([number]) => <span key={number}>→</span>)}
+        </div>
       </div>
 
       <div className="engine-bus" aria-label="Central layer">

@@ -21,6 +21,8 @@ check(count(/data-demo-row=/g) === 3, `expected 3 technical demo rows, found ${c
 check(count(/data-video-id=/g) === 3, `expected 3 language controls, found ${count(/data-video-id=/g)}`);
 check(html.indexOf("31Jm1Z2fnek") < html.indexOf("vVmnsDeSwhE"), "Korean subtitles are not the default variant");
 check(/GTO: 파라다이스 로스트/.test(html), "GTO Korean title is missing");
+for (const experiment of ["character and style consistency", "key-shot design and motion direction", "integrated video, voice, music, and sound"]) check(html.toLowerCase().includes(experiment), `demo experiment description ${experiment} is missing`);
+check(/property="og:image"[^>]*content="https:\/\/morpio\.com\/og-morpio\.png"|content="https:\/\/morpio\.com\/og-morpio\.png"[^>]*property="og:image"/.test(html), "OG image metadata is missing");
 check(/MORPIO THESIS/i.test(html), "Morpio thesis is missing");
 check(!/why-sequence|why-row|MORPIO \/ FRAME/i.test(html), "thesis must not contain artwork frames");
 check(/MORPIO TECHNOLOGY/i.test(html), "technology section is missing");
