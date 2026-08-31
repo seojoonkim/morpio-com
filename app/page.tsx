@@ -6,9 +6,11 @@ import Process from "@/components/Process";
 import About from "@/components/About";
 import CtaBanner from "@/components/CtaBanner";
 import Footer from "@/components/Footer";
+import HeadingMotion from "@/components/HeadingMotion";
 
 export default function Page() {
   return <>
+    <HeadingMotion />
     <Nav />
     <main>
       <Hero />

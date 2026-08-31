@@ -25,7 +25,7 @@ for (const viewport of [
     heroPoster: document.querySelector("[data-hero-film] video")?.getAttribute("poster"),
     dotColor: getComputedStyle(document.querySelector(".nav-logo span")).color,
   }));
-  if (summary.h1 !== "ANOTHERWORLDSTARTSHERE.") throw new Error(`Unexpected tagline: ${summary.h1}`);
+  if (summary.h1 !== "ANOTHERWORLDSTARTSHERE") throw new Error(`Unexpected tagline: ${summary.h1}`);
   if (summary.scrollWidth > summary.viewportWidth + 1) throw new Error(`Horizontal overflow at ${viewport.width}: ${summary.scrollWidth}`);
   if (summary.sections !== 5 || summary.featureFilms !== 1 || summary.demoRows !== 3) throw new Error(`Structure mismatch at ${viewport.width}: ${JSON.stringify(summary)}`);
   if (summary.iframes !== 0) throw new Error(`YouTube loaded before interaction at ${viewport.width}`);

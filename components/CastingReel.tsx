@@ -38,7 +38,7 @@ export default function CastingReel() {
       <article className="feature-film" data-feature-film={FEATURE_FILM.id}>
         <div className="feature-heading">
           <div>
-            <p className="kicker kicker-light"><span className="signal-dot" />ORIGINAL ANIMATION / 01</p>
+            <p className="kicker kicker-light"><span className="signal-dot" />ORIGINAL ANIMATION</p>
             <h2>{FEATURE_FILM.title}</h2>
             <p className="feature-subtitle">{FEATURE_FILM.subtitle}</p>
           </div>
@@ -76,7 +76,7 @@ export function TechnicalDemoIndex() {
   return (
     <section className="demo-index section-shell" aria-labelledby="demo-title">
       <div className="demo-intro">
-        <p className="kicker kicker-light"><span className="signal-dot" />TECHNICAL DEMOS / 03</p>
+        <p className="kicker kicker-light"><span className="signal-dot" />TECHNICAL DEMOS</p>
         <h2 id="demo-title">THREE TESTS.<br />THREE PRODUCTION PROBLEMS.</h2>
         <p>Each demo tests a different part of the path from source material to finished motion.</p>
       </div>

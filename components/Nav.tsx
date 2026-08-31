@@ -13,7 +13,6 @@ export default function Nav() {
       <nav aria-label="Primary navigation">
         {LINKS.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
       </nav>
-      <span className="nav-status" aria-hidden="true">SEOUL / 2026</span>
     </header>
   );
 }
