@@ -24,9 +24,12 @@ check(/GTO: 파라다이스 로스트/.test(html), "GTO Korean title is missing"
 check(/MORPIO THESIS/i.test(html), "Morpio thesis is missing");
 check(!/why-sequence|why-row|MORPIO \/ FRAME/i.test(html), "thesis must not contain artwork frames");
 check(/MORPIO TECHNOLOGY/i.test(html), "technology section is missing");
-check(/class="system-diagram"/.test(html), "technology system diagram is missing");
+check(/class="system-diagram engine-drawing"/.test(html), "technology system diagram is missing");
+for (const stage of ["SOURCE", "CHARACTER", "KEY-SHOT", "VIDEO", "AI SOUND", "HUMAN-LED"]) check(html.includes(stage), `production stage ${stage} is missing`);
+for (const control of ["STYLE BIBLE", "MODEL ROUTING", "VERSION CONTROL", "SCENE-CONSISTENCY REVIEW", "QUALITY GATES"]) check(html.includes(control), `central control ${control} is missing`);
+check(/5\+/.test(html) && /SPECIALIZED/.test(html), "5+ specialized AI model claim is missing");
 check(!/process-visual|process-mobile-frame/i.test(html), "technology section must not contain production stills");
-check(/HUMANS DECIDE[\s\S]*?SYSTEMS REPEAT/i.test(html), "production principle is missing");
+check(/ONE ENGINE[\s\S]*?EVERY FRAME/i.test(html), "production engine principle is missing");
 check(/powered by Hashed/i.test(html), "studio context is missing");
 check(/hello@morpio\.com/i.test(html), "contact email is missing");
 check(/aria-label="Pause hero film"|aria-label="Play hero film"/.test(html), "hero playback control is missing");
