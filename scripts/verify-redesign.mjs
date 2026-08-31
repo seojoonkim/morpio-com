@@ -12,6 +12,7 @@ check(/id="work"/.test(html), "work section is missing");
 check(/id="system"/.test(html), "production system is missing");
 check(/id="team"/.test(html), "team section is missing");
 check(/id="contact"/.test(html), "contact section is missing");
+check(html.indexOf('href="#why"') < html.indexOf('href="#work"') && html.indexOf('href="#work"') < html.indexOf('href="#system"') && html.indexOf('href="#system"') < html.indexOf('href="#team"'), "navigation order does not match page order");
 check(count(/data-reel-id=/g) === 4, `expected 4 selected works, found ${count(/data-reel-id=/g)}`);
 check(count(/ORIGINAL ANIMATION/g) >= 1, "original animation label is missing");
 check(count(/TECHNICAL DEMO/g) >= 3, "technical demo labels are missing");
