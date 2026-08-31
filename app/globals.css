@@ -346,7 +346,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .site-nav {
   color: white;
   border-color: rgba(255,255,255,.16);
-  background: linear-gradient(180deg, rgba(9,10,12,.78), transparent);
+  background: #090a0c;
   backdrop-filter: none;
   transition: transform .28s var(--ease), background .28s ease;
 }
@@ -434,13 +434,28 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .process-heading p:last-child { max-width:500px; color:#59606a; font-size:18px; }
 .process-layout { display:grid; grid-template-columns:minmax(320px,.72fr) minmax(0,1.28fr); gap:7vw; align-items:start; }
 .process-list { position:sticky; top:100px; border-top:1px solid var(--ink); }
-.process-list article { min-height:112px; padding:24px 0; display:grid; grid-template-columns:48px 1fr; border-bottom:1px solid var(--ink); }
+.process-list article { min-height:0; display:block; border-bottom:1px solid var(--ink); }
+.process-list button {
+  width:100%;
+  padding:24px 0;
+  display:grid;
+  grid-template-columns:48px minmax(0,1fr);
+  align-items:start;
+  border:0;
+  background:transparent;
+  color:inherit;
+  text-align:left;
+  cursor:pointer;
+}
 .process-list span { color:var(--sky); font:600 11px "Geist Mono",monospace; }
-.process-list h3 { margin:0; font:700 27px/1 "Bricolage Grotesque",sans-serif; }
-.process-list p { grid-column:2; margin:10px 0 0; color:#59606a; line-height:1.5; }
-.process-visual { position:sticky; top:100px; min-height:620px; }
-.process-visual img { width:100%; height:620px; object-fit:cover; }
-.process-mobile-frame { display:none; }
+.process-list strong { margin:0; font:700 27px/1 "Bricolage Grotesque",sans-serif; }
+.process-list p { grid-column:2; margin:10px 0 0; color:#59606a; line-height:1.5; overflow-wrap:normal; word-break:normal; }
+.process-visual { position:sticky; top:100px; min-height:620px; margin:0; overflow:hidden; background:#111318; }
+.process-visual img { position:absolute; inset:0; width:100%; height:620px; object-fit:cover; opacity:0; transition:opacity .25s ease; }
+.process-visual img.is-active { opacity:1; }
+.process-visual figcaption { position:absolute; z-index:2; left:0; right:0; bottom:0; padding:18px 20px; display:flex; justify-content:space-between; gap:24px; background:rgba(9,10,12,.82); color:white; font:600 10px/1.2 "Geist Mono",monospace; letter-spacing:.07em; }
+.process-mobile-frame { display:none; overflow:hidden; }
+.process-mobile-frame img { display:block; width:100%; height:100%; object-fit:cover; }
 
 .studio { padding-top:clamp(92px,9vw,132px); padding-bottom:clamp(92px,9vw,132px); display:grid; grid-template-columns:1.5fr .7fr; gap:8vw; background:white; }
 .studio h2 { margin:18px 0 0; max-width:13ch; font:700 clamp(54px,7vw,108px)/.88 "Bricolage Grotesque",sans-serif; letter-spacing:-.05em; }
