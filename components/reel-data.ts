@@ -1,65 +1,57 @@
 export type ReelVariant = {
-  label: string;
+  label: "KO" | "EN" | "JP";
   videoId: string;
 };
 
-export type ReelItem = {
+export type FeatureFilm = {
   id: string;
-  index: string;
   title: string;
-  subtitle?: string;
-  categoryLabel: string;
-  colorA: string;
-  colorB: string;
-  portrait?: boolean;
+  subtitle: string;
   variants: ReelVariant[];
 };
 
-export const REEL_ITEMS: ReelItem[] = [
-  {
-    id: "after-the-tail-stopped",
-    index: "01",
-    title: "尻尾が止まったあとも",
-    subtitle: "꼬리가 멈춘 뒤에",
-    categoryLabel: "ORIGINAL ANIMATION",
-    colorA: "#1B3AA0",
-    colorB: "#F5C451",
-    variants: [
-      { label: "한국어 자막", videoId: "31Jm1Z2fnek" },
-      { label: "ENGLISH SUBTITLES", videoId: "vVmnsDeSwhE" },
-      { label: "日本語", videoId: "tHjjSmaGcos" },
-    ],
-  },
+export type DemoFilm = {
+  id: string;
+  index: string;
+  title: string;
+  subtitle: string;
+  videoId: string;
+  portrait?: boolean;
+};
+
+export const FEATURE_FILM: FeatureFilm = {
+  id: "after-the-tail-stopped",
+  title: "尻尾が止まったあとも",
+  subtitle: "꼬리가 멈춘 뒤에",
+  variants: [
+    { label: "KO", videoId: "31Jm1Z2fnek" },
+    { label: "EN", videoId: "vVmnsDeSwhE" },
+    { label: "JP", videoId: "tHjjSmaGcos" },
+  ],
+};
+
+export const DEMO_FILMS: DemoFilm[] = [
   {
     id: "apple-of-creation",
-    index: "02",
+    index: "01",
     title: "創造のリンゴ",
     subtitle: "창조의 사과",
-    categoryLabel: "TECHNICAL DEMO",
-    colorA: "#14503C",
-    colorB: "#FF6B4A",
+    videoId: "Ff3HrDGiFsw",
     portrait: true,
-    variants: [{ label: "WATCH", videoId: "Ff3HrDGiFsw" }],
   },
   {
     id: "gto-paradise-lost",
-    index: "03",
+    index: "02",
     title: "GTO: PARADISE LOST",
     subtitle: "GTO: 파라다이스 로스트",
-    categoryLabel: "TECHNICAL DEMO",
-    colorA: "#6E1B2E",
-    colorB: "#7FC8E8",
+    videoId: "zUvo4r_AyoU",
     portrait: true,
-    variants: [{ label: "WATCH", videoId: "zUvo4r_AyoU" }],
   },
   {
     id: "agent-kim-reactivated",
-    index: "04",
+    index: "03",
     title: "AGENT KIM REACTIVATED",
     subtitle: "김부장",
-    categoryLabel: "TECHNICAL DEMO",
-    colorA: "#3B2340",
-    colorB: "#79E0B4",
-    variants: [{ label: "WATCH", videoId: "tOaoUyxOLT0" }],
+    videoId: "tOaoUyxOLT0",
   },
 ];

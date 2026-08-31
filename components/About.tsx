@@ -1,15 +1,14 @@
 export default function About() {
   return (
-    <section id="team" className="about section-shell">
-      <div className="section-intro">
-        <p className="kicker"><span className="signal-dot" />04 · THE TEAM · SEOUL</p>
-        <h2>STORY PEOPLE<br />AND BUILDERS.</h2>
+    <section id="studio" className="studio section-shell" aria-labelledby="studio-title">
+      <div>
+        <p className="kicker"><span className="signal-dot" />THE STUDIO / SEOUL</p>
+        <h2 id="studio-title">ONE TEAM.<br />FIRST DRAFT TO<br />FINAL FRAME.</h2>
       </div>
-      <div className="about-copy">
-        <p>Morpio is an AI media lab in Seoul, powered by Hashed.</p>
-        <p>The team works across story, visual development, animation, and production engineering. We build our tools and films together, so technology follows the creative direction.</p>
-        <p>Every project starts with the same question: what will make people care?</p>
-        <a className="text-link" href="#contact">Get in touch <span>↘</span></a>
+      <div className="studio-copy">
+        <p>Morpio is an AI media lab in Seoul, <strong>powered by Hashed.</strong></p>
+        <p>We keep story and creative direction in human hands, and build systems for everything that repeats.</p>
+        <a href="#contact">START A CONVERSATION <span>↘</span></a>
       </div>
     </section>
   );

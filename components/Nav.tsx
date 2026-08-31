@@ -1,8 +1,9 @@
 const LINKS = [
-  { label: "Why", href: "#why" },
   { label: "Work", href: "#work" },
+  { label: "Why", href: "#why" },
   { label: "System", href: "#system" },
-  { label: "Team", href: "#team" },
+  { label: "Studio", href: "#studio" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Nav() {
@@ -12,7 +13,7 @@ export default function Nav() {
       <nav aria-label="Primary navigation">
         {LINKS.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
       </nav>
-      <a className="nav-contact" href="#contact">Get in touch <span>↗</span></a>
+      <span className="nav-status" aria-hidden="true">SEOUL / 2026</span>
     </header>
   );
 }

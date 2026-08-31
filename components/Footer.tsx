@@ -1,1 +1,9 @@
-export default function Footer(){return <footer className="footer section-shell"><a className="footer-logo" href="#top">morpio<span>.</span></a><div><p>AI MEDIA LAB · POWERED BY HASHED</p><a href="mailto:hello@morpio.com">hello@morpio.com</a></div><div><p>SEOUL, KOREA</p><p>© {new Date().getFullYear()} MORPIO</p></div></footer>}
+export default function Footer() {
+  return (
+    <footer className="footer section-shell">
+      <a className="footer-logo" href="#top">morpio<span>.</span></a>
+      <p>ORIGINAL ANIMATION / TECHNICAL DEMOS</p>
+      <p>SEOUL, KOREA<br />© {new Date().getFullYear()} MORPIO</p>
+    </footer>
+  );
+}

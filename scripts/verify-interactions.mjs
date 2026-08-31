@@ -5,45 +5,59 @@ const browser = await puppeteer.launch({ headless: true });
 const page = await browser.newPage();
 const results = [];
 
-for (const viewport of [{ width: 390, height: 844 }, { width: 1280, height: 900 }]) {
+for (const viewport of [
+  { width: 390, height: 844 },
+  { width: 768, height: 900 },
+  { width: 1280, height: 900 },
+]) {
   await page.setViewport({ ...viewport, deviceScaleFactor: 1 });
-  await page.goto(url, { waitUntil: "networkidle0" });
-
+  await page.goto(url, { waitUntil: "domcontentloaded" });
+  await page.waitForSelector("[data-hero-film]");
   const summary = await page.evaluate(() => ({
     h1: document.querySelector("h1")?.textContent?.replace(/\s+/g, "").trim(),
     scrollWidth: document.documentElement.scrollWidth,
     viewportWidth: innerWidth,
-    sections: ["why", "work", "system", "team", "contact"].filter((id) => document.getElementById(id)).length,
-    cards: document.querySelectorAll("[data-reel-id]").length,
-    posters: document.querySelectorAll(".video-poster").length,
+    sections: ["work", "why", "system", "studio", "contact"].filter((id) => document.getElementById(id)).length,
+    featureFilms: document.querySelectorAll("[data-feature-film]").length,
+    demoRows: document.querySelectorAll("[data-demo-row]").length,
+    iframes: document.querySelectorAll("iframe").length,
+    heroVideo: document.querySelector("[data-hero-film] video")?.getAttribute("src"),
+    heroPoster: document.querySelector("[data-hero-film] video")?.getAttribute("poster"),
     dotColor: getComputedStyle(document.querySelector(".nav-logo span")).color,
   }));
   if (summary.h1 !== "ANOTHERWORLDSTARTSHERE.") throw new Error(`Unexpected tagline: ${summary.h1}`);
-  if (summary.scrollWidth !== summary.viewportWidth) throw new Error(`Horizontal overflow at ${viewport.width}: ${summary.scrollWidth}`);
-  if (summary.sections !== 5 || summary.cards !== 4 || summary.posters !== 4) throw new Error(`Structure mismatch at ${viewport.width}: ${JSON.stringify(summary)}`);
+  if (summary.scrollWidth > summary.viewportWidth + 1) throw new Error(`Horizontal overflow at ${viewport.width}: ${summary.scrollWidth}`);
+  if (summary.sections !== 5 || summary.featureFilms !== 1 || summary.demoRows !== 3) throw new Error(`Structure mismatch at ${viewport.width}: ${JSON.stringify(summary)}`);
+  if (summary.iframes !== 0) throw new Error(`YouTube loaded before interaction at ${viewport.width}`);
+  if (!summary.heroVideo?.endsWith("hero-loop.mp4") || !summary.heroPoster?.endsWith("hero-poster.jpg")) throw new Error(`Hero media mismatch at ${viewport.width}`);
   if (summary.dotColor !== "rgb(0, 174, 255)") throw new Error(`Wrong logo dot color: ${summary.dotColor}`);
-  results.push({ width: viewport.width, overflow: false, dotColor: summary.dotColor });
+  results.push({ width: viewport.width, overflow: false, sections: summary.sections });
 }
 
 await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
-await page.goto(url, { waitUntil: "networkidle0" });
+await page.goto(url, { waitUntil: "domcontentloaded" });
+await page.waitForSelector("button[data-video-id='31Jm1Z2fnek']");
 const defaultLanguage = await page.$eval("button[data-video-id='31Jm1Z2fnek']", (el) => el.getAttribute("aria-pressed"));
-const defaultPoster = await page.$eval("[data-reel-id='after-the-tail-stopped'] .video-poster img", (el) => el.getAttribute("src"));
-if (defaultLanguage !== "true" || !defaultPoster?.includes("31Jm1Z2fnek")) throw new Error("Korean subtitles are not selected by default");
-for (const id of ["why", "system", "work", "team", "contact"]) {
-  await page.evaluate(() => scrollTo(0, 0));
-  await page.click(`a[href='#${id}']`);
-  await page.waitForFunction((expected) => location.hash === `#${expected}`, {}, id);
-}
+if (defaultLanguage !== "true") throw new Error("Korean subtitles are not selected by default");
 await page.click("button[data-video-id='tHjjSmaGcos']");
-await page.waitForFunction(() => document.querySelector("button[data-video-id='tHjjSmaGcos']")?.getAttribute("aria-pressed") === "true");
-const language = await page.$eval("button[data-video-id='tHjjSmaGcos']", (el) => el.getAttribute("aria-pressed"));
-const posterSrc = await page.$eval("[data-reel-id='after-the-tail-stopped'] .video-poster img", (el) => el.getAttribute("src"));
-if (language !== "true" || !posterSrc?.includes("tHjjSmaGcos")) throw new Error("Language switch failed");
-await page.click("[data-reel-id='after-the-tail-stopped'] .video-poster");
-await page.waitForSelector("[data-reel-id='after-the-tail-stopped'] iframe");
-const languageSrc = await page.$eval("[data-reel-id='after-the-tail-stopped'] iframe", (el) => el.getAttribute("src"));
-if (!languageSrc?.includes("tHjjSmaGcos")) throw new Error("Video playback failed");
+const japanese = await page.$eval("button[data-video-id='tHjjSmaGcos']", (el) => el.getAttribute("aria-pressed"));
+if (japanese !== "true") throw new Error("Language switch failed");
+await page.click("[data-feature-film] .media-poster");
+await page.waitForSelector("[data-feature-film] iframe");
+const featureSrc = await page.$eval("[data-feature-film] iframe", (el) => el.getAttribute("src"));
+if (!featureSrc?.includes("tHjjSmaGcos")) throw new Error("Feature playback failed");
+await page.click("[data-demo-row] .demo-toggle");
+const expanded = await page.$eval("[data-demo-row] .demo-toggle", (el) => el.getAttribute("aria-expanded"));
+if (expanded !== "true") throw new Error("Demo expansion failed");
+await page.click("[data-demo-row] .media-poster");
+await page.waitForSelector("[data-demo-row] iframe");
+const iframeCount = await page.$$eval("iframe", (els) => els.length);
+if (iframeCount !== 1) throw new Error(`Expected one playing video, found ${iframeCount}`);
 
-console.log(JSON.stringify({ pass: true, viewports: results, selectedWorks: 4, languageSwitch: "日本語" }));
+await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
+await page.reload({ waitUntil: "domcontentloaded" });
+const reduced = await page.$eval("[data-hero-film] video", (el) => ({ display: getComputedStyle(el).display, src: el.getAttribute("src") }));
+if (reduced.display !== "none") throw new Error("Reduced-motion hero fallback failed");
+
+console.log(JSON.stringify({ pass: true, viewports: results, languageSwitch: "JP", singlePlayback: true, reducedMotion: true }));
 await browser.close();

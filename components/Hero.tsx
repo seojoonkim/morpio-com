@@ -1,26 +1,87 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(true);
+  const [motionAllowed, setMotionAllowed] = useState(true);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    if (reduced || saveData) {
+      video.pause();
+      setPlaying(false);
+      setMotionAllowed(false);
+      return;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && document.visibilityState === "visible") {
+        video.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+      } else {
+        video.pause();
+        setPlaying(false);
+      }
+    }, { threshold: 0.2 });
+
+    const onVisibility = () => {
+      if (document.hidden) {
+        video.pause();
+        setPlaying(false);
+      }
+    };
+
+    observer.observe(video);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, []);
+
+  const togglePlayback = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+    } else {
+      video.pause();
+      setPlaying(false);
+    }
+  };
+
   return (
-    <section id="top" className="hero section-shell">
+    <section id="top" className="hero" data-hero-film>
+      <video
+        ref={videoRef}
+        className="hero-film"
+        src={motionAllowed ? "/media/hero/hero-loop.mp4" : undefined}
+        poster="/media/hero/hero-poster.jpg"
+        muted
+        playsInline
+        loop
+        autoPlay
+        preload="metadata"
+        aria-hidden="true"
+      />
+      <div className="hero-wash" />
+      <div className="hero-state">MORPIO / SEOUL</div>
       <div className="hero-copy">
-        <p className="kicker"><span className="signal-dot" />AI MEDIA LAB · SEOUL</p>
+        <p className="kicker kicker-light"><span className="signal-dot" />MORPIO / ANIMATION STUDIO</p>
         <h1>ANOTHER WORLD<br />STARTS HERE<span>.</span></h1>
-        <p className="hero-deck">Morpio makes original animation with AI-assisted visual development and repeatable production systems, so more good stories reach the screen.</p>
-        <div className="hero-actions">
-          <a className="button button-primary" href="#work">View selected work <span>↓</span></a>
-          <a className="text-link" href="#why">Why Morpio <span>↘</span></a>
-        </div>
+        <p>We make original animation with human direction and AI-assisted production, so more stories reach the screen.</p>
       </div>
-      <div className="hero-visual">
-        <a className="hero-frame" href="#work" aria-label="View 尻尾が止まったあとも in selected work">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/work/tail-stopped.jpg" alt="Still from 尻尾が止まったあとも" />
-        </a>
-        <a className="frame-meta" href="#work"><span>ORIGINAL ANIMATION</span><span>VIEW WORK ↘</span></a>
-      </div>
-      <div className="hero-meta">
-        <span>POWERED BY HASHED</span>
-        <span>ORIGINAL ANIMATION · TECHNICAL DEMOS</span>
-        <span>SEOUL · 2026</span>
+      <div className="hero-controls">
+        <a href="#work">WATCH THE FILM <span>↓</span></a>
+        <button type="button" onClick={togglePlayback} aria-label={playing ? "Pause hero film" : "Play hero film"}>
+          <span aria-hidden="true">{playing ? "Ⅱ" : "▶"}</span>
+          {playing ? "PAUSE" : "PLAY"}
+        </button>
       </div>
     </section>
   );

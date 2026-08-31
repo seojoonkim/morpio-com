@@ -1,74 +1,115 @@
 "use client";
 
-import { useState } from "react";
-import { REEL_ITEMS, type ReelItem } from "./reel-data";
+import { useEffect, useState } from "react";
+import { DEMO_FILMS, FEATURE_FILM } from "./reel-data";
 
-function ReelCard({ item }: { item: ReelItem }) {
-  const [activeVideoId, setActiveVideoId] = useState(item.variants[0].videoId);
-  const [playing, setPlaying] = useState(false);
-  const activeVariant = item.variants.find((variant) => variant.videoId === activeVideoId)!;
+const PLAY_EVENT = "morpio:media-play";
+const embedUrl = (videoId: string) => `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+const thumbUrl = (videoId: string, portrait = false) => `https://i.ytimg.com/vi/${videoId}/${portrait ? "oar2.jpg" : "maxresdefault.jpg"}`;
 
-  const selectVariant = (videoId: string) => {
-    setActiveVideoId(videoId);
-    setPlaying(false);
+function useSinglePlayback(owner: string) {
+  const [playing, setPlaying] = useState<string | null>(null);
+  useEffect(() => {
+    const stopOther = (event: Event) => {
+      if ((event as CustomEvent<string>).detail !== owner) setPlaying(null);
+    };
+    window.addEventListener(PLAY_EVENT, stopOther);
+    return () => window.removeEventListener(PLAY_EVENT, stopOther);
+  }, [owner]);
+  const play = (key: string) => {
+    window.dispatchEvent(new CustomEvent(PLAY_EVENT, { detail: owner }));
+    setPlaying(key);
   };
-
-  return (
-    <article className="reel-card" data-reel-id={item.id}>
-      <div className="reel-media">
-        {playing ? (
-          <iframe
-            key={activeVideoId}
-            src={`https://www.youtube-nocookie.com/embed/${activeVideoId}?autoplay=1&rel=0&modestbranding=1`}
-            title={`${item.title} · ${activeVariant.label}`}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          />
-        ) : (
-          <button className={`video-poster${item.portrait ? " portrait-poster" : ""}`} type="button" onClick={() => setPlaying(true)} aria-label={`Play ${item.title}`}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`https://i.ytimg.com/vi/${activeVideoId}/${item.portrait ? "oar2.jpg" : "maxresdefault.jpg"}`} alt="" />
-            <span className="play-button" aria-hidden="true">▶</span>
-            <span className="play-label">PLAY FILM</span>
-          </button>
-        )}
-      </div>
-      <div className="reel-caption">
-        <div className="reel-label"><span>{item.index}</span><p>{item.categoryLabel}</p></div>
-        <h3>{item.title}</h3>
-        {item.subtitle && <p className="reel-subtitle">{item.subtitle}</p>}
-        {item.variants.length > 1 && (
-          <div className="language-switcher" aria-label={`${item.title} language`}>
-            {item.variants.map((variant) => (
-              <button
-                key={variant.videoId}
-                type="button"
-                data-video-id={variant.videoId}
-                aria-pressed={activeVideoId === variant.videoId}
-                onClick={() => selectVariant(variant.videoId)}
-              >
-                {variant.label}
-              </button>
-            ))}
-          </div>
-        )}
-        <button className={`watch-film${item.variants.length === 1 ? " single" : ""}`} type="button" onClick={() => setPlaying(true)}>Play film <span>↗</span></button>
-      </div>
-    </article>
-  );
+  return { playing, play, stop: () => setPlaying(null) };
 }
 
 export default function CastingReel() {
+  const [variantId, setVariantId] = useState(FEATURE_FILM.variants[0].videoId);
+  const { playing, play, stop } = useSinglePlayback("feature");
+  const variant = FEATURE_FILM.variants.find((item) => item.videoId === variantId)!;
+
+  const selectVariant = (videoId: string) => {
+    setVariantId(videoId);
+    stop();
+  };
+
   return (
     <section id="work" className="work-section section-shell">
-      <div className="section-heading work-heading">
-        <p className="kicker"><span className="signal-dot" />02 · SELECTED WORK</p>
-        <h2>STORIES FROM<br />ANOTHER WORLD.</h2>
-        <p>One original animation and three technical demos.</p>
+      <article className="feature-film" data-feature-film={FEATURE_FILM.id}>
+        <div className="feature-heading">
+          <div>
+            <p className="kicker kicker-light"><span className="signal-dot" />ORIGINAL ANIMATION / 01</p>
+            <h2>{FEATURE_FILM.title}</h2>
+            <p className="feature-subtitle">{FEATURE_FILM.subtitle}</p>
+          </div>
+          <p className="feature-description">An original short written, directed, and finished by Morpio. Watch in Korean, English, or Japanese.</p>
+        </div>
+        <div className="feature-media media-frame">
+          {playing === "feature" ? (
+            <iframe src={embedUrl(variantId)} title={`${FEATURE_FILM.title} · ${variant.label}`} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />
+          ) : (
+            <button type="button" className="media-poster" onClick={() => play("feature")} aria-label={`Play ${FEATURE_FILM.title} in ${variant.label}`}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={variantId === FEATURE_FILM.variants[0].videoId ? "/work/tail-stopped.jpg" : thumbUrl(variantId)} alt="" />
+              <span className="round-play" aria-hidden="true">▶</span>
+              <span className="poster-caption">PLAY ORIGINAL FILM</span>
+            </button>
+          )}
+        </div>
+        <div className="feature-meta">
+          <div className="language-switcher" aria-label="Film language">
+            {FEATURE_FILM.variants.map((item) => (
+              <button key={item.videoId} type="button" data-video-id={item.videoId} aria-pressed={variantId === item.videoId} onClick={() => selectVariant(item.videoId)}>{item.label}</button>
+            ))}
+          </div>
+          <span>KO DEFAULT / CLICK TO LOAD VIDEO</span>
+        </div>
+      </article>
+    </section>
+  );
+}
+
+export function TechnicalDemoIndex() {
+  const [expandedDemo, setExpandedDemo] = useState<string | null>(null);
+  const { playing, play, stop } = useSinglePlayback("demos");
+
+  return (
+    <section className="demo-index section-shell" aria-labelledby="demo-title">
+      <div className="demo-intro">
+        <p className="kicker kicker-light"><span className="signal-dot" />TECHNICAL DEMOS / 03</p>
+        <h2 id="demo-title">THREE TESTS.<br />THREE PRODUCTION PROBLEMS.</h2>
+        <p>Each demo tests a different part of the path from source material to finished motion.</p>
       </div>
-      <div className="reel-grid">
-        {REEL_ITEMS.map((item) => <ReelCard item={item} key={item.id} />)}
+      <div className="demo-rows">
+        {DEMO_FILMS.map((demo) => {
+          const expanded = expandedDemo === demo.id;
+          const isPlaying = playing === demo.id;
+          return (
+            <article className={`demo-row${expanded ? " is-expanded" : ""}`} data-demo-row={demo.id} key={demo.id}>
+              <button className="demo-toggle" type="button" aria-expanded={expanded} aria-controls={`${demo.id}-media`} onClick={() => { setExpandedDemo(expanded ? null : demo.id); stop(); }}>
+                <span className="demo-number">{demo.index}</span>
+                <span className="demo-name"><strong>{demo.title}</strong><small>{demo.subtitle}</small></span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={thumbUrl(demo.videoId, demo.portrait)} alt="" />
+                <span className="demo-action">{expanded ? "CLOSE" : "OPEN"} <i aria-hidden="true">↘</i></span>
+              </button>
+              {expanded && (
+                <div className="demo-media media-frame" id={`${demo.id}-media`}>
+                  {isPlaying ? (
+                    <iframe src={embedUrl(demo.videoId)} title={demo.title} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />
+                  ) : (
+                    <button className="media-poster" type="button" onClick={() => play(demo.id)} aria-label={`Play ${demo.title}`}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={thumbUrl(demo.videoId, demo.portrait)} alt="" />
+                      <span className="round-play" aria-hidden="true">▶</span>
+                      <span className="poster-caption">PLAY TECHNICAL DEMO</span>
+                    </button>
+                  )}
+                </div>
+              )}
+            </article>
+          );
+        })}
       </div>
     </section>
   );

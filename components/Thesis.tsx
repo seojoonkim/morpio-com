@@ -1,23 +1,44 @@
+import Reveal from "./Reveal";
+
 const POINTS = [
-  ["01", "A GLOBAL AUDIENCE", "Animation travels. A strong story can cross languages, formats, and borders, and find an audience far from where it was made."],
-  ["02", "TOO FEW GET MADE", "Most promising stories never reach production. Animation is slow, expensive, and depends on many specialists staying in sync."],
-  ["03", "A SHORTER PATH", "Morpio uses AI-assisted visual development and repeatable production systems to lower those barriers. People keep story and creative direction."],
+  {
+    number: "01",
+    text: "Animation is slow, expensive, and hard to coordinate.",
+    image: "/work/tail-stopped.jpg",
+    alt: "Still from the Morpio original animation 꼬리가 멈춘 뒤에",
+  },
+  {
+    number: "02",
+    text: "So most promising stories never survive production.",
+    image: "https://i.ytimg.com/vi/Ff3HrDGiFsw/oar2.jpg",
+    alt: "Still from the technical demo 창조의 사과",
+  },
+  {
+    number: "03",
+    text: "We treat that as a production problem, not a story problem.",
+    image: "https://i.ytimg.com/vi/zUvo4r_AyoU/oar2.jpg",
+    alt: "Still from GTO: 파라다이스 로스트",
+  },
 ];
 
 export default function Thesis() {
   return (
-    <section id="why" className="thesis section-shell" aria-labelledby="thesis-title">
-      <div className="section-intro">
-        <p className="kicker"><span className="signal-dot" />01 · WHY MORPIO</p>
-        <h2 id="thesis-title">MORE STORIES<br />SHOULD REACH<br />THE SCREEN.</h2>
-      </div>
-      <div className="thesis-list">
-        {POINTS.map(([number, title, text]) => (
-          <article key={number}>
-            <span>{number}</span>
-            <h3>{title}</h3>
-            <p>{text}</p>
-          </article>
+    <section id="why" className="why-section section-shell" aria-labelledby="why-title">
+      <header className="why-header">
+        <p className="kicker"><span className="signal-dot" />WHY WE EXIST</p>
+        <h2 id="why-title">MORE STORIES SHOULD<br />REACH THE SCREEN.</h2>
+        <p>People everywhere watch animation. Far fewer stories ever become it.</p>
+      </header>
+      <div className="why-sequence">
+        {POINTS.map((point) => (
+          <Reveal className="why-row" key={point.number}>
+            <div className="why-statement"><span>{point.number}</span><h3>{point.text}</h3></div>
+            <figure>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={point.image} alt={point.alt} />
+              <figcaption>MORPIO / FRAME {point.number}</figcaption>
+            </figure>
+          </Reveal>
         ))}
       </div>
     </section>

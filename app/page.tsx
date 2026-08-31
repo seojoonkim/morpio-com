@@ -1,6 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import CastingReel from "@/components/CastingReel";
+import CastingReel, { TechnicalDemoIndex } from "@/components/CastingReel";
 import Thesis from "@/components/Thesis";
 import Process from "@/components/Process";
 import About from "@/components/About";
@@ -12,8 +12,9 @@ export default function Page() {
     <Nav />
     <main>
       <Hero />
-      <Thesis />
       <CastingReel />
+      <Thesis />
+      <TechnicalDemoIndex />
       <Process />
       <About />
       <CtaBanner />
