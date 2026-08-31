@@ -8,7 +8,7 @@ const check = (condition, message) => {
 };
 
 check(response.ok, `homepage returned HTTP ${response.status}`);
-check(/<h1[^>]*>[\s\S]*?(CAST|TOMORROW)[\s\S]*?<\/h1>/i.test(html), "casting hero is missing");
+check(/<h1[^>]*>[\s\S]*?ANOTHER WORLD[\s\S]*?STARTS HERE[\s\S]*?<\/h1>/i.test(html), "hero tagline is missing");
 check(count(/data-morph-mode=/g) === 3, `expected 3 morph controls, found ${count(/data-morph-mode=/g)}`);
 check(count(/<video\b/g) === 6, `expected 6 portfolio videos, found ${count(/<video\b/g)}`);
 check(count(/data-category="animation"/g) === 2, "expected 2 animation videos");
@@ -19,6 +19,7 @@ check(/id="work"/.test(html), "work section is missing");
 check(/id="morph"/.test(html), "morph section is missing");
 check(/href="#work"/.test(html), "work navigation is missing");
 check(/href="#contact"/.test(html), "contact navigation is missing");
+check(/href="#morph"/.test(html), "hero cast button is missing");
 
 if (failures.length) {
   console.error(failures.map((failure) => `FAIL: ${failure}`).join("\n"));

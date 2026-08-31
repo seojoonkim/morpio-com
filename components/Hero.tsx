@@ -2,7 +2,7 @@ export default function Hero() {
   return <section id="top" className="hero section-shell">
     <div className="hero-copy">
       <p className="kicker"><span className="signal-dot" /> AI MEDIA LAB · SEOUL</p>
-      <h1>MEET THE CAST<br />OF TOMORROW.</h1>
+      <h1>ANOTHER WORLD<br />STARTS HERE.</h1>
       <p className="hero-deck">Morpio is an AI media lab incubated by Hashed. We build characters, then we make them famous.</p>
       <div className="hero-actions">
         <a className="button button-ink" href="#morph">Meet the cast</a>
