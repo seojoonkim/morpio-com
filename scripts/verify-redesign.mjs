@@ -10,11 +10,10 @@ const check = (condition, message) => {
 check(response.ok, `homepage returned HTTP ${response.status}`);
 check(/<h1[^>]*>[\s\S]*?ANOTHER WORLD[\s\S]*?STARTS HERE[\s\S]*?<\/h1>/i.test(html), "hero tagline is missing");
 check(count(/data-morph-mode=/g) === 3, `expected 3 morph controls, found ${count(/data-morph-mode=/g)}`);
-check(count(/<video\b/g) === 6, `expected 6 portfolio videos, found ${count(/<video\b/g)}`);
-check(count(/data-category="animation"/g) === 2, "expected 2 animation videos");
-check(count(/data-category="virtual-celebrity"/g) === 2, "expected 2 virtual celebrity videos");
-check(count(/data-category="ai-advertising"/g) === 2, "expected 2 AI advertising videos");
-check(count(/<video[^>]+src="[^"]+\.mp4"/g) === 6, "every portfolio card needs an MP4 source");
+check(count(/data-reel-id=/g) === 4, `expected 4 selected works, found ${count(/data-reel-id=/g)}`);
+check(count(/youtube-nocookie\.com\/embed\//g) === 4, `expected 4 YouTube embeds, found ${count(/youtube-nocookie\.com\/embed\//g)}`);
+check(count(/data-video-id=/g) === 3, `expected 3 language controls, found ${count(/data-video-id=/g)}`);
+check(!/PLACEHOLDER|sample-0[1-6]/i.test(html), "placeholder reels are still present");
 check(/id="work"/.test(html), "work section is missing");
 check(/id="morph"/.test(html), "morph section is missing");
 check(/href="#work"/.test(html), "work navigation is missing");
