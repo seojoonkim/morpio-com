@@ -1,9 +1,10 @@
 import puppeteer from "puppeteer";
 
+const url = process.env.MORPIO_URL || "http://127.0.0.1:3100";
 const browser = await puppeteer.launch({ headless: true });
 const page = await browser.newPage();
 await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
-await page.goto("http://127.0.0.1:3100", { waitUntil: "networkidle0" });
+await page.goto(url, { waitUntil: "networkidle0" });
 
 const h1 = await page.$eval("h1", (el) => el.textContent?.replace(/\s+/g, " ").trim());
 if (h1 !== "ANOTHER WORLDSTARTS HERE.") throw new Error(`Unexpected tagline: ${h1}`);
