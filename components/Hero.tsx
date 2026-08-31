@@ -73,7 +73,7 @@ export default function Hero() {
       <div className="hero-state">MORPIO / SEOUL</div>
       <div className="hero-copy">
         <p className="kicker kicker-light"><span className="signal-dot" />MORPIO / ANIMATION STUDIO</p>
-        <h1>ANOTHER WORLD<br />STARTS HERE<span className="hero-period" aria-hidden="true" /></h1>
+        <h1>ANOTHER WORLD<br /><span className="hero-last-line">STARTS HERE<span className="hero-period" aria-hidden="true" /></span></h1>
         <p>We make original animation with human direction and AI-assisted production, so more stories reach the screen.</p>
       </div>
       <div className="hero-controls">

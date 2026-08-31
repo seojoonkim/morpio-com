@@ -32,7 +32,7 @@ check(!/process-visual|process-mobile-frame/i.test(html), "technology section mu
 check(/ONE ENGINE[\s\S]*?EVERY FRAME/i.test(html), "production engine principle is missing");
 check(/powered by Hashed/i.test(html), "studio context is missing");
 check(/hello@morpio\.com/i.test(html), "contact email is missing");
-check(/class="hero-period"/.test(html), "hero period must be a geometric circle");
+check(/class="hero-last-line"[\s\S]*?class="hero-period"/.test(html), "hero period must stay attached to HERE");
 check(!/SEOUL \/ 2026|ORIGINAL ANIMATION \/ TECHNICAL DEMOS|ORIGINAL ANIMATION \/ 01|TECHNICAL DEMOS \/ 03/.test(html), "removed header/footer or section numbering text is present");
 check(/SEOUL, KOREA[\s\S]*?©/.test(html), "footer location and copyright line is missing");
 check(/aria-label="Pause hero film"|aria-label="Play hero film"/.test(html), "hero playback control is missing");
