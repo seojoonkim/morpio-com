@@ -1,20 +1,25 @@
 export default function Hero() {
-  return <section id="top" className="hero section-shell">
-    <div className="hero-copy">
-      <p className="kicker"><span className="signal-dot" /> AI MEDIA LAB · SEOUL</p>
-      <h1>ANOTHER WORLD<br />STARTS HERE.</h1>
-      <p className="hero-deck">Morpio is an AI media lab incubated by Hashed. We build characters, then we make them famous.</p>
-      <div className="hero-actions">
-        <a className="button button-ink" href="#morph">Meet the cast</a>
-        <a className="text-link" href="#work">See the work <span>↘</span></a>
+  return (
+    <section id="top" className="hero section-shell">
+      <div className="hero-copy">
+        <p className="kicker"><span className="signal-dot" />AI MEDIA LAB · SEOUL</p>
+        <h1>ANOTHER WORLD<br />STARTS HERE<span>.</span></h1>
+        <p className="hero-deck">Morpio makes original animation with AI-assisted visual development and repeatable production systems, so more good stories reach the screen.</p>
+        <div className="hero-actions">
+          <a className="button button-primary" href="#work">View selected work <span>↓</span></a>
+          <a className="text-link" href="#approach">How we work <span>↘</span></a>
+        </div>
       </div>
-    </div>
-    <div className="hero-portrait">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/gen/services/hero_v6.webp" alt="Colorful Morpio character study" />
-      <div className="portrait-label"><span>CAST 001</span><span>DEVELOPMENT FRAME</span></div>
-      <span className="sample-stamp">SAMPLE CAST</span>
-    </div>
-    <div className="call-sheet"><span>CASTING · 2026</span><span>SEOUL / REMOTE</span><span>INCUBATED BY HASHED</span></div>
-  </section>;
+      <a className="hero-frame" href="#work" aria-label="View 尻尾が止まったあとも in selected work">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/work/tail-stopped.jpg" alt="Still from 尻尾が止まったあとも" />
+        <div className="frame-meta"><span>ORIGINAL ANIMATION</span><strong>尻尾が止まったあとも</strong><span>VIEW WORK ↘</span></div>
+      </a>
+      <div className="hero-meta">
+        <span>INCUBATED BY HASHED</span>
+        <span>ORIGINAL ANIMATION · TECHNICAL DEMOS</span>
+        <span>SEOUL · 2026</span>
+      </div>
+    </section>
+  );
 }

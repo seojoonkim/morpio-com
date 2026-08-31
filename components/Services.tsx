@@ -1,6 +1,27 @@
-const SERVICES = [
-  { number: "01", title: "ANIMATION", text: "We adapt story worlds into animated formats built for screens, episodes, and expanding audiences.", image: "/gen/services/hero_v6.webp", color: "#f3b53f" },
-  { number: "02", title: "VIRTUAL CELEBRITY", text: "We develop digital characters with a visual identity, voice, persona, and repeatable content system.", image: "/gen/services/talent_v6.webp", color: "#76d8c4" },
-  { number: "03", title: "AI ADVERTISING", text: "We make campaign films and creative variants where technology serves the idea, not the other way around.", image: "/gen/services/ads_v6.webp", color: "#ff715b" },
+const APPROACH = [
+  { number: "01", title: "STORY AND DIRECTION", text: "Writers and directors decide what the work says and how it should feel. Every tool follows that decision.", code: "HUMAN / CORE" },
+  { number: "02", title: "AI-ASSISTED DEVELOPMENT", text: "We explore characters, worlds, and style frames quickly, so ideas can be seen and judged before production begins.", code: "EXPLORE / FAST" },
+  { number: "03", title: "REPEATABLE PRODUCTION", text: "We build consistent characters, reusable setups, and finished versions for more than one screen or language.", code: "SYSTEM / SCALE" },
 ];
-export default function Services() { return <section id="services" className="services section-shell"><div className="section-heading"><p className="kicker">WHAT WE MAKE</p><h2>BUILT TO MOVE<br />BETWEEN WORLDS.</h2></div><div className="service-grid">{SERVICES.map(s => <article key={s.number} style={{"--service-color":s.color} as React.CSSProperties}><div className="service-image"><img src={s.image} alt="" /><span>{s.number}</span></div><p className="service-label">DISCIPLINE {s.number}</p><h3>{s.title}</h3><p>{s.text}</p></article>)}</div></section>; }
+
+export default function Services() {
+  return (
+    <section id="approach" className="approach section-shell">
+      <div className="section-intro approach-intro">
+        <p className="kicker"><span className="signal-dot" />02 · OUR APPROACH</p>
+        <h2>DIRECTED BY PEOPLE.<br />BUILT ON SYSTEMS.</h2>
+        <p>Technology shortens the path to the screen. People decide what belongs there.</p>
+      </div>
+      <div className="approach-grid">
+        {APPROACH.map((item) => (
+          <article key={item.number}>
+            <div className="approach-code"><span>{item.number}</span><span>{item.code}</span></div>
+            <div className={`system-mark system-mark-${item.number}`} aria-hidden="true"><i /><i /><i /></div>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}

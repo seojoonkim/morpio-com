@@ -1,6 +1,5 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import MorphMachine from "@/components/MorphMachine";
 import Services from "@/components/Services";
 import CastingReel from "@/components/CastingReel";
 import Thesis from "@/components/Thesis";
@@ -14,10 +13,9 @@ export default function Page() {
     <Nav />
     <main>
       <Hero />
-      <MorphMachine />
+      <Thesis />
       <Services />
       <CastingReel />
-      <Thesis />
       <Process />
       <About />
       <CtaBanner />

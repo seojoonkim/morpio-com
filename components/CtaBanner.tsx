@@ -1,1 +1,11 @@
-export default function CtaBanner(){return <section id="contact" className="contact"><div><p className="kicker">OPEN CASTING · NEW PROJECTS</p><h2>CAST US IN<br />YOUR NEXT IDEA.</h2><a className="button button-signal" href="mailto:hello@morpio.com">Start a project <span>↗</span></a></div></section>}
+export default function CtaBanner() {
+  return (
+    <section id="contact" className="contact section-shell">
+      <p className="kicker"><span className="signal-dot" />06 · NEW PROJECTS · COLLABORATIONS</p>
+      <div>
+        <h2>TELL US<br />YOUR STORY.</h2>
+        <a className="button button-accent" href="mailto:hello@morpio.com">Email the studio <span>↗</span></a>
+      </div>
+    </section>
+  );
+}

@@ -1,34 +1,22 @@
 const POINTS = [
-  {
-    number: "01",
-    title: "A GLOBAL AUDIENCE",
-    text: "Animation is a global industry. A strong character or story can cross borders, formats, and languages.",
-  },
-  {
-    number: "02",
-    title: "TOO FEW GET MADE",
-    text: "Most promising stories never reach the screen. Animation takes time, costs money, and asks many specialists to move in sync.",
-  },
-  {
-    number: "03",
-    title: "A SHORTER PATH",
-    text: "Morpio uses AI-assisted development and production systems to move from an idea to finished motion faster, with people directing every creative decision.",
-  },
+  ["01", "A GLOBAL AUDIENCE", "Animation travels. A strong story can cross languages, formats, and borders, and find an audience far from where it was made."],
+  ["02", "TOO FEW GET MADE", "Most promising stories never reach production. Animation is slow, expensive, and depends on many specialists staying in sync."],
+  ["03", "A SHORTER PATH", "Morpio uses AI-assisted visual development and repeatable production systems to lower those barriers. People keep story and creative direction."],
 ];
 
 export default function Thesis() {
   return (
-    <section className="thesis section-shell" aria-labelledby="thesis-title">
-      <div className="section-heading">
-        <p className="kicker">WHY MORPIO</p>
+    <section id="why" className="thesis section-shell" aria-labelledby="thesis-title">
+      <div className="section-intro">
+        <p className="kicker"><span className="signal-dot" />01 · WHY MORPIO</p>
         <h2 id="thesis-title">MORE STORIES<br />SHOULD REACH<br />THE SCREEN.</h2>
       </div>
       <div className="thesis-list">
-        {POINTS.map((point) => (
-          <article key={point.number}>
-            <span>{point.number}</span>
-            <h3>{point.title}</h3>
-            <p>{point.text}</p>
+        {POINTS.map(([number, title, text]) => (
+          <article key={number}>
+            <span>{number}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
           </article>
         ))}
       </div>

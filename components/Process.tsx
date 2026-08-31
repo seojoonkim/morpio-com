@@ -1,24 +1,24 @@
 const STEPS = [
-  ["01", "STORY", "Start with a character, a world, or a brief worth making."],
-  ["02", "DEVELOP", "Use AI-assisted visual development to find the character, look, and language of the project."],
-  ["03", "PRODUCE", "Build shots, motion, and versions through a repeatable production system led by human directors."],
-  ["04", "ADAPT", "Prepare the work for different screens, formats, and languages without losing its identity."],
+  ["01", "STORY", "Start with a character, a world, or a script worth making."],
+  ["02", "DEVELOP", "Explore look, character, and tone until the world holds together."],
+  ["03", "PRODUCE", "Build shots, motion, and sound through a repeatable pipeline directed by people."],
+  ["04", "ADAPT", "Deliver versions for different screens and languages without losing the identity of the work."],
 ];
 
 export default function Process() {
   return (
-    <section id="process" className="process section-shell">
-      <div className="section-heading">
-        <p className="kicker">HOW MORPIO WORKS</p>
-        <h2>STORY FIRST.<br />SYSTEM READY.</h2>
-        <p>AI helps us explore and produce faster. People choose what the story needs and what belongs on screen.</p>
+    <section id="system" className="process section-shell">
+      <div className="section-intro">
+        <p className="kicker"><span className="signal-dot" />04 · THE PRODUCTION SYSTEM</p>
+        <h2>FROM IDEA TO<br />FINISHED MOTION.</h2>
+        <p>AI shortens exploration and iteration. People make every creative call.</p>
       </div>
       <div className="process-list">
-        {STEPS.map((step) => (
-          <article key={step[0]}>
-            <span>{step[0]}</span>
-            <h3>{step[1]}</h3>
-            <p>{step[2]}</p>
+        {STEPS.map(([number, title, text]) => (
+          <article key={number}>
+            <span>{number}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
           </article>
         ))}
       </div>

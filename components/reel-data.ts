@@ -11,6 +11,7 @@ export type ReelItem = {
   categoryLabel: string;
   colorA: string;
   colorB: string;
+  portrait?: boolean;
   variants: ReelVariant[];
 };
 
@@ -37,15 +38,17 @@ export const REEL_ITEMS: ReelItem[] = [
     categoryLabel: "TECHNICAL DEMO",
     colorA: "#14503C",
     colorB: "#FF6B4A",
+    portrait: true,
     variants: [{ label: "WATCH", videoId: "Ff3HrDGiFsw" }],
   },
   {
     id: "gto-paradise-lost",
     index: "03",
-    title: "GTO — PARADISE LOST",
+    title: "GTO: PARADISE LOST",
     categoryLabel: "TECHNICAL DEMO",
     colorA: "#6E1B2E",
     colorB: "#7FC8E8",
+    portrait: true,
     variants: [{ label: "WATCH", videoId: "zUvo4r_AyoU" }],
   },
   {
