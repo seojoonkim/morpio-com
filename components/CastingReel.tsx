@@ -63,7 +63,7 @@ export default function CastingReel() {
   return (
     <section id="work" className="work-section section-shell">
       <div className="section-heading work-heading">
-        <p className="kicker"><span className="signal-dot" />03 · SELECTED WORK</p>
+        <p className="kicker"><span className="signal-dot" />02 · SELECTED WORK</p>
         <h2>STORIES FROM<br />ANOTHER WORLD.</h2>
         <p>One original animation and three technical demos.</p>
       </div>

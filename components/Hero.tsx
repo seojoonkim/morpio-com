@@ -7,7 +7,7 @@ export default function Hero() {
         <p className="hero-deck">Morpio makes original animation with AI-assisted visual development and repeatable production systems, so more good stories reach the screen.</p>
         <div className="hero-actions">
           <a className="button button-primary" href="#work">View selected work <span>↓</span></a>
-          <a className="text-link" href="#approach">How we work <span>↘</span></a>
+          <a className="text-link" href="#why">Why Morpio <span>↘</span></a>
         </div>
       </div>
       <a className="hero-frame" href="#work" aria-label="View 尻尾が止まったあとも in selected work">
@@ -16,7 +16,7 @@ export default function Hero() {
         <div className="frame-meta"><span>ORIGINAL ANIMATION</span><strong>尻尾が止まったあとも</strong><span>VIEW WORK ↘</span></div>
       </a>
       <div className="hero-meta">
-        <span>INCUBATED BY HASHED</span>
+        <span>POWERED BY HASHED</span>
         <span>ORIGINAL ANIMATION · TECHNICAL DEMOS</span>
         <span>SEOUL · 2026</span>
       </div>

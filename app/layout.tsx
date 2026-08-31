@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://morpio.com"),
   openGraph: {
     title: "MORPIO — Another World Starts Here",
-    description: "Original animation and technical demos from an AI media lab in Seoul, incubated by Hashed.",
+    description: "Original animation and technical demos from an AI media lab in Seoul, powered by Hashed.",
     url: "https://morpio.com",
     siteName: "MORPIO",
     type: "website",
