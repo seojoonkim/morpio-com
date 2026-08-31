@@ -27,6 +27,9 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1280, height: 900 
 
 await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
 await page.goto(url, { waitUntil: "networkidle0" });
+const defaultLanguage = await page.$eval("button[data-video-id='31Jm1Z2fnek']", (el) => el.getAttribute("aria-pressed"));
+const defaultPoster = await page.$eval("[data-reel-id='after-the-tail-stopped'] .video-poster img", (el) => el.getAttribute("src"));
+if (defaultLanguage !== "true" || !defaultPoster?.includes("31Jm1Z2fnek")) throw new Error("Korean subtitles are not selected by default");
 for (const id of ["why", "system", "work", "team", "contact"]) {
   await page.evaluate(() => scrollTo(0, 0));
   await page.click(`a[href='#${id}']`);

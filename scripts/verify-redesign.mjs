@@ -17,6 +17,8 @@ check(count(/ORIGINAL ANIMATION/g) >= 1, "original animation label is missing");
 check(count(/TECHNICAL DEMO/g) >= 3, "technical demo labels are missing");
 check(count(/class="video-poster/g) === 4, `expected 4 video posters, found ${count(/class="video-poster/g)}`);
 check(count(/data-video-id=/g) === 3, `expected 3 language controls, found ${count(/data-video-id=/g)}`);
+check(html.indexOf("31Jm1Z2fnek") < html.indexOf("vVmnsDeSwhE"), "Korean subtitles are not the default variant");
+check(/GTO: 파라다이스 로스트/.test(html), "GTO Korean title is missing");
 check(/AI-assisted visual development/.test(html), "technology explanation is missing");
 check(/powered by Hashed/i.test(html), "team context is missing");
 check(!/incubated by Hashed/i.test(html), "old Hashed relationship copy is present");

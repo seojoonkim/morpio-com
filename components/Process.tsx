@@ -10,7 +10,7 @@ export default function Process() {
     <section id="system" className="process section-shell">
       <div className="section-intro">
         <p className="kicker"><span className="signal-dot" />03 · THE PRODUCTION SYSTEM</p>
-        <h2>FROM IDEA TO<br />FINISHED MOTION.</h2>
+        <h2>FROM IDEA TO<br />MOTION.</h2>
         <p>AI shortens exploration and iteration. People make every creative call.</p>
       </div>
       <div className="process-list">

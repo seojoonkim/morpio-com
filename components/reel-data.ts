@@ -25,8 +25,8 @@ export const REEL_ITEMS: ReelItem[] = [
     colorA: "#1B3AA0",
     colorB: "#F5C451",
     variants: [
-      { label: "ENGLISH SUBTITLES", videoId: "vVmnsDeSwhE" },
       { label: "한국어 자막", videoId: "31Jm1Z2fnek" },
+      { label: "ENGLISH SUBTITLES", videoId: "vVmnsDeSwhE" },
       { label: "日本語", videoId: "tHjjSmaGcos" },
     ],
   },
@@ -45,6 +45,7 @@ export const REEL_ITEMS: ReelItem[] = [
     id: "gto-paradise-lost",
     index: "03",
     title: "GTO: PARADISE LOST",
+    subtitle: "GTO: 파라다이스 로스트",
     categoryLabel: "TECHNICAL DEMO",
     colorA: "#6E1B2E",
     colorB: "#7FC8E8",

@@ -10,11 +10,13 @@ export default function Hero() {
           <a className="text-link" href="#why">Why Morpio <span>↘</span></a>
         </div>
       </div>
-      <a className="hero-frame" href="#work" aria-label="View 尻尾が止まったあとも in selected work">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/work/tail-stopped.jpg" alt="Still from 尻尾が止まったあとも" />
-        <div className="frame-meta"><span>ORIGINAL ANIMATION</span><strong>尻尾が止まったあとも</strong><span>VIEW WORK ↘</span></div>
-      </a>
+      <div className="hero-visual">
+        <a className="hero-frame" href="#work" aria-label="View 尻尾が止まったあとも in selected work">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/work/tail-stopped.jpg" alt="Still from 尻尾が止まったあとも" />
+        </a>
+        <a className="frame-meta" href="#work"><span>ORIGINAL ANIMATION</span><span>VIEW WORK ↘</span></a>
+      </div>
       <div className="hero-meta">
         <span>POWERED BY HASHED</span>
         <span>ORIGINAL ANIMATION · TECHNICAL DEMOS</span>
