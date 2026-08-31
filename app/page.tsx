@@ -12,8 +12,8 @@ export default function Page() {
     <Nav />
     <main>
       <Hero />
-      <CastingReel />
       <Thesis />
+      <CastingReel />
       <TechnicalDemoIndex />
       <Process />
       <About />
