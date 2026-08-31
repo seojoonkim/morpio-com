@@ -11,6 +11,8 @@ check(response.ok, `homepage returned HTTP ${response.status}`);
 check(/<h1[^>]*>[\s\S]*?ANOTHER WORLD[\s\S]*?STARTS HERE[\s\S]*?<\/h1>/i.test(html), "hero tagline is missing");
 check(count(/data-morph-mode=/g) === 3, `expected 3 morph controls, found ${count(/data-morph-mode=/g)}`);
 check(count(/data-reel-id=/g) === 4, `expected 4 selected works, found ${count(/data-reel-id=/g)}`);
+check(count(/ORIGINAL ANIMATION/g) === 1, `expected 1 original animation label, found ${count(/ORIGINAL ANIMATION/g)}`);
+check(count(/TECHNICAL DEMO/g) === 3, `expected 3 technical demo labels, found ${count(/TECHNICAL DEMO/g)}`);
 check(count(/youtube-nocookie\.com\/embed\//g) === 4, `expected 4 YouTube embeds, found ${count(/youtube-nocookie\.com\/embed\//g)}`);
 check(count(/data-video-id=/g) === 3, `expected 3 language controls, found ${count(/data-video-id=/g)}`);
 check(!/PLACEHOLDER|sample-0[1-6]/i.test(html), "placeholder reels are still present");
