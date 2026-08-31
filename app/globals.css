@@ -49,6 +49,11 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   border-radius: 50%;
   background: var(--sky);
   box-shadow: 0 0 16px rgba(0, 174, 255, .65);
+  animation: signal-dot-blink 1.8s ease-in-out infinite;
+}
+@keyframes signal-dot-blink {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 8px rgba(0,174,255,.42); }
+  50% { opacity: .25; transform: scale(.78); box-shadow: 0 0 18px rgba(0,174,255,.82); }
 }
 
 .site-nav {
@@ -600,7 +605,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   *, *:before, *:after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
   .hero-film { display:none; }
   .motion-ready .hero h1, .motion-ready main section h2 { opacity:1; filter:none; transform:none; }
-  .hero-period { animation:none; opacity:1; box-shadow:none; }
+  .hero-period, .signal-dot { animation:none; opacity:1; box-shadow:none; transform:none; }
   .motion-ready .engine-drawing .engine-topline,
   .motion-ready .engine-drawing .engine-stage,
   .motion-ready .engine-drawing .engine-bus,
