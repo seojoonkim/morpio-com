@@ -39,11 +39,17 @@ await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
 await page.goto(url, { waitUntil: "domcontentloaded" });
 await page.waitForSelector("button[data-video-id='31Jm1Z2fnek']");
 const urlBeforeNav = page.url();
-await page.click('.site-nav a[href="#work"]');
-await new Promise((resolve) => setTimeout(resolve, 700));
-if (page.url() !== urlBeforeNav) throw new Error(`Navigation changed URL: ${page.url()}`);
-const workKickerTop = await page.$eval("#work .kicker", (el) => el.getBoundingClientRect().top);
-if (workKickerTop < 92 || workKickerTop > 130) throw new Error(`Work anchor lands at an awkward position: ${workKickerTop}px`);
+for (const id of ["why", "work", "system", "studio", "contact"]) {
+  await page.click(`.site-nav a[href="#${id}"]`);
+  await new Promise((resolve) => setTimeout(resolve, 1200));
+  if (page.url() !== urlBeforeNav) throw new Error(`Navigation changed URL: ${page.url()}`);
+  const landing = await page.evaluate((targetId) => {
+    const header = document.querySelector(".site-nav").getBoundingClientRect();
+    const kicker = document.querySelector(`#${targetId} .kicker`).getBoundingClientRect();
+    return kicker.top - header.bottom;
+  }, id);
+  if (landing < 48 || (!["studio", "contact"].includes(id) && landing > 58)) throw new Error(`${id} mobile anchor gap is awkward: ${landing}px`);
+}
 if (await page.$eval(".round-play", (el) => el.textContent?.trim())) throw new Error("Play control contains a platform-rendered glyph");
 const defaultLanguage = await page.$eval("button[data-video-id='31Jm1Z2fnek']", (el) => el.getAttribute("aria-pressed"));
 if (defaultLanguage !== "true") throw new Error("Korean subtitles are not selected by default");
@@ -67,5 +73,22 @@ await page.reload({ waitUntil: "domcontentloaded" });
 const reduced = await page.$eval("[data-hero-film] video", (el) => ({ display: getComputedStyle(el).display, src: el.getAttribute("src") }));
 if (reduced.display !== "none") throw new Error("Reduced-motion hero fallback failed");
 
-console.log(JSON.stringify({ pass: true, viewports: results, languageSwitch: "JP", singlePlayback: true, reducedMotion: true }));
+const desktopNav = await browser.newPage();
+await desktopNav.setViewport({ width: 1280, height: 900, deviceScaleFactor: 1 });
+await desktopNav.goto(url, { waitUntil: "domcontentloaded" });
+const desktopUrl = desktopNav.url();
+for (const id of ["why", "work", "system", "studio", "contact"]) {
+  await desktopNav.click(`.site-nav a[href="#${id}"]`);
+  await new Promise((resolve) => setTimeout(resolve, 1200));
+  if (desktopNav.url() !== desktopUrl) throw new Error(`Desktop navigation changed URL: ${desktopNav.url()}`);
+  const landing = await desktopNav.evaluate((targetId) => {
+    const header = document.querySelector(".site-nav").getBoundingClientRect();
+    const kicker = document.querySelector(`#${targetId} .kicker`).getBoundingClientRect();
+    return kicker.top - header.bottom;
+  }, id);
+  if (landing < 60 || (id !== "contact" && landing > 70)) throw new Error(`${id} desktop anchor gap is awkward: ${landing}px`);
+}
+await desktopNav.close();
+
+console.log(JSON.stringify({ pass: true, viewports: results, languageSwitch: "JP", singlePlayback: true, reducedMotion: true, anchorSpacing: true, stableUrl: true }));
 await browser.close();

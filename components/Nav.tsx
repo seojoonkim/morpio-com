@@ -11,7 +11,17 @@ const LINKS = [
 export default function Nav() {
   const scrollToSection = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     event.preventDefault();
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const section = document.querySelector<HTMLElement>(href);
+    if (!section) return;
+    if (href === "#top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const anchor = section.querySelector<HTMLElement>(".kicker") ?? section;
+    const headerHeight = document.querySelector<HTMLElement>(".site-nav")?.getBoundingClientRect().height ?? 0;
+    const breathingRoom = window.innerWidth <= 900 ? 52 : 64;
+    const top = window.scrollY + anchor.getBoundingClientRect().top - headerHeight - breathingRoom;
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
   };
 
   return (
