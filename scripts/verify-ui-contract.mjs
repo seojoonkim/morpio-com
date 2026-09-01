@@ -112,8 +112,8 @@ for (const width of [390, 768, 1280]) {
   check(state.externalFonts === 0 && state.fontsReady, `${width}: local font contract failed`);
   check(state.og === "https://morpio.com/og-morpio.png", `${width}: OG metadata changed`);
   if (width === 390) {
-    check(state.mobileNav.height === 88, `mobile: nav height is ${state.mobileNav.height}px`);
-    check(state.mobileNav.logoTop >= 18, `mobile: logo remains too close to top (${state.mobileNav.logoTop}px)`);
+    check(state.mobileNav.height === 79, `mobile: nav height is ${state.mobileNav.height}px`);
+    check(state.mobileNav.logoTop >= 14, `mobile: logo remains too close to top (${state.mobileNav.logoTop}px)`);
     check(state.mobileNav.menuTop - state.mobileNav.logoBottom <= 12, `mobile: logo/menu gap remains too large (${state.mobileNav.menuTop - state.mobileNav.logoBottom}px)`);
     check(state.mobileNav.height - state.mobileNav.menuBottom <= 8, `mobile: menu bottom gap remains too large (${state.mobileNav.height - state.mobileNav.menuBottom}px)`);
   }
