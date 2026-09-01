@@ -38,7 +38,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 a { color: inherit; text-decoration: none; }
-section[id] { scroll-margin-top: 92px; }
+section[id] { scroll-margin-top: 0; }
 button, a { outline-offset: 4px; }
 button:focus-visible, a:focus-visible { outline: 2px solid var(--sky); }
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -418,7 +418,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .media-poster:after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 54%,rgba(0,0,0,.72)); }
 .media-poster img { transition: transform .7s var(--ease), filter .3s ease; }
 .media-poster:hover img { transform: scale(1.02); filter: brightness(.78); }
-.round-play { position: absolute; z-index: 2; left: 50%; top: 50%; width: 68px; height: 68px; display:grid; place-items:center; transform:translate(-50%,-50%); border-radius:50%; color:var(--ink); background:var(--sky); }
+.round-play { position: absolute; z-index: 2; left: 50%; top: 50%; width: 68px; height: 68px; display:grid; place-items:center; transform:translate(-50%,-50%); border-radius:50%; background:var(--sky); }
+.round-play:before { content:""; width:0; height:0; margin-left:4px; border-top:9px solid transparent; border-bottom:9px solid transparent; border-left:14px solid var(--ink); }
 .poster-caption { position:absolute; z-index:2; left:22px; bottom:20px; font:600 11px/1 "Geist Mono",monospace; letter-spacing:.08em; }
 .feature-meta { padding: 18px 0 34px; display:flex; justify-content:space-between; align-items:center; gap:20px; border-bottom:1px solid #30343b; color:#858c97; font:600 10px/1 "Geist Mono",monospace; letter-spacing:.07em; }
 .language-switcher { display:flex; gap:8px; }

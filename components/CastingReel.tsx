@@ -51,7 +51,7 @@ export default function CastingReel() {
             <button type="button" className="media-poster" onClick={() => play("feature")} aria-label={`Play ${FEATURE_FILM.title} in ${variant.label}`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={variantId === FEATURE_FILM.variants[0].videoId ? "/work/tail-stopped.jpg" : thumbUrl(variantId)} alt="" />
-              <span className="round-play" aria-hidden="true">▶</span>
+              <span className="round-play" aria-hidden="true" />
               <span className="poster-caption">PLAY ORIGINAL FILM</span>
             </button>
           )}
@@ -101,7 +101,7 @@ export function TechnicalDemoIndex() {
                     <button className="media-poster" type="button" onClick={() => play(demo.id)} aria-label={`Play ${demo.title}`}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={thumbUrl(demo.videoId, demo.portrait)} alt="" />
-                      <span className="round-play" aria-hidden="true">▶</span>
+                      <span className="round-play" aria-hidden="true" />
                       <span className="poster-caption">PLAY TECHNICAL DEMO</span>
                     </button>
                   )}

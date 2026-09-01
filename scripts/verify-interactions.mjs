@@ -1,7 +1,8 @@
 import puppeteer from "puppeteer";
 
 const url = process.env.MORPIO_URL || "http://127.0.0.1:3100";
-const browser = await puppeteer.launch({ headless: true });
+const executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const browser = await puppeteer.launch({ headless: true, executablePath });
 const page = await browser.newPage();
 const results = [];
 
@@ -37,6 +38,11 @@ for (const viewport of [
 await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
 await page.goto(url, { waitUntil: "domcontentloaded" });
 await page.waitForSelector("button[data-video-id='31Jm1Z2fnek']");
+await page.click('.site-nav a[href="#work"]');
+await new Promise((resolve) => setTimeout(resolve, 700));
+const workKickerTop = await page.$eval("#work .kicker", (el) => el.getBoundingClientRect().top);
+if (workKickerTop < 0 || workKickerTop > 110) throw new Error(`Work anchor lands at an awkward position: ${workKickerTop}px`);
+if (await page.$eval(".round-play", (el) => el.textContent?.trim())) throw new Error("Play control contains a platform-rendered glyph");
 const defaultLanguage = await page.$eval("button[data-video-id='31Jm1Z2fnek']", (el) => el.getAttribute("aria-pressed"));
 if (defaultLanguage !== "true") throw new Error("Korean subtitles are not selected by default");
 await page.click("button[data-video-id='tHjjSmaGcos']");
