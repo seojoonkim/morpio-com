@@ -109,7 +109,7 @@ for (const width of [390, 768, 1280]) {
   }
   if (width === 1280) {
     check(state.arrows.length === 5 && state.arrows.every((item) => item.display === "grid" && item.zIndex >= 20), "desktop: connector overlay contract failed");
-    check(Math.abs(state.fontSizes.hero - 115.2) < 1 && Math.abs(state.fontSizes.why - 74.88) < 1 && Math.abs(state.fontSizes.contact - 103.68) < 1, `desktop: 10% title scale contract changed ${JSON.stringify(state.fontSizes)}`);
+    check(Math.abs(state.fontSizes.hero - 103.68) < 1 && Math.abs(state.fontSizes.why - 67.392) < 1 && Math.abs(state.fontSizes.contact - 93.312) < 1, `desktop: title scale contract changed ${JSON.stringify(state.fontSizes)}`);
   }
   await page.close();
 }
