@@ -43,8 +43,22 @@ for (const width of [390, 768, 1280]) {
       heroDotAnimation: style(".hero-period").animationName,
       signalAnimations: [...document.querySelectorAll(".signal-dot")].map((node) => getComputedStyle(node).animationName),
       headingCharacters: document.querySelectorAll(".heading-char").length,
+      brokenHeroWords: [...document.querySelectorAll(".hero h1 .heading-word")].filter((word) => {
+        const chars = [...word.querySelectorAll(".heading-char")].map((char) => char.getBoundingClientRect());
+        return chars.some((rect, index) => index > 0 && Math.abs(rect.top - chars[0].top) > 1);
+      }).length,
       lightHeading: { animation: lightHeading.animationName, filter: lightHeading.filter },
       darkHeading: { animation: darkHeading.animationName, filter: darkHeading.filter },
+      headingCharAnimations: [...document.querySelectorAll(".heading-char")].map((node) => getComputedStyle(node).animationName),
+      firstHeadingDelays: [...document.querySelectorAll(".hero h1 .heading-char")].slice(0, 3).map((node) => getComputedStyle(node).animationDelay),
+      headingCharKeyframeColors: [...new Set((document.querySelector(".hero h1 .heading-char")?.getAnimations()[0]?.effect?.getKeyframes() ?? []).map((frame) => frame.color).filter(Boolean))],
+      mobileNav: {
+        height: rect(".site-nav").height,
+        logoTop: rect(".nav-logo").top,
+        logoBottom: rect(".nav-logo").bottom,
+        menuTop: rect(".site-nav nav").top,
+        menuBottom: rect(".site-nav nav").bottom,
+      },
       footerDirection: footerStyle.flexDirection,
       footerSameLine: footerLogo.bottom > footerText.top && footerText.bottom > footerLogo.top,
       footerText: document.querySelector(".footer > p").textContent.replace(/\s+/g, " ").trim(),
@@ -71,9 +85,13 @@ for (const width of [390, 768, 1280]) {
   check(state.heroDotAttached, `${width}: hero dot detached from HERE`);
   check(state.heroDotAnimation === "hero-period-blink", `${width}: hero dot animation missing`);
   check(state.signalAnimations.length === 7 && state.signalAnimations.every((name) => name === "signal-dot-blink"), `${width}: section signal animations missing`);
-  check(state.headingCharacters === 0, `${width}: legacy per-character heading spans remain`);
-  check(state.lightHeading.animation === "heading-glow-light" && state.lightHeading.filter === "none", `${width}: light heading color animation contract failed`);
-  check(state.darkHeading.animation === "heading-glow-dark" && state.darkHeading.filter === "none", `${width}: dark heading color animation contract failed`);
+  check(state.headingCharacters > 100, `${width}: per-character heading spans missing`);
+  check(state.brokenHeroWords === 0, `${width}: hero word broke between animated characters`);
+  check(state.lightHeading.animation === "none" && state.lightHeading.filter === "none", `${width}: light heading still animates as one block`);
+  check(state.darkHeading.animation === "none" && state.darkHeading.filter === "none", `${width}: dark heading still animates as one block`);
+  check(state.headingCharAnimations.every((name) => name === "heading-character-glint"), `${width}: character gradient animation contract failed`);
+  check(JSON.stringify(state.firstHeadingDelays) === JSON.stringify(["0s", "0.064s", "0.128s"]), `${width}: character animation is not staggered`);
+  check(state.headingCharKeyframeColors.length >= 3, `${width}: character gradient has fewer than three color stops`);
   check(state.footerDirection === "row" && state.footerSameLine, `${width}: footer is not one row`);
   check(state.footerText === "SEOUL, KOREA · © 2026 MORPIO", `${width}: footer copy changed`);
   check(!state.navStatus && state.navBorder === "0px", `${width}: removed nav status/divider returned`);
@@ -83,6 +101,12 @@ for (const width of [390, 768, 1280]) {
   check(state.studioCtaColor === "rgb(0, 174, 255)", `${width}: studio CTA lost key color`);
   check(state.externalFonts === 0 && state.fontsReady, `${width}: local font contract failed`);
   check(state.og === "https://morpio.com/og-morpio.png", `${width}: OG metadata changed`);
+  if (width === 390) {
+    check(state.mobileNav.height === 88, `mobile: nav height is ${state.mobileNav.height}px`);
+    check(state.mobileNav.logoTop >= 18, `mobile: logo remains too close to top (${state.mobileNav.logoTop}px)`);
+    check(state.mobileNav.menuTop - state.mobileNav.logoBottom <= 12, `mobile: logo/menu gap remains too large (${state.mobileNav.menuTop - state.mobileNav.logoBottom}px)`);
+    check(state.mobileNav.height - state.mobileNav.menuBottom <= 8, `mobile: menu bottom gap remains too large (${state.mobileNav.height - state.mobileNav.menuBottom}px)`);
+  }
   if (width === 1280) {
     check(state.arrows.length === 5 && state.arrows.every((item) => item.display === "grid" && item.zIndex >= 20), "desktop: connector overlay contract failed");
     check(Math.abs(state.fontSizes.hero - 115.2) < 1 && Math.abs(state.fontSizes.why - 74.88) < 1 && Math.abs(state.fontSizes.contact - 103.68) < 1, `desktop: 10% title scale contract changed ${JSON.stringify(state.fontSizes)}`);
