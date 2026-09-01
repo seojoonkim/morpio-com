@@ -84,7 +84,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   backdrop-filter: blur(18px);
 }
 .nav-logo, .footer-logo {
-  font: 700 28px/1 "Bricolage Grotesque", sans-serif;
+  font: 700 31px/1 "Bricolage Grotesque", sans-serif;
   letter-spacing: -.035em;
 }
 .nav-logo span, .footer-logo span { color: var(--sky); }
@@ -338,7 +338,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 @media (max-width: 520px) {
   .site-nav { padding-inline: 18px; }
-  .site-nav nav a { font-size: 10px; }
+  .nav-logo { transform: translateY(2px); }
+  .site-nav nav a { font-size: 11px; }
   .nav-contact { font-size: 10px; }
   .nav-contact span { display: none; }
   .hero-actions { align-items: flex-start; flex-direction: column; gap: 20px; }
