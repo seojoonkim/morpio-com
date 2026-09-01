@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "verify:redesign": "node scripts/verify-redesign.mjs"
+    "verify:redesign": "node scripts/verify-redesign.mjs",
+    "verify:interactions": "node scripts/verify-interactions.mjs",
+    "verify:ui": "node scripts/verify-ui-contract.mjs",
+    "verify:release": "npm run verify:redesign && npm run verify:interactions && npm run verify:ui"
   },
   "dependencies": {
     "framer-motion": "^11.11.17",
