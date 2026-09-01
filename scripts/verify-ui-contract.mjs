@@ -21,8 +21,9 @@ for (const width of [390, 768, 1280]) {
   const state = await page.evaluate(() => {
     const rect = (selector) => document.querySelector(selector).getBoundingClientRect();
     const style = (selector) => getComputedStyle(document.querySelector(selector));
-    const hero = rect(".hero h1");
     const dot = rect(".hero-period");
+    const heroTitleChars = [...document.querySelectorAll(".hero-last-line .heading-char")];
+    const lastHeroCharacter = heroTitleChars.at(-1).getBoundingClientRect();
     const footerLogo = rect(".footer-logo");
     const footerText = rect(".footer > p");
     const footerStyle = style(".footer");
@@ -39,7 +40,8 @@ for (const width of [390, 768, 1280]) {
     return {
       overflow: document.documentElement.scrollWidth - innerWidth,
       heroDotSafety: innerWidth - dot.right,
-      heroDotAttached: dot.left - hero.right < dot.width + 4,
+      heroDotGap: dot.left - lastHeroCharacter.right,
+      heroDotMarginRatio: parseFloat(style(".hero-period").marginLeft) / parseFloat(lightHeading.fontSize),
       heroDotAnimation: style(".hero-period").animationName,
       signalAnimations: [...document.querySelectorAll(".signal-dot")].map((node) => getComputedStyle(node).animationName),
       headingCharacters: document.querySelectorAll(".heading-char").length,
@@ -88,7 +90,8 @@ for (const width of [390, 768, 1280]) {
 
   check(state.overflow <= 1, `${width}: horizontal overflow ${state.overflow}px`);
   check(state.heroDotSafety >= 24, `${width}: hero dot safety is ${state.heroDotSafety}px`);
-  check(state.heroDotAttached, `${width}: hero dot detached from HERE`);
+  check(state.heroDotGap > 0 && state.heroDotGap < state.fontSizes.hero * 0.12, `${width}: hero dot gap is unnatural ${state.heroDotGap}px`);
+  check(Math.abs(state.heroDotMarginRatio - 0.09) < 0.005, `${width}: hero dot spacing ratio changed ${state.heroDotMarginRatio}`);
   check(state.heroDotAnimation === "hero-period-blink", `${width}: hero dot animation missing`);
   check(state.signalAnimations.length === 7 && state.signalAnimations.every((name) => name === "signal-dot-blink"), `${width}: section signal animations missing`);
   check(state.headingCharacters > 100, `${width}: per-character heading spans missing`);
