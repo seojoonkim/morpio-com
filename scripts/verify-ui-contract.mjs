@@ -59,6 +59,12 @@ for (const width of [390, 768, 1280]) {
         menuTop: rect(".site-nav nav").top,
         menuBottom: rect(".site-nav nav").bottom,
       },
+      pageFloor: {
+        html: getComputedStyle(document.documentElement).backgroundColor,
+        body: getComputedStyle(document.body).backgroundColor,
+        footer: style(".footer").backgroundColor,
+        theme: document.querySelector('meta[name="theme-color"]')?.content,
+      },
       footerDirection: footerStyle.flexDirection,
       footerSameLine: footerLogo.bottom > footerText.top && footerText.bottom > footerLogo.top,
       footerText: document.querySelector(".footer > p").textContent.replace(/\s+/g, " ").trim(),
@@ -91,6 +97,7 @@ for (const width of [390, 768, 1280]) {
   check(state.darkHeading.animation === "none" && state.darkHeading.filter === "none", `${width}: dark heading still animates as one block`);
   check(state.headingCharAnimations.every((name) => name === "heading-character-glint"), `${width}: character gradient animation contract failed`);
   check(JSON.stringify(state.firstHeadingDelays) === JSON.stringify(["0s", "0.064s", "0.128s"]), `${width}: character animation is not staggered`);
+  check(state.pageFloor.html === "rgb(9, 10, 12)" && state.pageFloor.body === state.pageFloor.html && state.pageFloor.footer === state.pageFloor.html && state.pageFloor.theme === "#090A0C", `${width}: footer floor and browser theme colors diverged`);
   check(state.headingCharKeyframeColors.length >= 3, `${width}: character gradient has fewer than three color stops`);
   check(state.footerDirection === "row" && state.footerSameLine, `${width}: footer is not one row`);
   check(state.footerText === "SEOUL, KOREA · © 2026 MORPIO", `${width}: footer copy changed`);
