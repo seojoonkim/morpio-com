@@ -38,10 +38,12 @@ for (const viewport of [
 await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
 await page.goto(url, { waitUntil: "domcontentloaded" });
 await page.waitForSelector("button[data-video-id='31Jm1Z2fnek']");
+const urlBeforeNav = page.url();
 await page.click('.site-nav a[href="#work"]');
 await new Promise((resolve) => setTimeout(resolve, 700));
+if (page.url() !== urlBeforeNav) throw new Error(`Navigation changed URL: ${page.url()}`);
 const workKickerTop = await page.$eval("#work .kicker", (el) => el.getBoundingClientRect().top);
-if (workKickerTop < 0 || workKickerTop > 110) throw new Error(`Work anchor lands at an awkward position: ${workKickerTop}px`);
+if (workKickerTop < 92 || workKickerTop > 130) throw new Error(`Work anchor lands at an awkward position: ${workKickerTop}px`);
 if (await page.$eval(".round-play", (el) => el.textContent?.trim())) throw new Error("Play control contains a platform-rendered glyph");
 const defaultLanguage = await page.$eval("button[data-video-id='31Jm1Z2fnek']", (el) => el.getAttribute("aria-pressed"));
 if (defaultLanguage !== "true") throw new Error("Korean subtitles are not selected by default");
