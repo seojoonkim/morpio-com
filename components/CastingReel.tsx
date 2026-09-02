@@ -77,8 +77,8 @@ export function TechnicalDemoIndex() {
     <section className="demo-index section-shell" aria-labelledby="demo-title">
       <div className="demo-intro">
         <p className="kicker kicker-light"><span className="signal-dot" />TECHNICAL DEMOS</p>
-        <h2 id="demo-title">THREE TESTS.<br />THREE PRODUCTION PROBLEMS.</h2>
-        <p>Each demo tests a different part of the path from source material to finished motion.</p>
+        <h2 id="demo-title">THREE TESTS.<br />THREE PROOFS.</h2>
+        <p>Each demo answers a production question. Can the character stay consistent? Can the shots feel directed? Can picture, voice, music, and sound arrive as one finished sequence?</p>
       </div>
       <div className="demo-rows">
         {DEMO_FILMS.map((demo) => {

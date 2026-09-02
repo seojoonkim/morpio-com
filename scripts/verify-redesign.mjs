@@ -7,6 +7,7 @@ const check = (condition, message) => { if (!condition) failures.push(message); 
 
 check(response.ok, `homepage returned HTTP ${response.status}`);
 check(/ANOTHER WORLD[\s\S]*?STARTS HERE/i.test(html), "hero tagline is missing");
+check(/<title>Morpio · Animation Studio in Seoul<\/title>/i.test(html), "partner-facing page title is missing");
 check(/data-hero-film/.test(html), "full-bleed hero film is missing");
 check(!/data-hero-film[^>]*>[\s\S]*?youtube/i.test(html), "hero must not use a YouTube background");
 check(/id="work"/.test(html), "work section is missing");
@@ -23,7 +24,7 @@ check(html.indexOf("31Jm1Z2fnek") < html.indexOf("vVmnsDeSwhE"), "Korean subtitl
 check(/GTO: 파라다이스 로스트/.test(html), "GTO Korean title is missing");
 for (const experiment of ["character and style consistency", "key-shot design and motion direction", "integrated video, voice, music, and sound"]) check(html.toLowerCase().includes(experiment), `demo experiment description ${experiment} is missing`);
 check(/property="og:image"[^>]*content="https:\/\/morpio\.com\/og-morpio\.png"|content="https:\/\/morpio\.com\/og-morpio\.png"[^>]*property="og:image"/.test(html), "OG image metadata is missing");
-check(/Seoul animation studio carrying original worlds/i.test(html), "partner-facing metadata description is missing");
+check(/Seoul animation studio working with IP holders and platforms/i.test(html), "partner-facing metadata description is missing");
 check(/WHY MORPIO EXISTS/i.test(html), "partner-facing thesis label is missing");
 check(!/why-sequence|why-row|MORPIO \/ FRAME/i.test(html), "thesis must not contain artwork frames");
 check(/MORPIO TECHNOLOGY/i.test(html), "technology section is missing");
@@ -36,7 +37,20 @@ check(/ONE ENGINE[\s\S]*?EVERY FRAME/i.test(html), "production engine principle 
 check(/powered by Hashed/i.test(html), "studio context is missing");
 check(/hello@morpio\.com/i.test(html), "contact email is missing");
 check(/FROM A MORPIO ORIGINAL SHORT/i.test(html), "hero film provenance caption is missing");
-check(/carry worlds from source material to finished motion/i.test(html), "partner-facing hero copy is missing");
+check(/bring existing worlds into finished animation/i.test(html), "partner-facing hero copy is missing");
+check(/help IP holders and platforms bring existing worlds/i.test(html), "hero does not identify Morpio's partners");
+check(/class="hero-partner-link"[^>]*href="#contact"[^>]*>[\s\S]*?START A PROJECT/i.test(html), "hero project CTA is missing");
+check(/>Process<\/a>/.test(html), "partner-facing Process navigation label is missing");
+check(/one controlled path from source interpretation to final master/i.test(html), "WHY section does not state the production outcome");
+check(/Each demo answers a production question/i.test(html) && /Can the character stay consistent/i.test(html), "partner-facing demo introduction is missing");
+check(/THREE TESTS[\s\S]*?THREE PROOFS/i.test(html), "technical demos do not frame tests as partner proof");
+check(/One workflow carries every shot from source interpretation to final master/i.test(html), "partner-facing process summary is missing");
+check(/<strong>VIDEO<\/strong><strong>PRODUCTION<\/strong>/.test(html), "plain-language video production stage is missing");
+check(/ONE SET OF RULES[\s\S]*?EVERY SHOT/.test(html), "plain-language shot-control label is missing");
+check(/PRODUCTION GOALS/.test(html), "partner-facing system goal label is missing");
+check(!/PRODUCTION OUTCOMES/.test(html), "system capabilities are framed as guaranteed outcomes");
+check(/A HUMAN DIRECTOR[\s\S]*?MAKES THE FINAL CALL/.test(html), "human final authority is unclear");
+check(!/<strong>VIDEO<\/strong><strong>GEN<\/strong>|ONE CONTROL PLANE|HUMAN DIRECTION IS NOT ABSTRACTED/.test(html), "internal production jargon remains");
 check(/AVAILABLE IN KOREAN, ENGLISH, AND JAPANESE/i.test(html), "verified language availability is missing");
 check(/ORIGINAL SHORT[\s\S]*?16:9[\s\S]*?KO \/ EN \/ JP/i.test(html), "distribution-ready original metadata is missing");
 check(/HAVE A WORLD THAT[\s\S]*?SHOULD BE ANIMATED/i.test(html), "world-oriented contact heading is missing");

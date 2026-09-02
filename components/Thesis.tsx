@@ -24,7 +24,7 @@ const POINTS = [
   {
     number: "03",
     title: "WE BUILD A DIFFERENT PATH.",
-    text: "Morpio keeps story, direction, and final judgment with people, then builds systems for everything production must repeat.",
+    text: "Morpio builds one controlled path from source interpretation to final master. The same team is responsible for direction, consistency, and review.",
     image: "/media/thesis/thesis-03-system.webp",
     mobileImage: "/media/thesis/thesis-03-system-mobile.webp",
     video: "/media/thesis/video/thesis-03-system-h3.mp4",

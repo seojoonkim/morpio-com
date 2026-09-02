@@ -74,7 +74,8 @@ export default function Hero() {
       <div className="hero-copy">
         <p className="kicker kicker-light"><span className="signal-dot" />MORPIO / ANIMATION STUDIO</p>
         <h1>ANOTHER WORLD<br /><span className="hero-last-line">STARTS HERE<span className="hero-period" aria-hidden="true" /></span></h1>
-        <p>An animation studio in Seoul. We carry worlds from source material to finished motion, with human direction at every stage.</p>
+        <p>We help IP holders and platforms bring existing worlds into finished animation, with human direction at every stage.</p>
+        <a className="hero-partner-link" href="#contact">START A PROJECT <span aria-hidden="true">↘</span></a>
       </div>
       <div className="hero-controls">
         <a href="#work">WATCH THE FILM <span>↓</span></a>

@@ -2,7 +2,7 @@ const STAGES = [
   ["01", "SOURCE", "INTERPRETATION", "World, story, tone"],
   ["02", "CHARACTER", "BIBLE", "Identity, design, behavior"],
   ["03", "KEY-SHOT", "DESIGN", "Composition, light, motion"],
-  ["04", "VIDEO", "GEN", "Shot production, iteration"],
+  ["04", "VIDEO", "PRODUCTION", "Shots, passes, iteration"],
   ["05", "AI SOUND", "STUDIO", "Voice, music, sound"],
   ["06", "HUMAN-LED", "POST", "Edit, grade, final master"],
 ];
@@ -34,7 +34,7 @@ function ProductionEngine() {
       </div>
 
       <div className="engine-bus" aria-label="Central layer">
-        <div className="bus-label"><span>CENTRAL LAYER</span><strong>ONE CONTROL PLANE<br />ACROSS EVERY SHOT.</strong></div>
+        <div className="bus-label"><span>CENTRAL LAYER</span><strong>ONE SET OF RULES<br />ACROSS EVERY SHOT.</strong></div>
         <div className="bus-controls">{CONTROLS.map((control, index) => <span key={control}><b>{String(index + 1).padStart(2, "0")}</b>{control}</span>)}</div>
       </div>
 
@@ -45,13 +45,13 @@ function ProductionEngine() {
           <div className="modality-list">{MODALITIES.map(item => <span key={item}>{item}</span>)}</div>
         </section>
         <section>
-          <p className="engine-kicker">OPERATING SYSTEM</p>
+          <p className="engine-kicker">PRODUCTION GOALS</p>
           <div className="engine-chain"><span>REUSABLE<br />ASSETS</span><i>+</i><span>APPROVAL<br />STAGES</span><i>→</i><span>SPEED</span><i>/</i><span>CONSISTENCY</span><i>/</i><span>REVISION<br />EFFICIENCY</span></div>
         </section>
         <section className="human-responsibility">
           <p className="engine-kicker">FINAL AUTHORITY</p>
-          <strong>HUMAN DIRECTION<br />IS NOT ABSTRACTED.</strong>
-          <p>Humans retain directorial judgment and final-quality responsibility.</p>
+          <strong>A HUMAN DIRECTOR<br />MAKES THE FINAL CALL.</strong>
+          <p>Directorial judgment and final quality stay with people on our team, not with a model.</p>
         </section>
       </div>
     </figure>
@@ -66,7 +66,7 @@ export default function Process() {
           <p className="kicker"><span className="signal-dot" />MORPIO TECHNOLOGY / PRODUCTION ENGINE</p>
           <div>
             <h2 id="system-title">ONE ENGINE.<br /><span>EVERY FRAME.</span></h2>
-            <p>One integrated workflow converts source worlds into consistent screen assets.</p>
+            <p>One workflow carries every shot from source interpretation to final master, using the same style rules, review stages, and human direction throughout.</p>
           </div>
         </header>
         <ProductionEngine />

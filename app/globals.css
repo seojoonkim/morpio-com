@@ -394,7 +394,10 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .hero h1 > .hero-last-line { display:inline-flex; align-items:baseline; white-space:nowrap; color:#fff; }
 .hero-period { width:.15em; aspect-ratio:1; margin-left:.09em; display:inline-block; flex:0 0 auto; border-radius:50%; background:var(--sky); vertical-align:.03em; animation:hero-period-blink 1.55s ease-in-out infinite; }
 @keyframes hero-period-blink { 0%,100% { opacity:1; box-shadow:0 0 0 rgba(0,174,255,0); } 50% { opacity:.28; box-shadow:0 0 22px rgba(0,174,255,.8); } }
-.hero-copy > p:last-child { max-width: 610px; margin: 0; color: rgba(255,255,255,.78); font-size: clamp(17px,1.5vw,22px); line-height: 1.45; }
+.hero-copy > p:not(.kicker) { max-width: 610px; margin: 0; color: rgba(255,255,255,.78); font-size: clamp(17px,1.5vw,22px); line-height: 1.45; }
+.hero-partner-link { width:max-content; margin-top:18px; padding-bottom:7px; display:inline-flex; align-items:center; gap:8px; border-bottom:1px solid var(--sky); color:white; font:600 11px/1 "Geist Mono",monospace; letter-spacing:.08em; transition:color .25s ease,border-color .25s ease; }
+.hero-partner-link span { color:var(--sky); }
+.hero-partner-link:hover,.hero-partner-link:focus-visible { color:var(--sky); border-color:white; }
 .hero-controls { position: absolute; right: clamp(20px,4vw,64px); bottom: 34px; display: flex; align-items: center; gap: 18px; }
 .hero-controls button { width:auto; height:auto; padding:8px 0; display:inline-flex; align-items:center; gap:8px; border:0; border-radius:0; background:transparent; color:white; cursor:pointer; font:600 11px/1 "Geist Mono",monospace; letter-spacing:.08em; }
 .hero-controls button > span { color:var(--sky); font-size:10px; }
@@ -612,6 +615,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 @media (min-width:901px) and (max-width:1050px) {
   .thesis-statements article { grid-template-columns:48px minmax(220px,.8fr) 1fr; }
   .thesis-art { grid-column:2 / 4; width:min(100%,680px); aspect-ratio:16/9; margin-top:8px; }
+  .engine-stage { padding-inline:8px; }
+  .stage-title strong { overflow-wrap:normal; word-break:normal; hyphens:none; white-space:nowrap; font-size:14px; letter-spacing:-.04em; }
 }
 
 @media (max-width:900px) {
@@ -650,7 +655,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .hero-film { object-position:52% center; }
   .hero-wash { background:linear-gradient(0deg,rgba(4,7,10,.94),rgba(4,7,10,.18) 82%); }
   .hero-copy { width:100%; padding-top:130px; }
-  .hero-copy > p:last-child { color:rgba(255,255,255,.94); }
+  .hero-copy > p:not(.kicker) { color:rgba(255,255,255,.94); }
   .hero h1 { max-width:9ch; font-size:clamp(46.8px,12.78vw,63px); }
   .hero-deck { max-width:31ch; font-size:16px; }
   .hero-controls { bottom:28px; justify-content:space-between; }
@@ -659,6 +664,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .thesis-statements h3, .thesis-statements p, .thesis-art { grid-column:2; }
   .thesis-statements h3 { font-size:30px; }
   .thesis-art { width:100%; aspect-ratio:4/3; margin-top:10px; }
+
   .demo-toggle { min-height:118px; grid-template-columns:32px 1fr 72px; gap:12px; }
   .demo-toggle img { width:72px; height:72px; }
   .demo-action { display:none; }
@@ -667,7 +673,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .engine-rail { padding:20px 14px 0; grid-template-columns:repeat(2,minmax(0,1fr)); }
   .engine-stage { min-height:170px; padding:15px 13px; }
   .stage-title { margin-top:22px; }
-  .stage-title strong { font-size:17px; }
+  .stage-title strong { overflow-wrap:normal; word-break:normal; hyphens:none; white-space:nowrap; font-size:16px; }
   .engine-bus { margin:14px 14px 0; }
   .bus-label { padding:18px; }
   .bus-controls { grid-template-columns:1fr; }

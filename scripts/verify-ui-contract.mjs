@@ -75,6 +75,21 @@ for (const width of [390, 768, 950, 1280]) {
       const computed = getComputedStyle(node);
       return { fontSize: computed.fontSize, fontFamily: computed.fontFamily };
     });
+    const heroPartnerLink = document.querySelector(".hero-partner-link");
+    const heroPartnerRect = heroPartnerLink?.getBoundingClientRect();
+    const heroControlsRect = document.querySelector(".hero-controls").getBoundingClientRect();
+    const brokenStageWords = [...document.querySelectorAll(".stage-title strong")].filter((node) => {
+      const text = node.firstChild;
+      if (!text || !text.textContent) return false;
+      const tops = new Set();
+      for (let index = 0; index < text.textContent.length; index += 1) {
+        const range = document.createRange();
+        range.setStart(text, index);
+        range.setEnd(text, index + 1);
+        tops.add(Math.round(range.getBoundingClientRect().top));
+      }
+      return tops.size > 1;
+    }).map((node) => node.textContent.trim());
     const arrows = [...document.querySelectorAll(".engine-connectors span")].map((node) => ({
       display: getComputedStyle(node).display,
       zIndex: Number(getComputedStyle(node.parentElement).zIndex),
@@ -137,6 +152,13 @@ for (const width of [390, 768, 950, 1280]) {
       heroFilmFilter: style(".hero-film").filter,
       featureShadow: style(".feature-media").boxShadow,
       contactPaths: document.querySelectorAll(".contact-path").length,
+      heroPartner: heroPartnerLink ? {
+        text: heroPartnerLink.textContent.replace(/\s+/g, " ").trim(),
+        href: heroPartnerLink.getAttribute("href"),
+        visible: getComputedStyle(heroPartnerLink).display !== "none" && heroPartnerRect.width > 0,
+        controlsGap: heroControlsRect.top - heroPartnerRect.bottom,
+      } : null,
+      brokenStageWords,
       colorScheme: document.querySelector('meta[name="color-scheme"]')?.content,
       externalFonts: performance.getEntriesByType("resource").filter((entry) => /fonts\.(googleapis|gstatic)\.com/.test(entry.name)).length,
       fontsReady: document.fonts.status === "loaded" && document.fonts.check('18px "Hanken Grotesk"') && document.fonts.check('700 32px "Bricolage Grotesque"') && document.fonts.check('600 11px "Geist Mono"'),
@@ -194,10 +216,14 @@ for (const width of [390, 768, 950, 1280]) {
   check(state.heroFilmFilter.includes("saturate(0.92)"), `${width}: hero film tone polish is missing`);
   check(state.featureShadow !== "none", `${width}: original film depth treatment is missing`);
   check(state.contactPaths === 2, `${width}: expected two partner contact paths`);
+  check(state.heroPartner?.text.includes("START A PROJECT") && state.heroPartner.href === "#contact" && state.heroPartner.visible, `${width}: hero project CTA is missing or unreachable`);
+  check(state.brokenStageWords.length === 0, `${width}: process stage words break mid-word ${JSON.stringify(state.brokenStageWords)}`);
   check(state.colorScheme === "dark", `${width}: browser color scheme is not dark`);
   check(state.externalFonts === 0 && state.fontsReady, `${width}: local font contract failed`);
   check(state.og === "https://morpio.com/og-morpio.png", `${width}: OG metadata changed`);
   if (width === 390) {
+    check(state.heroPartner && state.heroPartner.controlsGap >= 20, `mobile: hero project CTA is missing or too close to playback controls (${state.heroPartner?.controlsGap ?? "missing"})`);
+    check(state.sectionHeadings.find((heading) => heading.id === "demo-title")?.lineCount === 2, `mobile: technical demo heading should form two balanced lines`);
     check(state.mobileNav.height === 79, `mobile: nav height is ${state.mobileNav.height}px`);
     check(state.mobileNav.logoTop >= 14, `mobile: logo remains too close to top (${state.mobileNav.logoTop}px)`);
     check(state.mobileNav.menuTop - state.mobileNav.logoBottom <= 12, `mobile: logo/menu gap remains too large (${state.mobileNav.menuTop - state.mobileNav.logoBottom}px)`);
@@ -216,6 +242,17 @@ await interaction.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 })
 await interaction.goto(url, { waitUntil: "domcontentloaded", timeout: 60_000 });
 await interaction.waitForSelector("button[data-video-id='tHjjSmaGcos']", { visible: true });
 await new Promise((resolve) => setTimeout(resolve, 350));
+await interaction.click(".hero-partner-link");
+await interaction.waitForFunction(() => {
+  const contact = document.querySelector("#contact");
+  return contact && contact.getBoundingClientRect().top < innerHeight;
+});
+const contactLanding = await interaction.evaluate(() => {
+  const nav = document.querySelector(".site-nav").getBoundingClientRect();
+  const kicker = document.querySelector("#contact .kicker").getBoundingClientRect();
+  return { navBottom: nav.bottom, kickerTop: kicker.top };
+});
+check(contactLanding.kickerTop >= contactLanding.navBottom + 20, `hero project CTA hides the contact label beneath navigation ${JSON.stringify(contactLanding)}`);
 await interaction.click("button[data-video-id='tHjjSmaGcos']");
 await interaction.waitForFunction(() => document.querySelector("button[data-video-id='tHjjSmaGcos']")?.getAttribute("aria-pressed") === "true");
 check(await interaction.$eval("button[data-video-id='tHjjSmaGcos']", (node) => node.getAttribute("aria-pressed")) === "true", "hydrated language switch failed");

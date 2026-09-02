@@ -3,7 +3,7 @@
 const LINKS = [
   { label: "Why", href: "#why" },
   { label: "Work", href: "#work" },
-  { label: "System", href: "#system" },
+  { label: "Process", href: "#system" },
   { label: "Studio", href: "#studio" },
   { label: "Contact", href: "#contact" },
 ];
