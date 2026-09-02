@@ -185,6 +185,18 @@ for (const width of [390, 768, 950, 1280]) {
         scanAnimation: animation(".engine-bus-scan"),
         gateAnimation: animation(".human-gate-ring"),
       },
+      mobileEngineReadability: {
+        controlFontSize: parseFloat(getComputedStyle(document.querySelector(".bus-controls span")).fontSize),
+        controlNumberColor: getComputedStyle(document.querySelector(".bus-controls b")).color,
+        inputCount: document.querySelectorAll(".engine-chain-input span").length,
+        outputCount: document.querySelectorAll(".engine-chain-output span").length,
+        outputLines: new Set([...document.querySelectorAll(".engine-chain-output span")].map((node) => Math.round(node.getBoundingClientRect().top))).size,
+        humanGateOverlap: (() => {
+          const title = document.querySelector(".human-responsibility > strong").getBoundingClientRect();
+          const gate = document.querySelector(".human-gate").getBoundingClientRect();
+          return title.left < gate.right && title.right > gate.left && title.top < gate.bottom && title.bottom > gate.top;
+        })(),
+      },
       thesisArt,
       studioParagraphs,
       studioCtaColor: style(".studio-copy a").color,
@@ -276,6 +288,9 @@ for (const width of [390, 768, 950, 1280]) {
     check(state.mobileNav.logoTop >= 14, `mobile: logo remains too close to top (${state.mobileNav.logoTop}px)`);
     check(state.mobileNav.menuTop - state.mobileNav.logoBottom <= 12, `mobile: logo/menu gap remains too large (${state.mobileNav.menuTop - state.mobileNav.logoBottom}px)`);
     check(state.mobileNav.height - state.mobileNav.menuBottom <= 8, `mobile: menu bottom gap remains too large (${state.mobileNav.height - state.mobileNav.menuBottom}px)`);
+    check(state.mobileEngineReadability.controlFontSize >= 11 && state.mobileEngineReadability.controlNumberColor === "rgb(142, 151, 163)", `mobile: central layer labels remain too small or faint ${JSON.stringify(state.mobileEngineReadability)}`);
+    check(state.mobileEngineReadability.inputCount === 2 && state.mobileEngineReadability.outputCount === 3 && state.mobileEngineReadability.outputLines === 3, `mobile: production goals do not form a clear 2-to-3 flow ${JSON.stringify(state.mobileEngineReadability)}`);
+    check(!state.mobileEngineReadability.humanGateOverlap, `mobile: human authority gate overlaps its headline ${JSON.stringify(state.mobileEngineReadability)}`);
   }
   if (width === 1280) {
     check(state.arrows.length === 5 && state.arrows.every((item) => item.display === "grid" && item.zIndex >= 20), "desktop: connector overlay contract failed");

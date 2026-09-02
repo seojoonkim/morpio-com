@@ -68,7 +68,11 @@ function ProductionEngine() {
         </section>
         <section>
           <p className="engine-kicker">PRODUCTION GOALS</p>
-          <div className="engine-chain"><span>REUSABLE<br />ASSETS</span><i>+</i><span>APPROVAL<br />STAGES</span><i>→</i><span>SPEED</span><i>/</i><span>CONSISTENCY</span><i>/</i><span>REVISION<br />EFFICIENCY</span></div>
+          <div className="engine-chain">
+            <div className="engine-chain-input"><span>REUSABLE<br />ASSETS</span><i>+</i><span>APPROVAL<br />STAGES</span></div>
+            <i className="engine-chain-direction">→</i>
+            <div className="engine-chain-output"><span>SPEED</span><i>/</i><span>CONSISTENCY</span><i>/</i><span>REVISION<br />EFFICIENCY</span></div>
+          </div>
         </section>
         <section className="human-responsibility">
           <p className="engine-kicker">FINAL AUTHORITY</p>
