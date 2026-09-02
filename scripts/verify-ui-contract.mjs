@@ -29,6 +29,22 @@ for (const width of [390, 768, 1280]) {
     const footerStyle = style(".footer");
     const lightHeading = style(".hero h1");
     const darkHeading = style(".why-header h2");
+    const sectionHeadings = [...document.querySelectorAll("main section h2")].map((node) => {
+      const computed = getComputedStyle(node);
+      const section = node.closest("section");
+      const kicker = section?.querySelector(".kicker");
+      const characterTops = [...node.querySelectorAll(".heading-char")].map((character) => Math.round(character.getBoundingClientRect().top));
+      return {
+        id: node.id,
+        text: node.textContent.trim(),
+        authoredBreaks: node.querySelectorAll("br").length,
+        fontSize: parseFloat(computed.fontSize),
+        lineHeight: parseFloat(computed.lineHeight),
+        letterSpacing: parseFloat(computed.letterSpacing),
+        kickerGap: kicker ? node.getBoundingClientRect().top - kicker.getBoundingClientRect().bottom : null,
+        lineCount: new Set(characterTops).size,
+      };
+    });
     const studioParagraphs = [...document.querySelectorAll(".studio-copy p")].map((node) => {
       const computed = getComputedStyle(node);
       return { fontSize: computed.fontSize, fontFamily: computed.fontFamily };
@@ -51,6 +67,7 @@ for (const width of [390, 768, 1280]) {
       }).length,
       lightHeading: { animation: lightHeading.animationName, filter: lightHeading.filter },
       darkHeading: { animation: darkHeading.animationName, filter: darkHeading.filter },
+      sectionHeadings,
       headingCharAnimations: [...document.querySelectorAll(".heading-char")].map((node) => getComputedStyle(node).animationName),
       headingCharDurations: [...document.querySelectorAll(".heading-char")].map((node) => getComputedStyle(node).animationDuration),
       firstHeadingDelays: [...document.querySelectorAll(".hero h1 .heading-char")].slice(0, 3).map((node) => getComputedStyle(node).animationDelay),
@@ -103,6 +120,14 @@ for (const width of [390, 768, 1280]) {
   check(state.brokenHeroWords === 0, `${width}: hero word broke between animated characters`);
   check(state.lightHeading.animation === "none" && state.lightHeading.filter === "none", `${width}: light heading still animates as one block`);
   check(state.darkHeading.animation === "none" && state.darkHeading.filter === "none", `${width}: dark heading still animates as one block`);
+  const sectionTitleSize = state.sectionHeadings[0].fontSize;
+  check(state.sectionHeadings.length === 6, `${width}: expected six section titles`);
+  check(state.sectionHeadings.every((heading) => Math.abs(heading.fontSize - sectionTitleSize) < 0.1), `${width}: section title sizes diverged ${JSON.stringify(state.sectionHeadings)}`);
+  check(state.sectionHeadings.every((heading) => Math.abs(heading.lineHeight / heading.fontSize - 0.9) < 0.01), `${width}: section title line heights diverged ${JSON.stringify(state.sectionHeadings)}`);
+  check(state.sectionHeadings.every((heading) => Math.abs(heading.letterSpacing / heading.fontSize + 0.045) < 0.002), `${width}: section title tracking diverged ${JSON.stringify(state.sectionHeadings)}`);
+  check(state.sectionHeadings.every((heading) => Math.abs(heading.kickerGap - 22) < 1), `${width}: kicker/title spacing diverged ${JSON.stringify(state.sectionHeadings)}`);
+  const contactTitle = state.sectionHeadings.find((heading) => heading.id === "contact-title");
+  check(contactTitle?.authoredBreaks === 1, `${width}: contact title must retain its authored break`);
   check(state.headingCharAnimations.every((name) => name === "heading-character-glint"), `${width}: character gradient animation contract failed`);
   check(state.headingCharDurations.every((duration) => duration === "9s"), `${width}: heading glint is not restrained to 9s`);
   check(JSON.stringify(state.firstHeadingDelays) === JSON.stringify(["0s", "0.064s", "0.128s"]), `${width}: character animation is not staggered`);
@@ -129,7 +154,8 @@ for (const width of [390, 768, 1280]) {
   }
   if (width === 1280) {
     check(state.arrows.length === 5 && state.arrows.every((item) => item.display === "grid" && item.zIndex >= 20), "desktop: connector overlay contract failed");
-    check(Math.abs(state.fontSizes.hero - 103.68) < 1 && Math.abs(state.fontSizes.why - 67.392) < 1 && Math.abs(state.fontSizes.contact - 93.312) < 1, `desktop: title scale contract changed ${JSON.stringify(state.fontSizes)}`);
+    check(Math.abs(state.fontSizes.hero - 103.68) < 1 && Math.abs(sectionTitleSize - 67.392) < 1, `desktop: title scale contract changed ${JSON.stringify({ ...state.fontSizes, sectionTitleSize })}`);
+    check(contactTitle?.lineCount === 2, `desktop: contact title should follow its authored two-line break, found ${contactTitle?.lineCount}`);
   }
   await page.close();
 }
