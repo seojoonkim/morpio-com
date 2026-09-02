@@ -53,7 +53,13 @@ export default function HeadingMotion() {
     }, { threshold: 0.16, rootMargin: "0px 0px -5%" });
 
     if (engine) engineObserver.observe(engine);
+    const engineFallback = window.setTimeout(() => {
+      if (!engine || engine.classList.contains("is-engine-active")) return;
+      engine.classList.add("is-engine-active");
+      engineObserver.unobserve(engine);
+    }, 2400);
     return () => {
+      window.clearTimeout(engineFallback);
       engineObserver.disconnect();
       root.classList.remove("motion-ready");
     };

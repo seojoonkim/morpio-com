@@ -52,6 +52,7 @@ for (const width of [390, 768, 1280]) {
       lightHeading: { animation: lightHeading.animationName, filter: lightHeading.filter },
       darkHeading: { animation: darkHeading.animationName, filter: darkHeading.filter },
       headingCharAnimations: [...document.querySelectorAll(".heading-char")].map((node) => getComputedStyle(node).animationName),
+      headingCharDurations: [...document.querySelectorAll(".heading-char")].map((node) => getComputedStyle(node).animationDuration),
       firstHeadingDelays: [...document.querySelectorAll(".hero h1 .heading-char")].slice(0, 3).map((node) => getComputedStyle(node).animationDelay),
       headingCharKeyframeColors: [...new Set((document.querySelector(".hero h1 .heading-char")?.getAnimations()[0]?.effect?.getKeyframes() ?? []).map((frame) => frame.color).filter(Boolean))],
       mobileNav: {
@@ -77,6 +78,10 @@ for (const width of [390, 768, 1280]) {
       arrows,
       studioParagraphs,
       studioCtaColor: style(".studio-copy a").color,
+      heroFilmFilter: style(".hero-film").filter,
+      featureShadow: style(".feature-media").boxShadow,
+      contactPaths: document.querySelectorAll(".contact-path").length,
+      colorScheme: document.querySelector('meta[name="color-scheme"]')?.content,
       externalFonts: performance.getEntriesByType("resource").filter((entry) => /fonts\.(googleapis|gstatic)\.com/.test(entry.name)).length,
       fontsReady: document.fonts.status === "loaded" && document.fonts.check('18px "Hanken Grotesk"') && document.fonts.check('700 32px "Bricolage Grotesque"') && document.fonts.check('600 11px "Geist Mono"'),
       og: document.querySelector('meta[property="og:image"]')?.content,
@@ -99,6 +104,7 @@ for (const width of [390, 768, 1280]) {
   check(state.lightHeading.animation === "none" && state.lightHeading.filter === "none", `${width}: light heading still animates as one block`);
   check(state.darkHeading.animation === "none" && state.darkHeading.filter === "none", `${width}: dark heading still animates as one block`);
   check(state.headingCharAnimations.every((name) => name === "heading-character-glint"), `${width}: character gradient animation contract failed`);
+  check(state.headingCharDurations.every((duration) => duration === "9s"), `${width}: heading glint is not restrained to 9s`);
   check(JSON.stringify(state.firstHeadingDelays) === JSON.stringify(["0s", "0.064s", "0.128s"]), `${width}: character animation is not staggered`);
   check(state.pageFloor.html === "rgb(9, 10, 12)" && state.pageFloor.body === state.pageFloor.html && state.pageFloor.footer === state.pageFloor.html && state.pageFloor.theme === "#090A0C", `${width}: footer floor and browser theme colors diverged`);
   check(state.headingCharKeyframeColors.length >= 3, `${width}: character gradient has fewer than three color stops`);
@@ -109,6 +115,10 @@ for (const width of [390, 768, 1280]) {
   check(JSON.stringify(state.demos) === JSON.stringify(expectedExperiments), `${width}: demo experiment copy changed`);
   check(state.studioParagraphs.length === 2 && state.studioParagraphs.every((item) => item.fontSize === "18px" && item.fontFamily.includes("Hanken Grotesk")), `${width}: studio paragraph typography diverged`);
   check(state.studioCtaColor === "rgb(0, 174, 255)", `${width}: studio CTA lost key color`);
+  check(state.heroFilmFilter.includes("saturate(0.92)"), `${width}: hero film tone polish is missing`);
+  check(state.featureShadow !== "none", `${width}: original film depth treatment is missing`);
+  check(state.contactPaths === 2, `${width}: expected two partner contact paths`);
+  check(state.colorScheme === "dark", `${width}: browser color scheme is not dark`);
   check(state.externalFonts === 0 && state.fontsReady, `${width}: local font contract failed`);
   check(state.og === "https://morpio.com/og-morpio.png", `${width}: OG metadata changed`);
   if (width === 390) {
@@ -133,6 +143,18 @@ await interaction.click("button[data-video-id='tHjjSmaGcos']");
 await interaction.waitForFunction(() => document.querySelector("button[data-video-id='tHjjSmaGcos']")?.getAttribute("aria-pressed") === "true");
 check(await interaction.$eval("button[data-video-id='tHjjSmaGcos']", (node) => node.getAttribute("aria-pressed")) === "true", "hydrated language switch failed");
 await interaction.close();
+
+const fallback = await browser.newPage();
+await fallback.setViewport({ width: 1280, height: 900, deviceScaleFactor: 1 });
+await fallback.goto(url, { waitUntil: "networkidle0" });
+await fallback.waitForSelector(".engine-stage");
+await new Promise((resolve) => setTimeout(resolve, 2800));
+const engineFallback = await fallback.$eval(".engine-stage", (node) => ({
+  opacity: getComputedStyle(node).opacity,
+  active: node.closest(".engine-drawing")?.classList.contains("is-engine-active"),
+}));
+check(engineFallback.opacity === "1" && engineFallback.active, "engine drawing has no non-scroll visibility fallback");
+await fallback.close();
 await browser.close();
 
 if (failures.length) {

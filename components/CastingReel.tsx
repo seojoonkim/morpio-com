@@ -42,7 +42,7 @@ export default function CastingReel() {
             <h2>{FEATURE_FILM.title}</h2>
             <p className="feature-subtitle">{FEATURE_FILM.subtitle}</p>
           </div>
-          <p className="feature-description">An original short written, directed, and finished by Morpio. Watch in Korean, English, or Japanese.</p>
+          <p className="feature-description">A complete original short, written, directed, and finished by Morpio. Available in Korean, English, and Japanese.</p>
         </div>
         <div className="feature-media media-frame">
           {playing === "feature" ? (
@@ -62,7 +62,7 @@ export default function CastingReel() {
               <button key={item.videoId} type="button" data-video-id={item.videoId} aria-pressed={variantId === item.videoId} onClick={() => selectVariant(item.videoId)}>{item.label}</button>
             ))}
           </div>
-          <span>KO DEFAULT / CLICK TO LOAD VIDEO</span>
+          <span>ORIGINAL SHORT · 16:9 · KO / EN / JP</span>
         </div>
       </article>
     </section>

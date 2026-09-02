@@ -23,7 +23,8 @@ check(html.indexOf("31Jm1Z2fnek") < html.indexOf("vVmnsDeSwhE"), "Korean subtitl
 check(/GTO: 파라다이스 로스트/.test(html), "GTO Korean title is missing");
 for (const experiment of ["character and style consistency", "key-shot design and motion direction", "integrated video, voice, music, and sound"]) check(html.toLowerCase().includes(experiment), `demo experiment description ${experiment} is missing`);
 check(/property="og:image"[^>]*content="https:\/\/morpio\.com\/og-morpio\.png"|content="https:\/\/morpio\.com\/og-morpio\.png"[^>]*property="og:image"/.test(html), "OG image metadata is missing");
-check(/MORPIO THESIS/i.test(html), "Morpio thesis is missing");
+check(/Seoul animation studio carrying original worlds/i.test(html), "partner-facing metadata description is missing");
+check(/WHY MORPIO EXISTS/i.test(html), "partner-facing thesis label is missing");
 check(!/why-sequence|why-row|MORPIO \/ FRAME/i.test(html), "thesis must not contain artwork frames");
 check(/MORPIO TECHNOLOGY/i.test(html), "technology section is missing");
 check(/class="system-diagram engine-drawing"/.test(html), "technology system diagram is missing");
@@ -34,6 +35,13 @@ check(!/process-visual|process-mobile-frame/i.test(html), "technology section mu
 check(/ONE ENGINE[\s\S]*?EVERY FRAME/i.test(html), "production engine principle is missing");
 check(/powered by Hashed/i.test(html), "studio context is missing");
 check(/hello@morpio\.com/i.test(html), "contact email is missing");
+check(/FROM A MORPIO ORIGINAL SHORT/i.test(html), "hero film provenance caption is missing");
+check(/carry worlds from source material to finished motion/i.test(html), "partner-facing hero copy is missing");
+check(/AVAILABLE IN KOREAN, ENGLISH, AND JAPANESE/i.test(html), "verified language availability is missing");
+check(/ORIGINAL SHORT[\s\S]*?16:9[\s\S]*?KO \/ EN \/ JP/i.test(html), "distribution-ready original metadata is missing");
+check(/HAVE A WORLD THAT[\s\S]*?SHOULD BE ANIMATED/i.test(html), "world-oriented contact heading is missing");
+check(/FOR IP HOLDERS/i.test(html) && /FOR DISTRIBUTORS &amp; PLATFORMS/i.test(html), "partner contact paths are missing");
+check(/subject=IP%20Partnership/.test(html) && /subject=Distribution%20Partnership/.test(html), "partner email subjects are missing");
 check(/class="hero-last-line"[\s\S]*?class="hero-period"/.test(html), "hero period must stay attached to HERE");
 check(!/SEOUL \/ 2026|ORIGINAL ANIMATION \/ TECHNICAL DEMOS|ORIGINAL ANIMATION \/ 01|TECHNICAL DEMOS \/ 03/.test(html), "removed header/footer or section numbering text is present");
 check(/SEOUL, KOREA[\s\S]*?©/.test(html), "footer location and copyright line is missing");

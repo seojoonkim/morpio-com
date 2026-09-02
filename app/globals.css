@@ -386,9 +386,9 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   border: 0;
 }
 .hero-film, .hero-wash { position: absolute; inset: 0; }
-.hero-film { z-index: -3; width: 100%; height: 100%; object-fit: cover; object-position: 52% center; }
+.hero-film { z-index: -3; width: 100%; height: 100%; object-fit: cover; object-position: 52% center; filter:saturate(.92) contrast(1.02); }
 .hero-state { position: absolute; top: 104px; right: clamp(20px,4vw,64px); color: rgba(255,255,255,.72); font: 600 10px/1 "Geist Mono",monospace; letter-spacing:.08em; }
-.hero-wash { z-index: -2; background: linear-gradient(90deg, rgba(4,7,10,.84) 0%, rgba(4,7,10,.34) 48%, rgba(4,7,10,.08) 75%), linear-gradient(0deg, rgba(4,7,10,.8), transparent 58%); }
+.hero-wash { z-index: -2; background: linear-gradient(90deg, rgba(4,7,10,.86) 0%, rgba(4,7,10,.36) 48%, rgba(4,7,10,.1) 75%), linear-gradient(0deg, rgba(4,7,10,.84), transparent 50%); }
 .hero-copy { width: min(860px, 72vw); padding-top: 150px; animation: hero-in .8s var(--ease) both; }
 .hero h1 { margin: 20px 0 26px; max-width: 9ch; color:#fff; font-size: clamp(64.8px,9vw,138.6px); line-height: .84; letter-spacing: -.055em; text-wrap: balance; }
 .hero h1 > .hero-last-line { display:inline-flex; align-items:baseline; white-space:nowrap; color:#fff; }
@@ -413,7 +413,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .feature-subtitle { margin: 0; font-size: 18px; }
 .feature-description { margin: 0 0 5px; font-size: 17px; line-height: 1.55; }
 .media-frame { position: relative; overflow: hidden; background: #050607; }
-.feature-media { aspect-ratio: 16/9; border: 1px solid #30343b; }
+.feature-media { aspect-ratio: 16/9; border: 1px solid #30343b; box-shadow:0 40px 80px rgba(0,0,0,.45); }
 .media-frame iframe, .media-frame img { width: 100%; height: 100%; border: 0; object-fit: cover; }
 .media-poster { position: absolute; inset: 0; width: 100%; padding: 0; border: 0; background: #050607; color: white; cursor: pointer; }
 .media-poster:after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 54%,rgba(0,0,0,.72)); }
@@ -448,7 +448,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .demo-name strong { display:block; font:700 clamp(27px,3vw,45px)/1 "Bricolage Grotesque",sans-serif; letter-spacing:-.025em; }
 .demo-name small { display:block; margin-top:8px; color:#949ba5; font-size:15px; }
 .demo-name em { display:block; max-width:64ch; margin-top:11px; color:#c3c8d0; font:400 13px/1.45 "Hanken Grotesk",sans-serif; font-style:normal; }
-.demo-toggle img { height:98px; object-fit:cover; filter:saturate(.6) brightness(.7); transition:filter .25s ease, transform .25s var(--ease); }
+.demo-toggle img { height:98px; object-fit:cover; filter:saturate(.6) brightness(.7); transition:filter .4s var(--ease), transform .4s var(--ease); }
 .demo-toggle:hover img { filter:saturate(1) brightness(1); transform:scale(1.02); }
 .demo-action { justify-self:end; font:600 10px "Geist Mono",monospace; letter-spacing:.08em; }
 .demo-action i { color:var(--sky); font-style:normal; }
@@ -544,17 +544,26 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .contact { padding-top:clamp(88px,9vw,132px); padding-bottom:clamp(88px,9vw,132px); background:var(--ink); color:white; }
 .contact h2 { margin:24px 0; max-width:12ch; font-size:clamp(52.2px,8.1vw,122.4px); letter-spacing:-.05em; }
 .contact-email { display:inline-block; padding-bottom:8px; border-bottom:2px solid var(--sky); font:700 clamp(22px,3vw,42px)/1 "Bricolage Grotesque",sans-serif; }
+.contact-email { transition:color .3s ease; }
+.contact-email:hover,.contact-email:focus-visible { color:var(--sky); }
+.contact-paths { max-width:980px; margin-top:clamp(44px,6vw,76px); display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid #343943; }
+.contact-path { min-height:150px; padding:24px 28px 24px 0; display:flex; flex-direction:column; justify-content:space-between; gap:30px; border-bottom:1px solid #343943; color:#bfc5cd; transition:color .3s ease,border-color .3s ease; }
+.contact-path + .contact-path { padding-left:28px; border-left:1px solid #343943; }
+.contact-path strong { color:white; font:600 12px/1.2 "Geist Mono",monospace; letter-spacing:.08em; }
+.contact-path strong:after { content:" ↗"; color:var(--sky); font-size:14px; }
+.contact-path span { max-width:46ch; font-size:15px; line-height:1.55; }
+.contact-path:hover,.contact-path:focus-visible { color:white; border-color:var(--sky); }
 .footer { min-height:170px; }
 
 .motion-ready .heading-word { display:inline-block; white-space:nowrap; }
 .motion-ready .hero-last-line .heading-word + .heading-word { margin-left:.22em; }
 .motion-ready .heading-char {
   --heading-base:#090a0c;
-  --heading-glint:#315f70;
-  --heading-soft:#526f79;
+  --heading-glint:#294b58;
+  --heading-soft:#435a63;
   display:inline-block;
   color:var(--heading-base);
-  animation:heading-character-glint 5.4s linear infinite;
+  animation:heading-character-glint 9s linear infinite;
   animation-delay:calc(var(--char-index) * 64ms);
   will-change:color;
 }
@@ -563,8 +572,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .motion-ready .demo-index h2 .heading-char,
 .motion-ready .contact h2 .heading-char {
   --heading-base:#fff;
-  --heading-glint:#73c8ed;
-  --heading-soft:#d7f0fb;
+  --heading-glint:#67b3d4;
+  --heading-soft:#c4dce7;
 }
 @keyframes heading-character-glint {
   0%,60%,88%,100% { color:var(--heading-base); }
@@ -646,6 +655,9 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .engine-chain { flex-wrap:wrap; justify-content:flex-start; }
   .studio h2 { font-size:50.4px; }
   .contact h2 { font-size:50.4px; }
+  .contact-paths { grid-template-columns:1fr; }
+  .contact-path { min-height:132px; padding:22px 0; gap:24px; }
+  .contact-path + .contact-path { padding-left:0; border-left:0; }
   .footer { min-height:120px; flex-direction:row; align-items:center; justify-content:space-between; gap:12px; }
   .footer > p { align-self:auto; font-size:9px; letter-spacing:.025em; }
 }

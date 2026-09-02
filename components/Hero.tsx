@@ -70,11 +70,11 @@ export default function Hero() {
         aria-hidden="true"
       />
       <div className="hero-wash" />
-      <div className="hero-state">MORPIO / SEOUL</div>
+      <div className="hero-state">FROM A MORPIO ORIGINAL SHORT</div>
       <div className="hero-copy">
         <p className="kicker kicker-light"><span className="signal-dot" />MORPIO / ANIMATION STUDIO</p>
         <h1>ANOTHER WORLD<br /><span className="hero-last-line">STARTS HERE<span className="hero-period" aria-hidden="true" /></span></h1>
-        <p>We make original animation with human direction and AI-assisted production, so more stories reach the screen.</p>
+        <p>An animation studio in Seoul. We carry worlds from source material to finished motion, with human direction at every stage.</p>
       </div>
       <div className="hero-controls">
         <a href="#work">WATCH THE FILM <span>↓</span></a>
