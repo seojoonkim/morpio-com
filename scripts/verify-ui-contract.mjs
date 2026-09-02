@@ -10,12 +10,19 @@ const expectedExperiments = [
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 
-for (const width of [390, 768, 1280]) {
+for (const width of [390, 768, 950, 1280]) {
   const page = await browser.newPage();
   await page.setViewport({ width, height: 900, deviceScaleFactor: 1 });
-  await page.goto(url, { waitUntil: "networkidle0" });
-  await page.waitForSelector(".hero-period");
+  await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60_000 });
+  await page.waitForSelector(".hero-period", { visible: true });
   await page.evaluate(() => document.fonts.ready);
+  for (let artworkIndex = 0; artworkIndex < 3; artworkIndex += 1) {
+    await page.evaluate((index) => document.querySelectorAll(".thesis-art")[index]?.scrollIntoView({ behavior: "instant", block: "center" }), artworkIndex);
+    await page.waitForFunction((index) => {
+      const image = document.querySelectorAll(".thesis-art img")[index];
+      return image?.complete && image.naturalWidth > 0;
+    }, { timeout: 30_000 }, artworkIndex);
+  }
   await new Promise((resolve) => setTimeout(resolve, 250));
 
   const state = await page.evaluate(() => {
@@ -53,6 +60,18 @@ for (const width of [390, 768, 1280]) {
       display: getComputedStyle(node).display,
       zIndex: Number(getComputedStyle(node.parentElement).zIndex),
     }));
+    const thesisArt = [...document.querySelectorAll(".thesis-art img")].map((node) => {
+      const box = node.closest(".thesis-art").getBoundingClientRect();
+      return {
+        src: new URL(node.currentSrc || node.src).pathname,
+        loaded: node.complete && node.naturalWidth > 0,
+        naturalWidth: node.naturalWidth,
+        width: box.width,
+        height: box.height,
+        blend: getComputedStyle(node).mixBlendMode,
+        isolation: getComputedStyle(node.closest(".thesis-art")).isolation,
+      };
+    });
     return {
       overflow: document.documentElement.scrollWidth - innerWidth,
       heroDotSafety: innerWidth - dot.right,
@@ -93,6 +112,7 @@ for (const width of [390, 768, 1280]) {
       pauseBorder: style(".hero-controls button").borderWidth,
       demos: [...document.querySelectorAll(".demo-name em")].map((node) => node.textContent.trim()),
       arrows,
+      thesisArt,
       studioParagraphs,
       studioCtaColor: style(".studio-copy a").color,
       heroFilmFilter: style(".hero-film").filter,
@@ -111,6 +131,13 @@ for (const width of [390, 768, 1280]) {
   });
 
   check(state.overflow <= 1, `${width}: horizontal overflow ${state.overflow}px`);
+  check(state.thesisArt.length === 3, `${width}: expected three thesis artworks`);
+  check(state.thesisArt.every((art) => art.loaded && art.width >= 250 && art.height >= 170), `${width}: thesis artwork is missing or too small ${JSON.stringify(state.thesisArt)}`);
+  check(state.thesisArt.every((art) => art.naturalWidth >= art.width), `${width}: thesis artwork resolution is below rendered size ${JSON.stringify(state.thesisArt)}`);
+  check(state.thesisArt.every((art) => art.blend === "multiply"), `${width}: thesis artwork lost paper compositing`);
+  check(state.thesisArt.every((art) => art.isolation === "auto"), `${width}: thesis artwork blending is isolated from the paper surface`);
+  const thesisVariant = width <= 700 ? "-mobile.webp" : ".webp";
+  check(state.thesisArt.every((art) => art.src.endsWith(thesisVariant)), `${width}: wrong responsive thesis artwork selected ${JSON.stringify(state.thesisArt)}`);
   check(state.heroDotSafety >= 24, `${width}: hero dot safety is ${state.heroDotSafety}px`);
   check(state.heroDotGap > 0 && state.heroDotGap < state.fontSizes.hero * 0.12, `${width}: hero dot gap is unnatural ${state.heroDotGap}px`);
   check(Math.abs(state.heroDotMarginRatio - 0.09) < 0.005, `${width}: hero dot spacing ratio changed ${state.heroDotMarginRatio}`);
@@ -162,8 +189,8 @@ for (const width of [390, 768, 1280]) {
 
 const interaction = await browser.newPage();
 await interaction.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
-await interaction.goto(url, { waitUntil: "networkidle0" });
-await interaction.waitForSelector("button[data-video-id='tHjjSmaGcos']");
+await interaction.goto(url, { waitUntil: "domcontentloaded", timeout: 60_000 });
+await interaction.waitForSelector("button[data-video-id='tHjjSmaGcos']", { visible: true });
 await new Promise((resolve) => setTimeout(resolve, 350));
 await interaction.click("button[data-video-id='tHjjSmaGcos']");
 await interaction.waitForFunction(() => document.querySelector("button[data-video-id='tHjjSmaGcos']")?.getAttribute("aria-pressed") === "true");
@@ -172,9 +199,12 @@ await interaction.close();
 
 const fallback = await browser.newPage();
 await fallback.setViewport({ width: 1280, height: 900, deviceScaleFactor: 1 });
-await fallback.goto(url, { waitUntil: "networkidle0" });
-await fallback.waitForSelector(".engine-stage");
-await new Promise((resolve) => setTimeout(resolve, 2800));
+await fallback.goto(url, { waitUntil: "domcontentloaded", timeout: 60_000 });
+await fallback.waitForSelector(".engine-stage", { visible: true });
+await fallback.waitForFunction(() => {
+  const stage = document.querySelector(".engine-stage");
+  return stage && getComputedStyle(stage).opacity === "1" && stage.closest(".engine-drawing")?.classList.contains("is-engine-active");
+}, { timeout: 10_000 });
 const engineFallback = await fallback.$eval(".engine-stage", (node) => ({
   opacity: getComputedStyle(node).opacity,
   active: node.closest(".engine-drawing")?.classList.contains("is-engine-active"),
@@ -187,4 +217,4 @@ if (failures.length) {
   console.error(failures.map((failure) => `FAIL: ${failure}`).join("\n"));
   process.exit(1);
 }
-console.log("PASS: Morpio UI contract holds at 390/768/1280");
+console.log("PASS: Morpio UI contract holds at 390/768/950/1280");

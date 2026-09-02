@@ -432,10 +432,13 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .why-header h2 { margin:0; }
 .why-header > p:last-child { max-width:42ch; color:#565c65; font-size:18px; line-height:1.55; }
 .thesis-statements { border-top:1px solid var(--ink); }
-.thesis-statements article { min-height:180px; padding:32px 0; display:grid; grid-template-columns:72px minmax(240px,.8fr) minmax(280px,1fr); gap:4vw; align-items:start; border-bottom:1px solid var(--ink); }
+.thesis-statements article { min-height:260px; padding:32px 0; display:grid; grid-template-columns:72px minmax(220px,.72fr) minmax(250px,.78fr) minmax(280px,1fr); gap:clamp(22px,3vw,52px); align-items:start; border-bottom:1px solid var(--ink); }
 .thesis-statements span { color:var(--sky); font:600 11px "Geist Mono",monospace; }
 .thesis-statements h3 { margin:0; font:700 clamp(27px,3vw,45px)/.96 "Bricolage Grotesque",sans-serif; letter-spacing:-.03em; }
 .thesis-statements p { margin:0; max-width:46ch; color:#565c65; font-size:17px; line-height:1.58; }
+.thesis-art { position:relative; width:100%; aspect-ratio:4/3; margin:0; align-self:center; overflow:hidden; }
+.thesis-art picture { display:block; width:100%; height:100%; }
+.thesis-art img { object-fit:contain; mix-blend-mode:multiply; }
 
 .demo-index { padding-top: 78px; padding-bottom: clamp(92px,9vw,132px); }
 .demo-intro { display:flex; flex-direction:column; align-items:flex-start; gap:22px; padding-bottom:56px; }
@@ -600,12 +603,18 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .hero h1 { font-size:clamp(58.32px,8.1vw,124.74px); }
 }
 
+@media (min-width:901px) and (max-width:1050px) {
+  .thesis-statements article { grid-template-columns:48px minmax(220px,.8fr) 1fr; }
+  .thesis-art { grid-column:2 / 4; width:min(100%,680px); aspect-ratio:16/9; margin-top:8px; }
+}
+
 @media (max-width:900px) {
   .site-nav { height:83px; background:rgba(9,10,12,.88); backdrop-filter:blur(14px); }
   .hero-copy { width:min(760px,88vw); }
   .hero-controls { left:20px; right:20px; justify-content:flex-end; }
   .feature-heading, .why-header, .demo-intro, .process-heading { grid-template-columns:1fr; gap:22px; }
   .thesis-statements article { grid-template-columns:48px minmax(220px,.8fr) 1fr; }
+  .thesis-art { grid-column:2 / 4; width:min(100%,680px); aspect-ratio:16/9; margin-top:8px; }
   .demo-toggle { grid-template-columns:48px 1fr 130px 80px; }
   .engine-rail { grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; }
   .engine-stage { border:1px solid #3a4049; }
@@ -641,8 +650,9 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .hero-controls { bottom:28px; justify-content:space-between; }
   .feature-meta { align-items:flex-start; flex-direction:column; }
   .thesis-statements article { min-height:0; padding:26px 0; grid-template-columns:36px 1fr; gap:12px; }
-  .thesis-statements h3, .thesis-statements p { grid-column:2; }
+  .thesis-statements h3, .thesis-statements p, .thesis-art { grid-column:2; }
   .thesis-statements h3 { font-size:30px; }
+  .thesis-art { width:100%; aspect-ratio:4/3; margin-top:10px; }
   .demo-toggle { min-height:118px; grid-template-columns:32px 1fr 72px; gap:12px; }
   .demo-toggle img { width:72px; height:72px; }
   .demo-action { display:none; }
