@@ -121,8 +121,10 @@ for (const width of [390, 768, 950, 1280]) {
       lightHeading: { animation: lightHeading.animationName, filter: lightHeading.filter },
       darkHeading: { animation: darkHeading.animationName, filter: darkHeading.filter },
       sectionHeadings,
-      headingCharAnimations: [...document.querySelectorAll(".heading-char")].map((node) => getComputedStyle(node).animationName),
-      headingCharDurations: [...document.querySelectorAll(".heading-char")].map((node) => getComputedStyle(node).animationDuration),
+      demoHeadingCharAnimations: [...document.querySelectorAll(".demo-index h2 .heading-char")].map((node) => getComputedStyle(node).animationName),
+      demoHeadingCharColors: [...document.querySelectorAll(".demo-index h2 .heading-char")].map((node) => getComputedStyle(node).color),
+      animatedHeadingCharAnimations: [...document.querySelectorAll(".heading-char:not(.demo-index h2 .heading-char)")].map((node) => getComputedStyle(node).animationName),
+      animatedHeadingCharDurations: [...document.querySelectorAll(".heading-char:not(.demo-index h2 .heading-char)")].map((node) => getComputedStyle(node).animationDuration),
       firstHeadingDelays: [...document.querySelectorAll(".hero h1 .heading-char")].slice(0, 3).map((node) => getComputedStyle(node).animationDelay),
       headingCharKeyframeColors: [...new Set((document.querySelector(".hero h1 .heading-char")?.getAnimations()[0]?.effect?.getKeyframes() ?? []).map((frame) => frame.color).filter(Boolean))],
       mobileNav: {
@@ -201,8 +203,10 @@ for (const width of [390, 768, 950, 1280]) {
   check(state.sectionHeadings.every((heading) => Math.abs(heading.kickerGap - 22) < 1), `${width}: kicker/title spacing diverged ${JSON.stringify(state.sectionHeadings)}`);
   const contactTitle = state.sectionHeadings.find((heading) => heading.id === "contact-title");
   check(contactTitle?.authoredBreaks === 1, `${width}: contact title must retain its authored break`);
-  check(state.headingCharAnimations.every((name) => name === "heading-character-glint"), `${width}: character gradient animation contract failed`);
-  check(state.headingCharDurations.every((duration) => duration === "9s"), `${width}: heading glint is not restrained to 9s`);
+  check(state.demoHeadingCharAnimations.length > 0 && state.demoHeadingCharAnimations.every((name) => name === "none"), `${width}: technical demo heading still flickers`);
+  check(state.demoHeadingCharColors.every((color) => color === "rgb(255, 255, 255)"), `${width}: technical demo heading is not fixed white`);
+  check(state.animatedHeadingCharAnimations.length > 0 && state.animatedHeadingCharAnimations.every((name) => name === "heading-character-glint"), `${width}: remaining character gradient animation contract failed`);
+  check(state.animatedHeadingCharDurations.every((duration) => duration === "9s"), `${width}: remaining heading glint is not restrained to 9s`);
   check(JSON.stringify(state.firstHeadingDelays) === JSON.stringify(["0s", "0.064s", "0.128s"]), `${width}: character animation is not staggered`);
   check(state.pageFloor.html === "rgb(9, 10, 12)" && state.pageFloor.body === state.pageFloor.html && state.pageFloor.footer === state.pageFloor.html && state.pageFloor.theme === "#090A0C", `${width}: footer floor and browser theme colors diverged`);
   check(state.headingCharKeyframeColors.length >= 3, `${width}: character gradient has fewer than three color stops`);

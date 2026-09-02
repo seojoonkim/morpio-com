@@ -602,6 +602,11 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   --heading-glint:#67b3d4;
   --heading-soft:#c4dce7;
 }
+.motion-ready .demo-index h2 .heading-char {
+  animation:none;
+  color:var(--heading-base);
+  will-change:auto;
+}
 @keyframes heading-character-glint {
   0%,60%,88%,100% { color:var(--heading-base); }
   68%,80% { color:var(--heading-soft); }
