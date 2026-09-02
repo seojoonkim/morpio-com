@@ -439,6 +439,12 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .thesis-art { position:relative; width:100%; aspect-ratio:4/3; margin:0; align-self:center; overflow:hidden; }
 .thesis-art picture { display:block; width:100%; height:100%; }
 .thesis-art img { object-fit:contain; mix-blend-mode:multiply; }
+.thesis-art video { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:transparent; mix-blend-mode:multiply; opacity:0; transition:opacity .35s ease; }
+.thesis-art video.is-ready { opacity:1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .thesis-art video { display:none; }
+}
 
 .demo-index { padding-top: 78px; padding-bottom: clamp(92px,9vw,132px); }
 .demo-intro { display:flex; flex-direction:column; align-items:flex-start; gap:22px; padding-bottom:56px; }

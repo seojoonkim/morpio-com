@@ -16,12 +16,31 @@ for (const width of [390, 768, 950, 1280]) {
   await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60_000 });
   await page.waitForSelector(".hero-period", { visible: true });
   await page.evaluate(() => document.fonts.ready);
+  const thesisVideoChecks = [];
   for (let artworkIndex = 0; artworkIndex < 3; artworkIndex += 1) {
     await page.evaluate((index) => document.querySelectorAll(".thesis-art")[index]?.scrollIntoView({ behavior: "instant", block: "center" }), artworkIndex);
     await page.waitForFunction((index) => {
       const image = document.querySelectorAll(".thesis-art img")[index];
       return image?.complete && image.naturalWidth > 0;
     }, { timeout: 30_000 }, artworkIndex);
+    await page.waitForFunction((index) => {
+      const video = document.querySelectorAll(".thesis-art video")[index];
+      return video?.readyState >= 2 && !video.paused && video.currentTime > 0.05 && getComputedStyle(video).opacity === "1";
+    }, { timeout: 30_000 }, artworkIndex);
+    thesisVideoChecks.push(await page.evaluate((index) => {
+      const video = document.querySelectorAll(".thesis-art video")[index];
+      return {
+        src: new URL(video.currentSrc).pathname,
+        playing: !video.paused && video.currentTime > 0,
+        muted: video.muted,
+        loop: video.loop,
+        playsInline: video.playsInline,
+        duration: video.duration,
+        background: getComputedStyle(video).backgroundColor,
+        blend: getComputedStyle(video).mixBlendMode,
+        opacity: getComputedStyle(video).opacity,
+      };
+    }, artworkIndex));
   }
   await new Promise((resolve) => setTimeout(resolve, 250));
 
@@ -138,6 +157,11 @@ for (const width of [390, 768, 950, 1280]) {
   check(state.thesisArt.every((art) => art.isolation === "auto"), `${width}: thesis artwork blending is isolated from the paper surface`);
   const thesisVariant = width <= 700 ? "-mobile.webp" : ".webp";
   check(state.thesisArt.every((art) => art.src.endsWith(thesisVariant)), `${width}: wrong responsive thesis artwork selected ${JSON.stringify(state.thesisArt)}`);
+  const videoVariant = width <= 700 ? "-mobile.mp4" : "-h3.mp4";
+  check(thesisVideoChecks.length === 3, `${width}: expected three thesis videos`);
+  check(thesisVideoChecks.every((video) => video.src.endsWith(videoVariant)), `${width}: wrong responsive thesis video selected ${JSON.stringify(thesisVideoChecks)}`);
+  check(thesisVideoChecks.every((video) => video.playing && video.muted && video.loop && video.playsInline), `${width}: thesis video playback contract failed ${JSON.stringify(thesisVideoChecks)}`);
+  check(thesisVideoChecks.every((video) => Math.abs(video.duration - 5) < 0.05 && video.background === "rgba(0, 0, 0, 0)" && video.blend === "multiply" && video.opacity === "1"), `${width}: thesis video paper compositing/readiness changed ${JSON.stringify(thesisVideoChecks)}`);
   check(state.heroDotSafety >= 24, `${width}: hero dot safety is ${state.heroDotSafety}px`);
   check(state.heroDotGap > 0 && state.heroDotGap < state.fontSizes.hero * 0.12, `${width}: hero dot gap is unnatural ${state.heroDotGap}px`);
   check(Math.abs(state.heroDotMarginRatio - 0.09) < 0.005, `${width}: hero dot spacing ratio changed ${state.heroDotMarginRatio}`);
@@ -211,6 +235,16 @@ const engineFallback = await fallback.$eval(".engine-stage", (node) => ({
 }));
 check(engineFallback.opacity === "1" && engineFallback.active, "engine drawing has no non-scroll visibility fallback");
 await fallback.close();
+
+const reducedMotion = await browser.newPage();
+await reducedMotion.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
+await reducedMotion.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
+await reducedMotion.goto(url, { waitUntil: "domcontentloaded", timeout: 60_000 });
+await reducedMotion.$eval("#why", (node) => node.scrollIntoView({ behavior: "instant", block: "center" }));
+await new Promise((resolve) => setTimeout(resolve, 500));
+check(await reducedMotion.$$eval(".thesis-art video", (nodes) => nodes.length) === 0, "reduced-motion users should not load thesis videos");
+check(await reducedMotion.$$eval(".thesis-art img", (nodes) => nodes.length) === 3, "reduced-motion fallback images are missing");
+await reducedMotion.close();
 await browser.close();
 
 if (failures.length) {

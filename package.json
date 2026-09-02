@@ -10,8 +10,9 @@
     "verify:redesign": "node scripts/verify-redesign.mjs",
     "verify:interactions": "node scripts/verify-interactions.mjs",
     "verify:ui": "node scripts/verify-ui-contract.mjs",
+    "verify:thesis-media": "python3 scripts/verify-thesis-media.py",
     "verify:og": "python3 scripts/verify-og.py",
-    "verify:release": "npm run verify:redesign && npm run verify:interactions && npm run verify:ui && npm run verify:og"
+    "verify:release": "npm run verify:redesign && npm run verify:interactions && npm run verify:thesis-media && npm run verify:ui && npm run verify:og"
   },
   "dependencies": {
     "framer-motion": "^11.11.17",
