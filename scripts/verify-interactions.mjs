@@ -90,5 +90,38 @@ for (const id of ["why", "work", "system", "studio", "contact"]) {
 }
 await desktopNav.close();
 
-console.log(JSON.stringify({ pass: true, viewports: results, languageSwitch: "JP", singlePlayback: true, reducedMotion: true, anchorSpacing: true, stableUrl: true }));
+const shiftingNav = await browser.newPage();
+await shiftingNav.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
+await shiftingNav.goto(url, { waitUntil: "domcontentloaded" });
+await shiftingNav.click('.site-nav a[href="#system"]');
+await new Promise((resolve) => setTimeout(resolve, 120));
+await shiftingNav.evaluate(() => {
+  const spacer = document.createElement("div");
+  spacer.dataset.anchorShiftProbe = "true";
+  spacer.style.height = "120px";
+  document.querySelector("#system")?.before(spacer);
+});
+await new Promise((resolve) => setTimeout(resolve, 1500));
+const shiftedLanding = await shiftingNav.evaluate(() => {
+  const header = document.querySelector(".site-nav").getBoundingClientRect();
+  const kicker = document.querySelector("#system .kicker").getBoundingClientRect();
+  return kicker.top - header.bottom;
+});
+if (shiftedLanding < 48 || shiftedLanding > 58) throw new Error(`One-click navigation did not recover from a late layout shift: ${shiftedLanding}px`);
+await shiftingNav.close();
+
+const interruptedNav = await browser.newPage();
+await interruptedNav.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
+await interruptedNav.goto(url, { waitUntil: "domcontentloaded" });
+await interruptedNav.click('.site-nav a[href="#system"]');
+await new Promise((resolve) => setTimeout(resolve, 200));
+await interruptedNav.mouse.wheel({ deltaY: -500 });
+await new Promise((resolve) => setTimeout(resolve, 120));
+const interruptedPosition = await interruptedNav.evaluate(() => scrollY);
+await new Promise((resolve) => setTimeout(resolve, 1600));
+const settledInterruptedPosition = await interruptedNav.evaluate(() => scrollY);
+if (Math.abs(settledInterruptedPosition - interruptedPosition) > 2) throw new Error(`Navigation kept moving after user input: ${interruptedPosition}px → ${settledInterruptedPosition}px`);
+await interruptedNav.close();
+
+console.log(JSON.stringify({ pass: true, viewports: results, languageSwitch: "JP", singlePlayback: true, reducedMotion: true, anchorSpacing: true, lateLayoutShiftRecovery: true, userInterruption: true, stableUrl: true }));
 await browser.close();
