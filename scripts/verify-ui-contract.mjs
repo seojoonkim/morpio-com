@@ -43,10 +43,16 @@ for (const width of [390, 768, 950, 1280]) {
     }, artworkIndex));
   }
   await new Promise((resolve) => setTimeout(resolve, 250));
+  await page.evaluate(() => document.querySelector(".engine-drawing")?.scrollIntoView({ behavior: "instant", block: "center" }));
+  await new Promise((resolve) => setTimeout(resolve, 1800));
 
   const state = await page.evaluate(() => {
     const rect = (selector) => document.querySelector(selector).getBoundingClientRect();
     const style = (selector) => getComputedStyle(document.querySelector(selector));
+    const animation = (selector) => {
+      const node = document.querySelector(selector);
+      return node ? getComputedStyle(node).animationName : "missing";
+    };
     const dot = rect(".hero-period");
     const heroTitleChars = [...document.querySelectorAll(".hero-last-line .heading-char")];
     const lastHeroCharacter = heroTitleChars.at(-1).getBoundingClientRect();
@@ -106,6 +112,26 @@ for (const width of [390, 768, 950, 1280]) {
         isolation: getComputedStyle(node.closest(".thesis-art")).isolation,
       };
     });
+    const engineGeometry = (() => {
+      const route = [...document.querySelectorAll(".flow-layout")].find((node) => getComputedStyle(node).display !== "none")?.querySelector(".flow-route");
+      if (!route) return { textIntersections: -1, maxPortDistance: -1 };
+      const matrix = route.getScreenCTM();
+      const points = [];
+      for (let offset = 0; offset <= route.getTotalLength(); offset += 1) {
+        const point = route.getPointAtLength(offset);
+        points.push(new DOMPoint(point.x, point.y).matrixTransform(matrix));
+      }
+      const textRects = [...document.querySelectorAll(".stage-index span,.stage-index b,.stage-title strong,.engine-stage p")].map((node) => node.getBoundingClientRect());
+      const portDistances = [...document.querySelectorAll(".stage-port")].map((node) => {
+        const box = node.getBoundingClientRect();
+        const center = { x: box.left + box.width / 2, y: box.top + box.height / 2 };
+        return Math.min(...points.map((point) => Math.hypot(point.x - center.x, point.y - center.y)));
+      });
+      return {
+        textIntersections: points.filter((point) => textRects.some((box) => point.x > box.left && point.x < box.right && point.y > box.top && point.y < box.bottom)).length,
+        maxPortDistance: Math.max(...portDistances),
+      };
+    })();
     return {
       overflow: document.documentElement.scrollWidth - innerWidth,
       heroDotSafety: innerWidth - dot.right,
@@ -148,6 +174,17 @@ for (const width of [390, 768, 950, 1280]) {
       pauseBorder: style(".hero-controls button").borderWidth,
       demos: [...document.querySelectorAll(".demo-name em")].map((node) => node.textContent.trim()),
       arrows,
+      engineGeometry,
+      engineFlow: {
+        svg: document.querySelectorAll(".engine-flow").length,
+        paths: document.querySelectorAll(".engine-flow .flow-route").length,
+        pulses: document.querySelectorAll(".engine-flow .flow-pulse").length,
+        ports: document.querySelectorAll(".stage-port").length,
+        stageData: [...document.querySelectorAll(".engine-stage")].map((node) => node.getAttribute("data-phase")),
+        routeAnimation: animation(".engine-flow .flow-pulse"),
+        scanAnimation: animation(".engine-bus-scan"),
+        gateAnimation: animation(".human-gate-ring"),
+      },
       thesisArt,
       studioParagraphs,
       studioCtaColor: style(".studio-copy a").color,
@@ -222,6 +259,13 @@ for (const width of [390, 768, 950, 1280]) {
   check(state.contactPaths === 2, `${width}: expected two partner contact paths`);
   check(state.heroPartner?.text.includes("START A PROJECT") && state.heroPartner.href === "#contact" && state.heroPartner.visible, `${width}: hero project CTA is missing or unreachable`);
   check(state.brokenStageWords.length === 0, `${width}: process stage words break mid-word ${JSON.stringify(state.brokenStageWords)}`);
+  check(state.engineFlow.svg === 1 && state.engineFlow.paths >= 3 && state.engineFlow.pulses >= 3, `${width}: production signal network is incomplete ${JSON.stringify(state.engineFlow)}`);
+  check(state.engineFlow.ports === 6 && JSON.stringify(state.engineFlow.stageData) === JSON.stringify(["01", "02", "03", "04", "05", "06"]), `${width}: production stage ports/data are incomplete`);
+  check(state.engineFlow.routeAnimation === "engine-route-flow", `${width}: production route is not moving`);
+  check(state.engineFlow.scanAnimation === "engine-bus-scan", `${width}: central control scan is not moving`);
+  check(state.engineFlow.gateAnimation === "human-gate-lock", `${width}: human authority gate is not active`);
+  check(state.engineGeometry.textIntersections === 0, `${width}: production route crosses stage text ${JSON.stringify(state.engineGeometry)}`);
+  check(state.engineGeometry.maxPortDistance <= 3, `${width}: production route misses a stage port ${JSON.stringify(state.engineGeometry)}`);
   check(state.colorScheme === "dark", `${width}: browser color scheme is not dark`);
   check(state.externalFonts === 0 && state.fontsReady, `${width}: local font contract failed`);
   check(state.og === "https://morpio.com/og-morpio.png", `${width}: OG metadata changed`);
@@ -285,6 +329,19 @@ await reducedMotion.$eval("#why", (node) => node.scrollIntoView({ behavior: "ins
 await new Promise((resolve) => setTimeout(resolve, 500));
 check(await reducedMotion.$$eval(".thesis-art video", (nodes) => nodes.length) === 0, "reduced-motion users should not load thesis videos");
 check(await reducedMotion.$$eval(".thesis-art img", (nodes) => nodes.length) === 3, "reduced-motion fallback images are missing");
+const reducedEngineMotion = await reducedMotion.evaluate(() => {
+  const animation = (selector) => {
+    const node = document.querySelector(selector);
+    return node ? getComputedStyle(node).animationName : "missing";
+  };
+  return {
+    route: animation(".engine-flow .flow-pulse"),
+    scan: animation(".engine-bus-scan"),
+    gate: animation(".human-gate-ring"),
+    stagesVisible: [...document.querySelectorAll(".engine-stage")].every((node) => getComputedStyle(node).opacity === "1"),
+  };
+});
+check(reducedEngineMotion.route === "none" && reducedEngineMotion.scan === "none" && reducedEngineMotion.gate === "none" && reducedEngineMotion.stagesVisible, `reduced-motion production engine is not fully static ${JSON.stringify(reducedEngineMotion)}`);
 await reducedMotion.close();
 await browser.close();
 

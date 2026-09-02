@@ -21,7 +21,8 @@ function ProductionEngine() {
 
       <div className="engine-rail" aria-label="Production stages">
         {STAGES.map(([number, line1, line2, detail], index) => (
-          <article className={`engine-stage${index === STAGES.length - 1 ? " is-human" : ""}`} key={number}>
+          <article className={`engine-stage${index === STAGES.length - 1 ? " is-human" : ""}`} data-phase={number} key={number}>
+            <span className="stage-port" aria-hidden="true"><i /></span>
             <div className="stage-index"><span>PHASE</span><b>{number}</b></div>
             <div className="stage-title"><strong>{line1}</strong><strong>{line2}</strong></div>
             <p>{detail}</p>
@@ -31,11 +32,32 @@ function ProductionEngine() {
         <div className="engine-connectors" aria-hidden="true">
           {STAGES.slice(0, -1).map(([number]) => <span key={number}>→</span>)}
         </div>
+        <svg className="engine-flow" viewBox="0 0 600 558" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <filter id="engine-signal-glow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="2.4" result="blur" />
+              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
+          </defs>
+          <g className="flow-layout flow-desktop">
+            <path className="flow-route" pathLength="100" d="M 50 43 H 550" />
+            <path className="flow-pulse" pathLength="100" d="M 50 43 H 550" />
+          </g>
+          <g className="flow-layout flow-tablet">
+            <path className="flow-route" pathLength="100" d="M 100 20 H 590 V 279 H 10 V 314 H 500" />
+            <path className="flow-pulse" pathLength="100" d="M 100 20 H 590 V 279 H 10 V 314 H 500" />
+          </g>
+          <g className="flow-layout flow-mobile">
+            <path className="flow-route" pathLength="100" d="M 150 16 H 590 V 182 H 10 V 210 H 590 V 376 H 10 V 404 H 450" />
+            <path className="flow-pulse" pathLength="100" d="M 150 16 H 590 V 182 H 10 V 210 H 590 V 376 H 10 V 404 H 450" />
+          </g>
+        </svg>
       </div>
 
       <div className="engine-bus" aria-label="Central layer">
+        <span className="engine-bus-scan" aria-hidden="true" />
         <div className="bus-label"><span>CENTRAL LAYER</span><strong>ONE SET OF RULES<br />ACROSS EVERY SHOT.</strong></div>
-        <div className="bus-controls">{CONTROLS.map((control, index) => <span key={control}><b>{String(index + 1).padStart(2, "0")}</b>{control}</span>)}</div>
+        <div className="bus-controls">{CONTROLS.map((control, index) => <span data-control={String(index + 1).padStart(2, "0")} key={control}><b>{String(index + 1).padStart(2, "0")}</b>{control}<i aria-hidden="true" /></span>)}</div>
       </div>
 
       <div className="engine-ledger">
@@ -50,6 +72,7 @@ function ProductionEngine() {
         </section>
         <section className="human-responsibility">
           <p className="engine-kicker">FINAL AUTHORITY</p>
+          <span className="human-gate" aria-hidden="true"><i className="human-gate-ring" /><i className="human-gate-core" /><b>HUMAN / LOCK</b></span>
           <strong>A HUMAN DIRECTOR<br />MAKES THE FINAL CALL.</strong>
           <p>Directorial judgment and final quality stay with people on our team, not with a model.</p>
         </section>
