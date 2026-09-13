@@ -53,7 +53,7 @@ try {
     result.httpStatus = response?.status() ?? null;
     check(result.httpStatus === 200, `${viewport.name}: /logo HTTP ${result.httpStatus}`);
     check(result.background === "rgb(255, 255, 255)", `${viewport.name}: page background is not white`);
-    check(result.headingText === "Morpio", `${viewport.name}: h1 text is not Morpio`);
+    check(result.headingText === "morpio", `${viewport.name}: h1 text is not Morpio`);
     check(result.fontFamily?.includes("Bricolage Grotesque"), `${viewport.name}: h1 font family is not Hanken Grotesk`);
     check(result.fontWeight === "700", `${viewport.name}: h1 font weight is not 700`);
     check(result.periodColor === "rgb(0, 174, 255)", `${viewport.name}: period is not brand blue`);
