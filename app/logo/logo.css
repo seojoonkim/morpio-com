@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Hanken Grotesk";
-  src: url("/fonts/hanken-700.ttf") format("truetype");
+  font-family: "Bricolage Grotesque";
+  src: url("/fonts/bricolage-700.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: block;
@@ -14,7 +14,7 @@
   overflow: hidden;
   background: #fff;
   color: #090a0c;
-  font-family: "Hanken Grotesk", sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
 }
 
 .logo-stage {
@@ -28,7 +28,7 @@
   margin: 0;
   max-width: 100%;
   color: #090a0c;
-  font-family: "Hanken Grotesk", sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: clamp(72px, 16vw, 248px);
   font-weight: 700;
   line-height: .82;

@@ -26,14 +26,14 @@ try {
     });
     const result = await page.evaluate(async () => {
       await document.fonts.ready;
-      await document.fonts.load('700 1em "Hanken Grotesk"');
+      await document.fonts.load('700 1em "Bricolage Grotesque"');
       const heading = document.querySelector("h1");
       const period = document.querySelector(".logo-period");
       const info = document.querySelector("[data-font-info]");
       const style = heading ? getComputedStyle(heading) : null;
       const periodStyle = period ? getComputedStyle(period) : null;
-      const loadedEntry = [...document.fonts].find((font) => font.family === "Hanken Grotesk" && font.weight === "700");
-      const fontResource = performance.getEntriesByType("resource").find((entry) => entry.name.endsWith("/fonts/hanken-700.ttf"));
+      const loadedEntry = [...document.fonts].find((font) => font.family === "Bricolage Grotesque" && font.weight === "700");
+      const fontResource = performance.getEntriesByType("resource").find((entry) => entry.name.endsWith("/fonts/bricolage-700.ttf"));
       return {
         status: document.body.dataset.logoReady || null,
         responseOk: true,
@@ -43,7 +43,7 @@ try {
         fontWeight: style?.fontWeight || null,
         periodColor: periodStyle?.backgroundColor || null,
         overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-        fontLoaded: document.fonts.check('700 1em "Hanken Grotesk"') && loadedEntry?.status === "loaded" && Boolean(fontResource),
+        fontLoaded: document.fonts.check('700 1em "Bricolage Grotesque"') && loadedEntry?.status === "loaded" && Boolean(fontResource),
         fontInfoVisible: Boolean(info && info.getBoundingClientRect().width > 0 && info.getBoundingClientRect().height > 0 && getComputedStyle(info).visibility !== "hidden"),
         title: document.title,
         description: document.querySelector('meta[name="description"]')?.content || null,
@@ -54,7 +54,7 @@ try {
     check(result.httpStatus === 200, `${viewport.name}: /logo HTTP ${result.httpStatus}`);
     check(result.background === "rgb(255, 255, 255)", `${viewport.name}: page background is not white`);
     check(result.headingText === "Morpio", `${viewport.name}: h1 text is not Morpio`);
-    check(result.fontFamily?.includes("Hanken Grotesk"), `${viewport.name}: h1 font family is not Hanken Grotesk`);
+    check(result.fontFamily?.includes("Bricolage Grotesque"), `${viewport.name}: h1 font family is not Hanken Grotesk`);
     check(result.fontWeight === "700", `${viewport.name}: h1 font weight is not 700`);
     check(result.periodColor === "rgb(0, 174, 255)", `${viewport.name}: period is not brand blue`);
     check(result.overflow <= 0, `${viewport.name}: horizontal overflow is ${result.overflow}px`);

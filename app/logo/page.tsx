@@ -17,8 +17,8 @@ export default function LogoPage() {
       </div>
       <footer className="logo-spec" data-font-info>
         <span>TYPOGRAPHY / WORDMARK</span>
-        <strong>Hanken Grotesk</strong>
-        <span>Bold · 700 · Local TTF /fonts/hanken-700.ttf</span>
+        <strong>Bricolage Grotesque</strong>
+        <span>Bold · 700 · Local TTF /fonts/bricolage-700.ttf</span>
       </footer>
     </main>
   );
