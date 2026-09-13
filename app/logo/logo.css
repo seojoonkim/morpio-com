@@ -1,0 +1,70 @@
+@font-face {
+  font-family: "Hanken Grotesk";
+  src: url("/fonts/hanken-700.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+.logo-page {
+  --logo-blue: #00aeff;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  overflow: hidden;
+  background: #fff;
+  color: #090a0c;
+  font-family: "Hanken Grotesk", sans-serif;
+}
+
+.logo-stage {
+  min-height: min(78svh, 760px);
+  display: grid;
+  place-items: center;
+  padding: clamp(32px, 8vw, 96px) clamp(20px, 6vw, 80px);
+}
+
+.logo-wordmark {
+  margin: 0;
+  max-width: 100%;
+  color: #090a0c;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: clamp(72px, 16vw, 248px);
+  font-weight: 700;
+  line-height: .82;
+  letter-spacing: -.075em;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.logo-period { display: inline-block; width: .12em; height: .12em; margin-left: .045em; border-radius: 50%; background: var(--logo-blue); vertical-align: .02em; }
+
+.logo-spec {
+  width: min(100% - 40px, 1180px);
+  margin: 0 auto;
+  padding: 18px 0 24px;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  border-top: 1px solid #d9dde4;
+  color: #696f7a;
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.logo-spec strong { color: #090a0c; font-size: 12px; }
+
+@media (max-width: 600px) {
+  .logo-stage { min-height: 76svh; padding-inline: 20px; }
+  .logo-wordmark { font-size: clamp(62px, 21vw, 110px); letter-spacing: -.08em; }
+  .logo-spec { width: calc(100% - 40px); display: grid; gap: 7px; padding-bottom: 20px; line-height: 1.35; }
+  .logo-spec strong { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-page * { transition: none !important; animation: none !important; }
+}
+
+html:has(.logo-page), body:has(.logo-page) { background: #fff; }
