@@ -50,7 +50,7 @@ export default function CastingReel() {
           ) : (
             <button type="button" className="media-poster" onClick={() => play("feature")} aria-label={`Play ${FEATURE_FILM.title} in ${variant.label}`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/work/tail-stopped.jpg" alt="" />
+              <img src={`/work/tail-trailer-${variant.label.toLowerCase()}.jpg`} alt="" />
               <span className="round-play" aria-hidden="true" />
               <span className="poster-caption">PLAY OFFICIAL TRAILER</span>
             </button>

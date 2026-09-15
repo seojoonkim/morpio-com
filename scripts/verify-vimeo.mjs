@@ -13,6 +13,11 @@ try {
   for(const [label,id,hash] of expected) {
    await page.click(`button[data-video-id="${id}"]`);
    assert.equal(await page.$('[data-feature-film] iframe'),null);
+   await page.waitForFunction(() => {const i=document.querySelector('[data-feature-film] .media-poster img');return i?.complete && i.naturalWidth > 0;});
+   const poster=await page.$eval('[data-feature-film] .media-poster img',n=>({src:new URL(n.src).pathname,width:n.naturalWidth,height:n.naturalHeight}));
+   assert.equal(poster.src,`/work/tail-trailer-${label.toLowerCase()}.jpg`);
+   assert(poster.width >= 1280);
+   console.log(JSON.stringify({width,label,poster}));
    await page.click('[data-feature-film] .media-poster');
    await page.waitForSelector('[data-feature-film] iframe');
    const src=await page.$eval('[data-feature-film] iframe',n=>n.src);
