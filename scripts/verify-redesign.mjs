@@ -20,7 +20,7 @@ check(html.indexOf('id="why"') < html.indexOf('id="work"') && html.indexOf('id="
 check(count(/data-feature-film=/g) === 1, `expected 1 featured original, found ${count(/data-feature-film=/g)}`);
 check(count(/data-demo-row=/g) === 3, `expected 3 technical demo rows, found ${count(/data-demo-row=/g)}`);
 check(count(/data-video-id=/g) === 3, `expected 3 language controls, found ${count(/data-video-id=/g)}`);
-check(html.indexOf("31Jm1Z2fnek") < html.indexOf("vVmnsDeSwhE"), "Korean subtitles are not the default variant");
+check(html.indexOf("1226530757") < html.indexOf("1226620443"), "Korean subtitles are not the default variant");
 check(/GTO: 파라다이스 로스트/.test(html), "GTO Korean title is missing");
 for (const experiment of ["character and style consistency", "key-shot design and motion direction", "integrated video, voice, music, and sound"]) check(html.toLowerCase().includes(experiment), `demo experiment description ${experiment} is missing`);
 check(/property="og:image"[^>]*content="https:\/\/morpio\.com\/og-morpio\.png"|content="https:\/\/morpio\.com\/og-morpio\.png"[^>]*property="og:image"/.test(html), "OG image metadata is missing");

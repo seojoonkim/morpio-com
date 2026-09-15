@@ -37,7 +37,7 @@ for (const viewport of [
 
 await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
 await page.goto(url, { waitUntil: "domcontentloaded" });
-await page.waitForSelector("button[data-video-id='31Jm1Z2fnek']");
+await page.waitForSelector("button[data-video-id='1226530757']");
 const urlBeforeNav = page.url();
 for (const id of ["why", "work", "system", "studio", "contact"]) {
   await page.click(`.site-nav a[href="#${id}"]`);
@@ -51,15 +51,15 @@ for (const id of ["why", "work", "system", "studio", "contact"]) {
   if (landing < 48 || (!["studio", "contact"].includes(id) && landing > 58)) throw new Error(`${id} mobile anchor gap is awkward: ${landing}px`);
 }
 if (await page.$eval(".round-play", (el) => el.textContent?.trim())) throw new Error("Play control contains a platform-rendered glyph");
-const defaultLanguage = await page.$eval("button[data-video-id='31Jm1Z2fnek']", (el) => el.getAttribute("aria-pressed"));
+const defaultLanguage = await page.$eval("button[data-video-id='1226530757']", (el) => el.getAttribute("aria-pressed"));
 if (defaultLanguage !== "true") throw new Error("Korean subtitles are not selected by default");
-await page.click("button[data-video-id='tHjjSmaGcos']");
-const japanese = await page.$eval("button[data-video-id='tHjjSmaGcos']", (el) => el.getAttribute("aria-pressed"));
+await page.click("button[data-video-id='1226530758']");
+const japanese = await page.$eval("button[data-video-id='1226530758']", (el) => el.getAttribute("aria-pressed"));
 if (japanese !== "true") throw new Error("Language switch failed");
 await page.click("[data-feature-film] .media-poster");
 await page.waitForSelector("[data-feature-film] iframe");
 const featureSrc = await page.$eval("[data-feature-film] iframe", (el) => el.getAttribute("src"));
-if (!featureSrc?.includes("tHjjSmaGcos")) throw new Error("Feature playback failed");
+if (!featureSrc?.includes("1226530758")) throw new Error("Feature playback failed");
 await page.click("[data-demo-row] .demo-toggle");
 const expanded = await page.$eval("[data-demo-row] .demo-toggle", (el) => el.getAttribute("aria-expanded"));
 if (expanded !== "true") throw new Error("Demo expansion failed");

@@ -42,17 +42,17 @@ export default function CastingReel() {
             <h2>{FEATURE_FILM.title}</h2>
             <p className="feature-subtitle">{FEATURE_FILM.subtitle}</p>
           </div>
-          <p className="feature-description">A complete original short, written, directed, and finished by Morpio. Available in Korean, English, and Japanese.</p>
+          <p className="feature-description">The official trailer for Morpio’s original animated film, currently in production. Available in Korean, Japanese, and English.</p>
         </div>
         <div className="feature-media media-frame">
           {playing === "feature" ? (
-            <iframe src={embedUrl(variantId)} title={`${FEATURE_FILM.title} · ${variant.label}`} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />
+            <iframe src={`https://player.vimeo.com/video/${variant.videoId}?h=${variant.hash}&autoplay=1`} title={`${FEATURE_FILM.title} · ${variant.label}`} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />
           ) : (
             <button type="button" className="media-poster" onClick={() => play("feature")} aria-label={`Play ${FEATURE_FILM.title} in ${variant.label}`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={variantId === FEATURE_FILM.variants[0].videoId ? "/work/tail-stopped.jpg" : thumbUrl(variantId)} alt="" />
+              <img src="/work/tail-stopped.jpg" alt="" />
               <span className="round-play" aria-hidden="true" />
-              <span className="poster-caption">PLAY ORIGINAL FILM</span>
+              <span className="poster-caption">PLAY OFFICIAL TRAILER</span>
             </button>
           )}
         </div>
@@ -62,7 +62,7 @@ export default function CastingReel() {
               <button key={item.videoId} type="button" data-video-id={item.videoId} aria-pressed={variantId === item.videoId} onClick={() => selectVariant(item.videoId)}>{item.label}</button>
             ))}
           </div>
-          <span>ORIGINAL SHORT · 16:9 · KO / EN / JP</span>
+          <span>OFFICIAL TRAILER · 16:9 · KO / JP / EN</span>
         </div>
       </article>
     </section>

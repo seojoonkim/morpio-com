@@ -303,7 +303,7 @@ for (const width of [390, 768, 950, 1280]) {
 const interaction = await browser.newPage();
 await interaction.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
 await interaction.goto(url, { waitUntil: "domcontentloaded", timeout: 60_000 });
-await interaction.waitForSelector("button[data-video-id='tHjjSmaGcos']", { visible: true });
+await interaction.waitForSelector("button[data-video-id='1226530758']", { visible: true });
 await new Promise((resolve) => setTimeout(resolve, 350));
 await interaction.click(".hero-partner-link");
 await interaction.waitForFunction(() => {
@@ -316,9 +316,9 @@ const contactLanding = await interaction.evaluate(() => {
   return { navBottom: nav.bottom, kickerTop: kicker.top };
 });
 check(contactLanding.kickerTop >= contactLanding.navBottom + 20, `hero project CTA hides the contact label beneath navigation ${JSON.stringify(contactLanding)}`);
-await interaction.click("button[data-video-id='tHjjSmaGcos']");
-await interaction.waitForFunction(() => document.querySelector("button[data-video-id='tHjjSmaGcos']")?.getAttribute("aria-pressed") === "true");
-check(await interaction.$eval("button[data-video-id='tHjjSmaGcos']", (node) => node.getAttribute("aria-pressed")) === "true", "hydrated language switch failed");
+await interaction.click("button[data-video-id='1226530758']");
+await interaction.waitForFunction(() => document.querySelector("button[data-video-id='1226530758']")?.getAttribute("aria-pressed") === "true");
+check(await interaction.$eval("button[data-video-id='1226530758']", (node) => node.getAttribute("aria-pressed")) === "true", "hydrated language switch failed");
 await interaction.close();
 
 const fallback = await browser.newPage();

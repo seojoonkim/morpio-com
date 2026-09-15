@@ -1,6 +1,7 @@
 export type ReelVariant = {
   label: "KO" | "EN" | "JP";
   videoId: string;
+  hash: string;
 };
 
 export type FeatureFilm = {
@@ -25,9 +26,9 @@ export const FEATURE_FILM: FeatureFilm = {
   title: "尻尾が止まったあとも",
   subtitle: "꼬리가 멈춘 뒤에",
   variants: [
-    { label: "KO", videoId: "31Jm1Z2fnek" },
-    { label: "EN", videoId: "vVmnsDeSwhE" },
-    { label: "JP", videoId: "tHjjSmaGcos" },
+    { label: "KO", videoId: "1226530757", hash: "b828cbdcc6" },
+    { label: "JP", videoId: "1226530758", hash: "5c2c86e9ae" },
+    { label: "EN", videoId: "1226620443", hash: "34dea26cfc" },
   ],
 };
 
