@@ -50,6 +50,9 @@ for (const id of ["why", "work", "system", "studio", "contact"]) {
   }, id);
   if (landing < 48 || (!["studio", "contact"].includes(id) && landing > 58)) throw new Error(`${id} mobile anchor gap is awkward: ${landing}px`);
 }
+await new Promise((resolve) => setTimeout(resolve, 900));
+const hiddenReveals = await page.$$eval("[data-reveal]", (nodes) => nodes.filter((node) => node.getBoundingClientRect().bottom < innerHeight && getComputedStyle(node).opacity !== "1").length);
+if (hiddenReveals) throw new Error(`${hiddenReveals} revealed blocks stayed hidden after anchor navigation`);
 if (await page.$eval(".round-play", (el) => el.textContent?.trim())) throw new Error("Play control contains a platform-rendered glyph");
 const defaultLanguage = await page.$eval("button[data-video-id='1226530757']", (el) => el.getAttribute("aria-pressed"));
 if (defaultLanguage !== "true") throw new Error("Korean subtitles are not selected by default");

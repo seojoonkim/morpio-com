@@ -46,6 +46,35 @@ export default function HeadingMotion() {
       });
     });
 
+    const glintObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-glinting");
+        glintObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.3 });
+    headings.forEach((heading) => glintObserver.observe(heading));
+
+    // Position-based (not intersection-based) so blocks jumped past by anchor navigation never stay hidden.
+    let revealTargets = [...document.querySelectorAll<HTMLElement>("[data-reveal]")];
+    let revealFrame = 0;
+    const settleReveals = () => {
+      revealFrame = 0;
+      const line = window.innerHeight * 0.94;
+      revealTargets = revealTargets.filter((target) => {
+        if (target.getBoundingClientRect().top > line) return true;
+        target.classList.add("is-in");
+        return false;
+      });
+      if (!revealTargets.length) window.removeEventListener("scroll", queueReveals);
+    };
+    const queueReveals = () => {
+      if (!revealFrame) revealFrame = window.requestAnimationFrame(settleReveals);
+    };
+    window.addEventListener("scroll", queueReveals, { passive: true });
+    window.addEventListener("resize", queueReveals);
+    settleReveals();
+
     const engineObserver = new IntersectionObserver(([entry]) => {
       if (!entry?.isIntersecting) return;
       entry.target.classList.add("is-engine-active");
@@ -61,6 +90,10 @@ export default function HeadingMotion() {
     return () => {
       window.clearTimeout(engineFallback);
       engineObserver.disconnect();
+      glintObserver.disconnect();
+      window.removeEventListener("scroll", queueReveals);
+      window.removeEventListener("resize", queueReveals);
+      window.cancelAnimationFrame(revealFrame);
       root.classList.remove("motion-ready");
     };
   }, []);

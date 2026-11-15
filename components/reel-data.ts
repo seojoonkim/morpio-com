@@ -7,6 +7,7 @@ export type ReelVariant = {
 export type FeatureFilm = {
   id: string;
   title: string;
+  titlePhrases: string[];
   subtitle: string;
   variants: ReelVariant[];
 };
@@ -23,7 +24,8 @@ export type DemoFilm = {
 
 export const FEATURE_FILM: FeatureFilm = {
   id: "after-the-tail-stopped",
-  title: "尻尾が止まったあとも",
+  title: "尻尾が止まったあとに",
+  titlePhrases: ["尻尾が", "止まった", "あとに"],
   subtitle: "꼬리가 멈춘 뒤에",
   variants: [
     { label: "KO", videoId: "1226530757", hash: "b828cbdcc6" },

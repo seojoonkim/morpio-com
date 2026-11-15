@@ -45,6 +45,9 @@ for (const width of [390, 768, 950, 1280]) {
   await new Promise((resolve) => setTimeout(resolve, 250));
   await page.evaluate(() => document.querySelector(".engine-drawing")?.scrollIntoView({ behavior: "instant", block: "center" }));
   await new Promise((resolve) => setTimeout(resolve, 1800));
+  // Headings glint once when first seen, so bring one into view before sampling the glint contract.
+  await page.evaluate(() => document.querySelector("#why-title")?.scrollIntoView({ behavior: "instant", block: "center" }));
+  await page.waitForFunction(() => document.querySelector("#why-title")?.classList.contains("is-glinting"), { timeout: 10_000 });
 
   const state = await page.evaluate(() => {
     const rect = (selector) => document.querySelector(selector).getBoundingClientRect();
@@ -149,10 +152,29 @@ for (const width of [390, 768, 950, 1280]) {
       sectionHeadings,
       demoHeadingCharAnimations: [...document.querySelectorAll(".demo-index h2 .heading-char")].map((node) => getComputedStyle(node).animationName),
       demoHeadingCharColors: [...document.querySelectorAll(".demo-index h2 .heading-char")].map((node) => getComputedStyle(node).color),
-      animatedHeadingCharAnimations: [...document.querySelectorAll(".heading-char:not(.demo-index h2 .heading-char)")].map((node) => getComputedStyle(node).animationName),
-      animatedHeadingCharDurations: [...document.querySelectorAll(".heading-char:not(.demo-index h2 .heading-char)")].map((node) => getComputedStyle(node).animationDuration),
-      firstHeadingDelays: [...document.querySelectorAll(".hero h1 .heading-char")].slice(0, 3).map((node) => getComputedStyle(node).animationDelay),
-      headingCharKeyframeColors: [...new Set((document.querySelector(".hero h1 .heading-char")?.getAnimations()[0]?.effect?.getKeyframes() ?? []).map((frame) => frame.color).filter(Boolean))],
+      animatedHeadingCharAnimations: [...document.querySelectorAll(".is-glinting .heading-char:not(.demo-index h2 .heading-char)")].map((node) => getComputedStyle(node).animationName),
+      animatedHeadingCharDurations: [...document.querySelectorAll(".is-glinting .heading-char:not(.demo-index h2 .heading-char)")].map((node) => getComputedStyle(node).animationDuration),
+      headingCharIterations: [...new Set([...document.querySelectorAll(".heading-char")].map((node) => getComputedStyle(node).animationIterationCount))],
+      idleHeadingCharAnimations: [...new Set([...document.querySelectorAll("h2:not(.is-glinting) .heading-char")].map((node) => getComputedStyle(node).animationName))],
+      polish: (() => {
+        const media = document.querySelector(".feature-media").getBoundingClientRect();
+        const play = document.querySelector(".feature-media .round-play").getBoundingClientRect();
+        const rail = document.querySelector(".engine-rail");
+        const cta = [...document.querySelectorAll(".contact-path-cta")].map((node) => ({ height: node.getBoundingClientRect().height, background: getComputedStyle(node).backgroundColor }));
+        return {
+          workTitle: document.querySelector("#work-title")?.textContent,
+          brokenTitlePhrases: [...document.querySelectorAll(".title-phrase")].filter((node) => node.getClientRects().length > 1).length,
+          playCenter: { x: (play.left + play.width / 2 - media.left) / media.width, y: (play.top + play.height / 2 - media.top) / media.height },
+          studioFrames: [...document.querySelectorAll(".studio-frames img")].map((node) => node.getAttribute("src")),
+          revealTargets: document.querySelectorAll("[data-reveal]").length,
+          cta,
+          rail: { client: rail.clientWidth, scroll: rail.scrollWidth, overflowX: getComputedStyle(rail).overflowX },
+          systemHeight: document.querySelector("#system").getBoundingClientRect().height,
+          gridBackground: getComputedStyle(document.querySelector(".engine-drawing"), "::before").backgroundImage,
+        };
+      })(),
+      firstHeadingDelays: [...document.querySelectorAll("#why-title .heading-char")].slice(0, 3).map((node) => getComputedStyle(node).animationDelay),
+      headingCharKeyframeColors: [...new Set((document.querySelector("#why-title .heading-char")?.getAnimations()[0]?.effect?.getKeyframes() ?? []).map((frame) => frame.color).filter(Boolean))],
       mobileNav: {
         height: rect(".site-nav").height,
         logoTop: rect(".nav-logo").top,
@@ -255,7 +277,16 @@ for (const width of [390, 768, 950, 1280]) {
   check(state.demoHeadingCharAnimations.length > 0 && state.demoHeadingCharAnimations.every((name) => name === "none"), `${width}: technical demo heading still flickers`);
   check(state.demoHeadingCharColors.every((color) => color === "rgb(255, 255, 255)"), `${width}: technical demo heading is not fixed white`);
   check(state.animatedHeadingCharAnimations.length > 0 && state.animatedHeadingCharAnimations.every((name) => name === "heading-character-glint"), `${width}: remaining character gradient animation contract failed`);
-  check(state.animatedHeadingCharDurations.every((duration) => duration === "9s"), `${width}: remaining heading glint is not restrained to 9s`);
+  check(state.animatedHeadingCharDurations.every((duration) => duration === "1.8s"), `${width}: heading glint is not a short single pass`);
+  check(JSON.stringify(state.headingCharIterations) === JSON.stringify(["1"]), `${width}: heading glint must run once, not loop ${JSON.stringify(state.headingCharIterations)}`);
+  check(state.idleHeadingCharAnimations.every((name) => name === "none"), `${width}: headings glint before they are seen ${JSON.stringify(state.idleHeadingCharAnimations)}`);
+  check(state.polish.workTitle === "尻尾が止まったあとに", `${width}: film title does not match the trailer title card (${state.polish.workTitle})`);
+  check(state.polish.brokenTitlePhrases === 0, `${width}: film title breaks inside a phrase`);
+  check(state.polish.playCenter.x < 0.2 && state.polish.playCenter.y > 0.72, `${width}: play control covers the poster title ${JSON.stringify(state.polish.playCenter)}`);
+  check(state.polish.studioFrames.length === 4 && state.polish.studioFrames.every((src) => /^\/media\/studio\/frame-0[1-4]\.jpg$/.test(src)), `${width}: studio frames are missing ${JSON.stringify(state.polish.studioFrames)}`);
+  check(state.polish.revealTargets >= 12, `${width}: staged reveal targets are missing (${state.polish.revealTargets})`);
+  check(state.polish.cta.length === 2 && state.polish.cta.every((item) => item.height >= 44 && item.background === "rgb(0, 174, 255)"), `${width}: contact paths do not read as buttons ${JSON.stringify(state.polish.cta)}`);
+  check(state.polish.gridBackground === "none", `${width}: grid background returned to the engine drawing`);
   check(JSON.stringify(state.firstHeadingDelays) === JSON.stringify(["0s", "0.064s", "0.128s"]), `${width}: character animation is not staggered`);
   check(state.pageFloor.html === "rgb(9, 10, 12)" && state.pageFloor.body === state.pageFloor.html && state.pageFloor.footer === state.pageFloor.html && state.pageFloor.theme === "#090A0C", `${width}: footer floor and browser theme colors diverged`);
   check(state.headingCharKeyframeColors.length >= 3, `${width}: character gradient has fewer than three color stops`);
@@ -290,6 +321,8 @@ for (const width of [390, 768, 950, 1280]) {
     check(state.mobileNav.height - state.mobileNav.menuBottom <= 8, `mobile: menu bottom gap remains too large (${state.mobileNav.height - state.mobileNav.menuBottom}px)`);
     check(state.mobileEngineReadability.controlFontSize >= 11 && state.mobileEngineReadability.controlNumberColor === "rgb(142, 151, 163)", `mobile: central layer labels remain too small or faint ${JSON.stringify(state.mobileEngineReadability)}`);
     check(state.mobileEngineReadability.inputCount === 2 && state.mobileEngineReadability.outputCount === 3 && state.mobileEngineReadability.outputLines === 3, `mobile: production goals do not form a clear 2-to-3 flow ${JSON.stringify(state.mobileEngineReadability)}`);
+    check(state.polish.rail.overflowX === "auto" && state.polish.rail.scroll > state.polish.rail.client * 3, `mobile: production stages are not a horizontal swipe rail ${JSON.stringify(state.polish.rail)}`);
+    check(state.polish.systemHeight < 1850, `mobile: process section is still too tall (${state.polish.systemHeight}px)`);
     check(!state.mobileEngineReadability.humanGateOverlap, `mobile: human authority gate overlaps its headline ${JSON.stringify(state.mobileEngineReadability)}`);
   }
   if (width === 1280) {

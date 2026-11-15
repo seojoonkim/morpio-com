@@ -54,6 +54,8 @@ function ProductionEngine() {
         </svg>
       </div>
 
+      <p className="engine-swipe" aria-hidden="true"><span>01 — 06</span><span>SWIPE <i>→</i></span></p>
+
       <div className="engine-bus" aria-label="Central layer">
         <span className="engine-bus-scan" aria-hidden="true" />
         <div className="bus-label"><span>CENTRAL LAYER</span><strong>ONE SET OF RULES<br />ACROSS EVERY SHOT.</strong></div>

@@ -36,15 +36,15 @@ export default function CastingReel() {
   return (
     <section id="work" className="work-section section-shell">
       <article className="feature-film" data-feature-film={FEATURE_FILM.id}>
-        <div className="feature-heading">
+        <div className="feature-heading" data-reveal="fade">
           <div>
             <p className="kicker kicker-light"><span className="signal-dot" />ORIGINAL ANIMATION</p>
-            <h2>{FEATURE_FILM.title}</h2>
+            <h2 id="work-title">{FEATURE_FILM.titlePhrases.map((phrase) => <span className="title-phrase" key={phrase}>{phrase}</span>)}</h2>
             <p className="feature-subtitle">{FEATURE_FILM.subtitle}</p>
           </div>
           <p className="feature-description">The official trailer for Morpio’s original animated film, currently in production. Available in Korean, Japanese, and English.</p>
         </div>
-        <div className="feature-media media-frame">
+        <div className="feature-media media-frame" data-reveal>
           {playing === "feature" ? (
             <iframe src={`https://player.vimeo.com/video/${variant.videoId}?h=${variant.hash}&autoplay=1`} title={`${FEATURE_FILM.title} · ${variant.label}`} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />
           ) : (
@@ -56,7 +56,7 @@ export default function CastingReel() {
             </button>
           )}
         </div>
-        <div className="feature-meta">
+        <div className="feature-meta" data-reveal="fade">
           <div className="language-switcher" aria-label="Film language">
             {FEATURE_FILM.variants.map((item) => (
               <button key={item.videoId} type="button" data-video-id={item.videoId} aria-pressed={variantId === item.videoId} onClick={() => selectVariant(item.videoId)}>{item.label}</button>
@@ -75,17 +75,17 @@ export function TechnicalDemoIndex() {
 
   return (
     <section className="demo-index section-shell" aria-labelledby="demo-title">
-      <div className="demo-intro">
+      <div className="demo-intro" data-reveal="fade">
         <p className="kicker kicker-light"><span className="signal-dot" />TECHNICAL DEMOS</p>
         <h2 id="demo-title">THREE TESTS.<br />THREE PROOFS.</h2>
         <p>Each demo answers a production question. Can the character stay consistent? Can the shots feel directed? Can picture, voice, music, and sound arrive as one finished sequence?</p>
       </div>
       <div className="demo-rows">
-        {DEMO_FILMS.map((demo) => {
+        {DEMO_FILMS.map((demo, demoIndex) => {
           const expanded = expandedDemo === demo.id;
           const isPlaying = playing === demo.id;
           return (
-            <article className={`demo-row${expanded ? " is-expanded" : ""}`} data-demo-row={demo.id} key={demo.id}>
+            <article className={`demo-row${expanded ? " is-expanded" : ""}`} data-demo-row={demo.id} data-reveal style={{ "--reveal-delay": `${demoIndex * 0.09}s` } as React.CSSProperties} key={demo.id}>
               <button className="demo-toggle" type="button" aria-expanded={expanded} aria-controls={`${demo.id}-media`} onClick={() => { setExpandedDemo(expanded ? null : demo.id); stop(); }}>
                 <span className="demo-number">{demo.index}</span>
                 <span className="demo-name"><strong>{demo.title}</strong><small>{demo.subtitle}</small><em>{demo.experiment}</em></span>
