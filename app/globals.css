@@ -692,7 +692,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .site-nav nav a { min-height:25px; padding-top:0; flex:none; }
   .nav-status { display:none; }
   .hero { min-height:100svh; padding-bottom:92px; }
-  .hero-film { object-position:52% center; }
+  .hero-film { object-position:60% center; }
   .hero-wash { background:linear-gradient(0deg,rgba(4,7,10,.94),rgba(4,7,10,.18) 82%); }
   .hero-copy { width:100%; padding-top:130px; }
   .hero-copy > p:not(.kicker) { color:rgba(255,255,255,.94); }

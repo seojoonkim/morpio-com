@@ -60,8 +60,8 @@ export default function Hero() {
       <video
         ref={videoRef}
         className="hero-film"
-        src={motionAllowed ? "/media/hero/hero-loop.mp4" : undefined}
-        poster="/media/hero/hero-poster.jpg"
+        src={motionAllowed ? "/media/hero/hero-trailer-loop.mp4" : undefined}
+        poster="/media/hero/hero-trailer-poster.jpg"
         muted
         playsInline
         loop
@@ -70,7 +70,7 @@ export default function Hero() {
         aria-hidden="true"
       />
       <div className="hero-wash" />
-      <div className="hero-state">FROM A MORPIO ORIGINAL SHORT</div>
+      <div className="hero-state">FROM A MORPIO ORIGINAL FILM</div>
       <div className="hero-copy">
         <p className="kicker kicker-light"><span className="signal-dot" />MORPIO / ANIMATION STUDIO</p>
         <h1>ANOTHER WORLD<br /><span className="hero-last-line">STARTS HERE<span className="hero-period" aria-hidden="true" /></span></h1>
@@ -78,7 +78,7 @@ export default function Hero() {
         <a className="hero-partner-link" href="#contact">START A PROJECT <span aria-hidden="true">↘</span></a>
       </div>
       <div className="hero-controls">
-        <a href="#work">WATCH THE FILM <span>↓</span></a>
+        <a href="#work">WATCH THE TRAILER <span>↓</span></a>
         <button type="button" onClick={togglePlayback} aria-label={playing ? "Pause hero film" : "Play hero film"}>
           <span aria-hidden="true">{playing ? "Ⅱ" : "▶"}</span>
           {playing ? "PAUSE" : "PLAY"}

@@ -30,7 +30,7 @@ for (const viewport of [
   if (summary.scrollWidth > summary.viewportWidth + 1) throw new Error(`Horizontal overflow at ${viewport.width}: ${summary.scrollWidth}`);
   if (summary.sections !== 5 || summary.featureFilms !== 1 || summary.demoRows !== 3) throw new Error(`Structure mismatch at ${viewport.width}: ${JSON.stringify(summary)}`);
   if (summary.iframes !== 0) throw new Error(`YouTube loaded before interaction at ${viewport.width}`);
-  if (!summary.heroVideo?.endsWith("hero-loop.mp4") || !summary.heroPoster?.endsWith("hero-poster.jpg")) throw new Error(`Hero media mismatch at ${viewport.width}`);
+  if (!summary.heroVideo?.endsWith("hero-trailer-loop.mp4") || !summary.heroPoster?.endsWith("hero-trailer-poster.jpg")) throw new Error(`Hero media mismatch at ${viewport.width}`);
   if (summary.dotColor !== "rgb(0, 174, 255)") throw new Error(`Wrong logo dot color: ${summary.dotColor}`);
   results.push({ width: viewport.width, overflow: false, sections: summary.sections });
 }
@@ -116,7 +116,8 @@ await interruptedNav.goto(url, { waitUntil: "domcontentloaded" });
 await interruptedNav.click('.site-nav a[href="#system"]');
 await new Promise((resolve) => setTimeout(resolve, 200));
 await interruptedNav.mouse.wheel({ deltaY: -500 });
-await new Promise((resolve) => setTimeout(resolve, 120));
+// Let the wheel's own scroll settle before sampling; nav re-alignment timers (700/1400/2200ms) still fall inside the window below.
+await new Promise((resolve) => setTimeout(resolve, 400));
 const interruptedPosition = await interruptedNav.evaluate(() => scrollY);
 await new Promise((resolve) => setTimeout(resolve, 1600));
 const settledInterruptedPosition = await interruptedNav.evaluate(() => scrollY);

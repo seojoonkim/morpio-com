@@ -36,7 +36,7 @@ check(!/process-visual|process-mobile-frame/i.test(html), "technology section mu
 check(/ONE ENGINE[\s\S]*?EVERY FRAME/i.test(html), "production engine principle is missing");
 check(/powered by Hashed/i.test(html), "studio context is missing");
 check(/hello@morpio\.com/i.test(html), "contact email is missing");
-check(/FROM A MORPIO ORIGINAL SHORT/i.test(html), "hero film provenance caption is missing");
+check(/FROM A MORPIO ORIGINAL FILM/i.test(html), "hero film provenance caption is missing");
 check(/bring existing worlds into finished animation/i.test(html), "partner-facing hero copy is missing");
 check(/help IP holders and platforms bring existing worlds/i.test(html), "hero does not identify Morpio's partners");
 check(/class="hero-partner-link"[^>]*href="#contact"[^>]*>[\s\S]*?START A PROJECT/i.test(html), "hero project CTA is missing");
@@ -51,8 +51,8 @@ check(/PRODUCTION GOALS/.test(html), "partner-facing system goal label is missin
 check(!/PRODUCTION OUTCOMES/.test(html), "system capabilities are framed as guaranteed outcomes");
 check(/A HUMAN DIRECTOR[\s\S]*?MAKES THE FINAL CALL/.test(html), "human final authority is unclear");
 check(!/<strong>VIDEO<\/strong><strong>GEN<\/strong>|ONE CONTROL PLANE|HUMAN DIRECTION IS NOT ABSTRACTED/.test(html), "internal production jargon remains");
-check(/AVAILABLE IN KOREAN, ENGLISH, AND JAPANESE/i.test(html), "verified language availability is missing");
-check(/ORIGINAL SHORT[\s\S]*?16:9[\s\S]*?KO \/ EN \/ JP/i.test(html), "distribution-ready original metadata is missing");
+check(/AVAILABLE IN KOREAN, JAPANESE, AND ENGLISH/i.test(html), "verified language availability is missing");
+check(/OFFICIAL TRAILER[\s\S]*?16:9[\s\S]*?KO \/ JP \/ EN/i.test(html), "distribution-ready original metadata is missing");
 check(/HAVE A WORLD THAT[\s\S]*?SHOULD BE ANIMATED/i.test(html), "world-oriented contact heading is missing");
 check(/FOR IP HOLDERS/i.test(html) && /FOR DISTRIBUTORS &amp; PLATFORMS/i.test(html), "partner contact paths are missing");
 check(/subject=IP%20Partnership/.test(html) && /subject=Distribution%20Partnership/.test(html), "partner email subjects are missing");
