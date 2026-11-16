@@ -169,7 +169,9 @@ for (const width of [390, 768, 950, 1280]) {
           revealTargets: document.querySelectorAll("[data-reveal]").length,
           cta,
           rail: { client: rail.clientWidth, scroll: rail.scrollWidth, overflowX: getComputedStyle(rail).overflowX },
-          systemHeight: document.querySelector("#system").getBoundingClientRect().height,
+          stageColumns: new Set([...document.querySelectorAll(".engine-stage")].map((node) => Math.round(node.getBoundingClientRect().left))).size,
+          stageRows: new Set([...document.querySelectorAll(".engine-stage")].map((node) => Math.round(node.getBoundingClientRect().top))).size,
+          sideScrollers: [...document.querySelectorAll("main *")].filter((node) => /(auto|scroll)/.test(getComputedStyle(node).overflowX) && node.scrollWidth > node.clientWidth + 1).map((node) => String(node.className)),
           gridBackground: getComputedStyle(document.querySelector(".engine-drawing"), "::before").backgroundImage,
         };
       })(),
@@ -321,8 +323,9 @@ for (const width of [390, 768, 950, 1280]) {
     check(state.mobileNav.height - state.mobileNav.menuBottom <= 8, `mobile: menu bottom gap remains too large (${state.mobileNav.height - state.mobileNav.menuBottom}px)`);
     check(state.mobileEngineReadability.controlFontSize >= 11 && state.mobileEngineReadability.controlNumberColor === "rgb(142, 151, 163)", `mobile: central layer labels remain too small or faint ${JSON.stringify(state.mobileEngineReadability)}`);
     check(state.mobileEngineReadability.inputCount === 2 && state.mobileEngineReadability.outputCount === 3 && state.mobileEngineReadability.outputLines === 3, `mobile: production goals do not form a clear 2-to-3 flow ${JSON.stringify(state.mobileEngineReadability)}`);
-    check(state.polish.rail.overflowX === "auto" && state.polish.rail.scroll > state.polish.rail.client * 3, `mobile: production stages are not a horizontal swipe rail ${JSON.stringify(state.polish.rail)}`);
-    check(state.polish.systemHeight < 1850, `mobile: process section is still too tall (${state.polish.systemHeight}px)`);
+    check(state.polish.rail.scroll <= state.polish.rail.client + 1 && state.polish.rail.overflowX !== "auto" && state.polish.rail.overflowX !== "scroll", `mobile: production stages must fit without horizontal scrolling ${JSON.stringify(state.polish.rail)}`);
+    check(state.polish.stageColumns === 2 && state.polish.stageRows === 3, `mobile: production stages are not a 2x3 grid (${state.polish.stageColumns}x${state.polish.stageRows})`);
+    check(state.polish.sideScrollers.length === 0, `mobile: horizontally scrolling blocks remain ${JSON.stringify(state.polish.sideScrollers)}`);
     check(!state.mobileEngineReadability.humanGateOverlap, `mobile: human authority gate overlaps its headline ${JSON.stringify(state.mobileEngineReadability)}`);
   }
   if (width === 1280) {
