@@ -66,6 +66,10 @@ if (!featureSrc?.includes("1226530758")) throw new Error("Feature playback faile
 await page.click("[data-demo-row] .demo-toggle");
 const expanded = await page.$eval("[data-demo-row] .demo-toggle", (el) => el.getAttribute("aria-expanded"));
 if (expanded !== "true") throw new Error("Demo expansion failed");
+// Opening a row re-renders it; it must stay visible (a re-render once wiped the reveal class and hid the open demo).
+await new Promise((resolve) => setTimeout(resolve, 900));
+const openDemoVisibility = await page.$$eval("[data-demo-row]", (rows) => rows.map((row) => ({ opacity: getComputedStyle(row).opacity, transform: getComputedStyle(row).transform })));
+if (openDemoVisibility.some((row) => row.opacity !== "1" || row.transform !== "none")) throw new Error(`Demo row became hidden after opening: ${JSON.stringify(openDemoVisibility)}`);
 await page.click("[data-demo-row] .media-poster");
 await page.waitForSelector("[data-demo-row] iframe");
 const iframeCount = await page.$$eval("iframe", (els) => els.length);

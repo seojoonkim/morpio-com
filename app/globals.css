@@ -771,7 +771,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 .motion-ready [data-reveal] { opacity:0; transform:translate3d(0,18px,0); transition:opacity .7s var(--ease),transform .7s var(--ease); transition-delay:var(--reveal-delay,0s); }
 .motion-ready [data-reveal="fade"] { transform:none; }
-.motion-ready [data-reveal].is-in { opacity:1; transform:none; }
+.motion-ready [data-reveal][data-revealed] { opacity:1; transform:none; }
 
 .studio-frames { grid-column:1 / -1; margin-top:clamp(44px,5vw,72px); display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
 .studio-frames figure { min-width:0; margin:0; }

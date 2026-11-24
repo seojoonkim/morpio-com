@@ -63,7 +63,8 @@ export default function HeadingMotion() {
       const line = window.innerHeight * 0.94;
       revealTargets = revealTargets.filter((target) => {
         if (target.getBoundingClientRect().top > line) return true;
-        target.classList.add("is-in");
+        // Attribute, not class: React rewrites className on re-render (e.g. opening a demo row) and would hide it again.
+        target.dataset.revealed = "true";
         return false;
       });
       if (!revealTargets.length) window.removeEventListener("scroll", queueReveals);

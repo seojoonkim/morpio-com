@@ -73,6 +73,20 @@ export function TechnicalDemoIndex() {
   const [expandedDemo, setExpandedDemo] = useState<string | null>(null);
   const { playing, play, stop } = useSinglePlayback("demos");
 
+  // Closing the previously open row shifts the page; keep the row the visitor just opened in view.
+  useEffect(() => {
+    if (!expandedDemo) return;
+    const frame = window.requestAnimationFrame(() => {
+      const row = document.querySelector<HTMLElement>(`[data-demo-row="${expandedDemo}"]`);
+      if (!row) return;
+      const top = row.getBoundingClientRect().top;
+      const header = document.querySelector<HTMLElement>(".site-nav, header")?.getBoundingClientRect().height ?? 80;
+      if (top >= header && top <= window.innerHeight * 0.45) return;
+      window.scrollTo({ top: window.scrollY + top - header - 12, behavior: "auto" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [expandedDemo]);
+
   return (
     <section className="demo-index section-shell" aria-labelledby="demo-title">
       <div className="demo-intro" data-reveal="fade">
